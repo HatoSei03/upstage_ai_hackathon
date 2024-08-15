@@ -43,7 +43,6 @@ class _TimelineState extends State<Timeline> {
         return e.split('"')[1];
       }).toList();
       placeNames.removeAt(0);
-      print(placeNames);
       List<List<Place>> placeList = [];
 
       for (var i = 0; i < placeNames.length; i++) {
@@ -55,7 +54,6 @@ class _TimelineState extends State<Timeline> {
             }
           }
         }
-        print(tmp);
         placeList.add(tmp);
       }
 

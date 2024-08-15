@@ -5,18 +5,21 @@ import 'package:stour/screens/timeline.dart';
 import 'package:stour/util/const.dart';
 import 'package:stour/screens/profile.dart';
 import 'package:stour/screens/chatbot.dart';
+import 'package:stour/screens/ocr.dart';
 
 List icons = [
+  Icons.document_scanner_outlined,
   Icons.chat_outlined,
-  Icons.timeline_outlined,
   Icons.home_outlined,
+  Icons.timeline_outlined,
   Icons.person_outline,
 ];
 
 List<Widget> pages = [
+  const CameraAwesomeApp(),
   const ChatbotSupportScreen(),
-  const Timeline(),
   const Home(),
+  const Timeline(),
   const Profile(),
   // const ReviewScreen(),
 ];
@@ -48,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
               physics: const NeverScrollableScrollPhysics(),
               controller: _pageController,
               // onPageChanged: onPageChanged,
-              children: List.generate(4, (index) => pages[index]),
+              children: List.generate(5, (index) => pages[index]),
             ),
           ),
         ],
@@ -88,6 +91,7 @@ class HomeBottomBar extends StatelessWidget {
         Icon(icons[1], size: 30, color: Constants.paletteDark),
         Icon(icons[2], size: 30, color: Constants.paletteDark),
         Icon(icons[3], size: 30, color: Constants.paletteDark),
+        Icon(icons[4], size: 30, color: Constants.paletteDark),
       ],
       onTap: onTap,
     );

@@ -3,7 +3,6 @@ import 'package:stour/util/const.dart';
 import 'package:stour/util/places.dart';
 import 'package:stour/widgets/timeline_day.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uuid/uuid.dart';
 import 'package:stour/screens/chatbot.dart';
 
 class ScheduleScreen extends StatefulWidget {
