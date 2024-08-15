@@ -38,33 +38,32 @@ class _TimelineState extends State<Timeline> {
       final response = await getUpstageAIResponse(
           "Use the places in this list: ${content.join(',')}",
           getSchedulePrompt(_departureDate, _returnDate, 2, _maxBudget));
-      print(response);
       List<String> placeNames = response.split('"places"');
       placeNames = placeNames.map((e) {
         return e.split('"')[1];
       }).toList();
       placeNames.removeAt(0);
+      print(placeNames);
       List<List<Place>> placeList = [];
 
       for (var i = 0; i < placeNames.length; i++) {
-        List<Place> tmp = places
-            .where((place) => place.name == placeNames[i])
-            .take(3)
-            .toList();
+        List<Place> tmp = [];
+        for (var j = 0; j < 3 && i < placeNames.length; j++, i++) {
+          for (var place in places) {
+            if (place.name == placeNames[i]) {
+              tmp.add(place);
+            }
+          }
+        }
+        print(tmp);
         placeList.add(tmp);
       }
-
 
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ScheduleScreen(
-            departureDate: _departureDate,
-            returnDate: _returnDate,
-            maxBudget: _maxBudget,
-            isTravelingAlone: _isTravelingAlone,
-            startTime: _startTime,
-            endTime: _endTime,
+            placeList: placeList,
           ),
         ),
       );
