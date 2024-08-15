@@ -98,6 +98,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     TextEditingController tourNameController = TextEditingController();
     if (res.isEmpty) {

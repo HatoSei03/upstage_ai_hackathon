@@ -5,6 +5,8 @@ import 'package:stour/screens/timeline_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:stour/util/const.dart';
 import 'package:stour/screens/chatbot.dart';
+import 'package:stour/model/upstage.dart';
+import 'package:stour/util/places.dart';
 
 class Timeline extends StatefulWidget {
   const Timeline({super.key});
@@ -29,9 +31,30 @@ class _TimelineState extends State<Timeline> {
     "Hoi An",
     "Can Tho"
   ];
+  List<String> content = [];
 
-  void _generateSchedule() {
+  void _generateSchedule() async {
     {
+      final response = await getUpstageAIResponse(
+          "Use the places in this list: ${content.join(',')}",
+          getSchedulePrompt(_departureDate, _returnDate, 2, _maxBudget));
+      print(response);
+      List<String> placeNames = response.split('"places"');
+      placeNames = placeNames.map((e) {
+        return e.split('"')[1];
+      }).toList();
+      placeNames.removeAt(0);
+      List<List<Place>> placeList = [];
+
+      for (var i = 0; i < placeNames.length; i++) {
+        List<Place> tmp = places
+            .where((place) => place.name == placeNames[i])
+            .take(3)
+            .toList();
+        placeList.add(tmp);
+      }
+
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -55,6 +78,7 @@ class _TimelineState extends State<Timeline> {
     _maxBudget = 0;
     _startTime = const TimeOfDay(hour: 0, minute: 0);
     _endTime = const TimeOfDay(hour: 0, minute: 0);
+    content.addAll(places.map((place) => place.name));
     super.initState();
   }
 
