@@ -52,6 +52,7 @@ dependencies:
   flutter_rounded_date_picker: ^3.0.3
   drag_and_drop_lists: ^0.4.1
   uuid: ^4.4.2
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
