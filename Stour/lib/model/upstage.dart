@@ -190,6 +190,7 @@ Future<String> getTranslation(String input) async {
   final Map<String, dynamic> body = {
     'model': 'solar-1-mini-translate-koen',
     'messages': message,
+    'stream': true,
   };
 
   try {
@@ -208,7 +209,6 @@ Future<String> getTranslation(String input) async {
           in streamedResponse.stream.transform(utf8.decoder)) {
         final parts = chunk.split('\n');
         for (var part in parts) {
-          print(response);
           if (part.startsWith('data: ')) {
             final data = part.substring(6);
             if (data != '[DONE]') {
