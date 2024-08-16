@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:stour/util/const.dart';
 import 'package:stour/model/upstage.dart';
-import 'package:flutter/services.dart';
 
 class OCRScreen extends StatefulWidget {
   const OCRScreen({super.key, required this.imagePath});
   final String imagePath;
   @override
+  // ignore: library_private_types_in_public_api
   _OCRScreenState createState() => _OCRScreenState();
 }
 
 class _OCRScreenState extends State<OCRScreen> {
   String _response = '';
+  String translated = '';
   String image = '';
 
   @override
@@ -30,11 +31,11 @@ class _OCRScreenState extends State<OCRScreen> {
     });
   }
 
-  void _copyToClipboard() {
-    Clipboard.setData(ClipboardData(text: _response));
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Copied to clipboard')),
-    );
+  Future<void> translate() async {
+    translated = await getTranslation(_response);
+    setState(() {
+      _response = translated;
+    });
   }
 
   @override
@@ -66,17 +67,35 @@ class _OCRScreenState extends State<OCRScreen> {
             flex: 1,
             child: Column(
               children: [
-                Expanded(child: displayText(_response)),
-                ElevatedButton.icon(
-                  onPressed: _copyToClipboard,
-                  icon: const Icon(Icons.copy),
-                  label: const Text('Copy to Clipboard'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(255, 35, 52, 10),
-                    backgroundColor: Constants.palette3,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Tooltip(
+                                message: 'Translate',
+                                child: IconButton(
+                                  onPressed: translate,
+                                  icon: const Icon(Icons.translate, size: 20),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: displayText(_response),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
               ],
             ),
           ),
@@ -105,7 +124,7 @@ Widget displayText(String text) {
     child: SingleChildScrollView(
       child: Text(
         text,
-        style: const TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 14),
       ),
     ),
   );

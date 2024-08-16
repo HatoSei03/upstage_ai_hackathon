@@ -1,5 +1,6 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async';
-import 'dart:io';
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:stour/screens/ocr.dart';
@@ -28,9 +29,6 @@ class CameraPage extends StatefulWidget {
 }
 
 class _CameraPageState extends State<CameraPage> {
-  File? _capturedImage;
-  MediaCapture? _capture;
-
   String filePath(MediaCapture mediaCapture) {
     if (mediaCapture.status == MediaCaptureStatus.success) {
       return mediaCapture.captureRequest.when(
@@ -51,51 +49,22 @@ class _CameraPageState extends State<CameraPage> {
         color: Colors.white,
         child: CameraAwesomeBuilder.awesome(
           saveConfig: SaveConfig.photo(),
-          onMediaTap: (mediaCapture) {
-            print("Tapped");
-          },
+          onMediaTap: (mediaCapture) {},
           topActionsBuilder: (state) {
             _captureStateSubscription ??=
                 state.captureState$.listen((MediaCapture? mediaCapture) {
-              if (mediaCapture != null) {
-                setState(() {
-                  _capture = mediaCapture;
-                });
-
-                // switch (mediaCapture.status) {
-                //   case MediaCaptureStatus.success:
-                //     // Image captured, perform additional code (e.g., get the file path)
-                //     print("Image captured: ${filePath(mediaCapture)}");
-                //     _showImageDialog(File(filePath(mediaCapture)));
-                //     break;
-                //   case MediaCaptureStatus.capturing:
-                //     print("Capturing in progress...");
-                //     break;
-                //   case MediaCaptureStatus.failure:
-                //     print("Capture failed!");
-                //     break;
-                // }
-                switch (mediaCapture.status) {
-                  case MediaCaptureStatus.success:
-                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return OCRScreen(
-                            imagePath: filePath(mediaCapture),
-                          );
-                        },
-                      ),
-                    );
-                    print("Image captured: ${filePath(mediaCapture)}");
-                    break;
-                  case MediaCaptureStatus.capturing:
-                    print("Capturing in progress...");
-                    break;
-                  case MediaCaptureStatus.failure:
-                    print("Capture failed!");
-                    break;
-                }
+              if (mediaCapture != null &&
+                  mediaCapture.status == MediaCaptureStatus.success) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return OCRScreen(
+                        imagePath: filePath(mediaCapture),
+                      );
+                    },
+                  ),
+                );
               }
             });
             return Container();
@@ -103,19 +72,6 @@ class _CameraPageState extends State<CameraPage> {
         ),
       ),
     );
-  }
-
-  void _showImageDialog(File image) {
-    if (image != null) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Image.file(image),
-          );
-        },
-      );
-    }
   }
 
   @override

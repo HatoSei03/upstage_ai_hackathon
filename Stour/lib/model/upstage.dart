@@ -71,6 +71,22 @@ String getChatbotContent() {
     """;
 }
 
+String getReconstructContent() {
+  return """
+this is the OCR result of a document. reconstruct the document and correct any mistakes in case there are problems during the OCR process.
+only return the reconstructed document's content, never add any other content to it.
+
+example:
+{apiVersion: 1.1, confidence: 0.9142, metadata: {pages: [{height: 1280, page: 1, width: 960}]}, mimeType: multipart/form-data, modelVersion: ocr-2.2.1, numBilledPages: 1, pages: [{confidence: 0.9142, height: 1280, id: 0, text: Lor em
+I psum, width: 960, words: [{boundingBox: {vertices: [{x: 64, y: 528}, {x: 400, y: 551}, {x: 392, y: 666}, {x: 56, y: 644}]}, confidence: 0.9508, id: 0, text: Lor}, {boundingBox: {vertices: [{x: 417, y: 550}, {x: 631, y: 543}, {x: 634, y: 649}, {x: 421, y: 657}]}, confidence: 0.9928, id: 1, text: em}, {boundingBox: {vertices: [{x: 67, y: 741}, {x: 157, y: 733}, {x: 166, y: 842}, {x: 77, y: 849}]}, confidence: 0.7352, id: 2, text: I}, {boundingBox: {vertices: [{x: 180, y: 761}, {x: 621, y: 725}, {x: 631, y: 849}, {x: 191, y: 885}]}, confidence: 0.9778, id: 3, text: psum}]}], stored: false, text: Lor em
+I psum}
+
+--> response: 
+Lorem
+Ipsum
+  """;
+}
+
 const String apiKey = 'up_34nJBBm1jGJWcYhjX2H5X3tLKUfRx';
 
 Future<String> getUpstageAIResponse(String content, String prompt) async {
@@ -152,28 +168,68 @@ Future<String> performOCR(String imagePath) async {
   final jsonString = utf8.decode(responseBody);
   final jsonData = jsonDecode(jsonString);
 
-  String mainContent = '';
-  List<dynamic> pages = jsonData['pages'];
-  if (pages.isNotEmpty) {
-    List<dynamic> words = pages[0]['words'];
-    for (var word in words) {
-      mainContent += word['text'] + ' ';
-    }
-  }
-  return mainContent.trim();
-
-  // return jsonData.toString();
+  final reconstructed =
+      await getUpstageAIResponse(getReconstructContent(), jsonData.toString());
+  return reconstructed;
 }
 
-String parseMainContent(String jsonResult) {
-  Map<String, dynamic> ocrResult = jsonDecode(jsonResult);
-  String mainContent = '';
-  List<dynamic> pages = ocrResult['pages'];
-  if (pages.isNotEmpty) {
-    List<dynamic> words = pages[0]['words'];
-    for (var word in words) {
-      mainContent += word['text'] + ' ';
+Future<String> getTranslation(String input) async {
+  const String url = 'https://api.upstage.ai/v1/solar/chat/completions';
+
+  final Map<String, String> headers = {
+    'Authorization': 'Bearer $apiKey',
+    'Content-Type': 'application/json',
+  };
+
+  final message = [
+    {"role": "user", "content": "아버지가방에들어가셨다"},
+    {"role": "assistant", "content": "Father went into his room"},
+    {"role": "user", "content": input}
+  ];
+
+  final Map<String, dynamic> body = {
+    'model': 'solar-1-mini-translate-koen',
+    'messages': message,
+  };
+
+  try {
+    final client = http.Client();
+    final request = http.Request('POST', Uri.parse(url));
+    request.headers.addAll(headers);
+    request.body = jsonEncode(body);
+
+    final streamedResponse = await client.send(request);
+
+    print(streamedResponse.statusCode);
+
+    if (streamedResponse.statusCode == 200) {
+      String response = '';
+      await for (String chunk
+          in streamedResponse.stream.transform(utf8.decoder)) {
+        final parts = chunk.split('\n');
+        for (var part in parts) {
+          print(response);
+          if (part.startsWith('data: ')) {
+            final data = part.substring(6);
+            if (data != '[DONE]') {
+              try {
+                final jsonData = jsonDecode(data);
+                final content = jsonData['choices'][0]['delta']['content'];
+                if (content != null) {
+                  response += content;
+                }
+              } catch (e) {
+                print('Error parsing JSON: $e');
+              }
+            }
+          }
+        }
+      }
+      return response;
+    } else {
+      return 'Error: ${streamedResponse.statusCode}';
     }
+  } catch (e) {
+    return 'Error: $e';
   }
-  return mainContent.trim();
 }
