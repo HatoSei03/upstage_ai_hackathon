@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 
 String getSchedulePrompt(
     DateTime startDate, DateTime endDate, int peopleNum, double budget) {
@@ -70,8 +71,9 @@ String getChatbotContent() {
     """;
 }
 
+const String apiKey = 'up_34nJBBm1jGJWcYhjX2H5X3tLKUfRx';
+
 Future<String> getUpstageAIResponse(String content, String prompt) async {
-  const String apiKey = 'up_34nJBBm1jGJWcYhjX2H5X3tLKUfRx';
   const String url = 'https://api.upstage.ai/v1/solar/chat/completions';
 
   final Map<String, String> headers = {
@@ -128,4 +130,50 @@ Future<String> getUpstageAIResponse(String content, String prompt) async {
   } catch (e) {
     return 'Error: $e';
   }
+}
+
+Future<String> performOCR(String imagePath) async {
+  const String url = 'https://api.upstage.ai/v1/document-ai/ocr';
+
+  final File file = File(imagePath);
+  final bytes = await file.readAsBytes();
+  final multipartFile = http.MultipartFile.fromBytes(
+    'document',
+    bytes,
+    filename: 'image.png',
+  );
+
+  final request = http.MultipartRequest('POST', Uri.parse(url));
+  request.headers['Authorization'] = 'Bearer $apiKey';
+  request.files.add(multipartFile);
+
+  final response = await request.send();
+  final responseBody = await response.stream.toBytes();
+  final jsonString = utf8.decode(responseBody);
+  final jsonData = jsonDecode(jsonString);
+
+  String mainContent = '';
+  List<dynamic> pages = jsonData['pages'];
+  if (pages.isNotEmpty) {
+    List<dynamic> words = pages[0]['words'];
+    for (var word in words) {
+      mainContent += word['text'] + ' ';
+    }
+  }
+  return mainContent.trim();
+
+  // return jsonData.toString();
+}
+
+String parseMainContent(String jsonResult) {
+  Map<String, dynamic> ocrResult = jsonDecode(jsonResult);
+  String mainContent = '';
+  List<dynamic> pages = ocrResult['pages'];
+  if (pages.isNotEmpty) {
+    List<dynamic> words = pages[0]['words'];
+    for (var word in words) {
+      mainContent += word['text'] + ' ';
+    }
+  }
+  return mainContent.trim();
 }

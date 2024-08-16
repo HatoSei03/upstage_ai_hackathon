@@ -6,9 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stour/screens/chatbot.dart';
 
 class ScheduleScreen extends StatefulWidget {
-  List<List<Place>> placeList;
+  final List<List<Place>> placeList;
 
-  ScheduleScreen({required this.placeList, super.key});
+  const ScheduleScreen({required this.placeList, super.key});
   @override
   State<ScheduleScreen> createState() => _ScheduleScreenState();
 }

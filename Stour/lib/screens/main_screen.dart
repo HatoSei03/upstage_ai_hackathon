@@ -5,7 +5,7 @@ import 'package:stour/screens/timeline.dart';
 import 'package:stour/util/const.dart';
 import 'package:stour/screens/profile.dart';
 import 'package:stour/screens/chatbot.dart';
-import 'package:stour/screens/ocr.dart';
+import 'package:stour/screens/camera_screen.dart';
 
 List icons = [
   Icons.document_scanner_outlined,

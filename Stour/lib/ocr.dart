@@ -4,21 +4,38 @@ import 'package:stour/util/const.dart';
 import 'package:stour/model/upstage.dart';
 import 'package:flutter/services.dart';
 
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Image and Text Screen',
+      home: OCRScreen(),
+    );
+  }
+}
+
 class OCRScreen extends StatefulWidget {
-  const OCRScreen({super.key, required this.imagePath});
-  final String imagePath;
+  const OCRScreen({super.key});
+
   @override
   _OCRScreenState createState() => _OCRScreenState();
 }
 
 class _OCRScreenState extends State<OCRScreen> {
   String _response = '';
-  String image = '';
+
+  String image =
+      '/data/user/0/com.example.stour/cache/camerawesome/1723798191104308.jpg';
 
   @override
   void initState() {
     super.initState();
-    image = widget.imagePath;
     _performOCR();
   }
 
@@ -76,7 +93,7 @@ class _OCRScreenState extends State<OCRScreen> {
                     backgroundColor: Constants.palette3,
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 16), 
               ],
             ),
           ),
