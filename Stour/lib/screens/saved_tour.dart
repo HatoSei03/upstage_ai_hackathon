@@ -111,7 +111,7 @@ class _SavedTourState extends State<SavedTour> {
               color: Color.fromARGB(255, 35, 52, 10),
             ),
           ),
-          backgroundColor: Constants.palette3,
+          backgroundColor: Constants.header,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back,
                 color:
@@ -163,7 +163,7 @@ class _SavedTourState extends State<SavedTour> {
             );
           },
           tooltip: 'Floating Action Button',
-          backgroundColor: Constants.palette3, // Custom color
+          backgroundColor: Constants.highlight, // Custom color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0), // Round shape
           ),
@@ -181,7 +181,7 @@ class _SavedTourState extends State<SavedTour> {
             color: Color.fromARGB(255, 35, 52, 10),
           ),
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back,
               color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
@@ -228,7 +228,7 @@ class _SavedTourState extends State<SavedTour> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.palette3, // Custom color
+        backgroundColor: Constants.highlight, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),

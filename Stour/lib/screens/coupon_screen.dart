@@ -30,17 +30,17 @@ class _CouponScreenState extends State<CouponScreen> {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
       ),
       body: ListView.builder(
         itemCount: listCoupon.length,
         itemBuilder: (context, index) {
           return ListTile(
-            hoverColor: Constants.lightpp,
+            hoverColor: Constants.button,
             title: Text(
               listCoupon[index].name,
               style: GoogleFonts.roboto(
-                color: Constants.text,
+                color: Constants.textColor,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -71,7 +71,7 @@ class _CouponScreenState extends State<CouponScreen> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.palette3, // Custom color
+        backgroundColor: Constants.highlight, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),

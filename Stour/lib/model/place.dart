@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stour/util/places.dart';
 import 'package:collection/collection.dart';
+import 'package:uuid/uuid.dart';
 
 void getAllPlaceFood(String collection) {
   CollectionReference place = FirebaseFirestore.instance.collection(collection);
@@ -13,22 +14,24 @@ void getAllPlaceFood(String collection) {
         Map<String, dynamic> data =
             documentSnapshot.data() as Map<String, dynamic>;
         Place tmpPlace = Place(
-          id: data['id'],
+          id: data['id'] ?? const Uuid().v4(),
           name: data['name'],
           address: data['address'],
-          rating: data['rating'] ?? 0, 
-          img: data['image'],
+          rating: data['rating'] ?? '0',
+          img: data['image'] ?? '',
           price: data['price'] ?? 0,
           history: data['history'],
-          duration:
-              data['duration'] ?? 2, 
-          city: data['city'],
-          closeTime: data['closetime'],
-          district: data['district'],
-          openTime: data['opentime'],
-          // website: data['website'],
-          // contact: data['contact'],
+          duration: data['duration'] ?? 2,
+          closetime: data['closetime'] > 24
+              ? data['closetime'] / 100
+              : data['closetime'] ?? '24',
+          opentime: data['opentime'] > 24
+              ? data['opentime'] / 100
+              : data['opentime'] ?? '0',
+          website: data['web'] ?? 'N/A',
+          contact: data['contact'] ?? 'N/A',
         );
+
         if (collection == 'place') {
           if (places.firstWhereOrNull((element) => element.id == tmpPlace.id) ==
               null) {

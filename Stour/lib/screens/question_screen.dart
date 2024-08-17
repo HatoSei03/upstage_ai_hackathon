@@ -61,7 +61,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.background,
       ),
       body: Column(
         children: <Widget>[
@@ -116,7 +116,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         },
                       ),
                       backgroundColor:
-                          WidgetStateProperty.all<Color>(Constants.palette3),
+                          WidgetStateProperty.all<Color>(Constants.header),
                       minimumSize:
                           WidgetStateProperty.all<Size>(const Size(120, 50)),
                     ),
@@ -144,7 +144,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         },
                       ),
                       backgroundColor:
-                          WidgetStateProperty.all<Color>(Constants.palette3),
+                          WidgetStateProperty.all<Color>(Constants.header),
                       textStyle: WidgetStateProperty.all<TextStyle>(
                         const TextStyle(fontSize: 20),
                       ),

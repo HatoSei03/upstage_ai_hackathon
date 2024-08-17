@@ -41,7 +41,7 @@ class _AddLocationState extends State<AddLocation> {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
       ),
       body: Column(
         children: [

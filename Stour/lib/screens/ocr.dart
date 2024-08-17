@@ -65,7 +65,7 @@ class _OCRScreenState extends State<OCRScreen> {
             color: Color.fromARGB(255, 35, 52, 10),
           ),
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back,
               color: Color.fromARGB(255, 35, 52, 10)),
@@ -87,7 +87,7 @@ class _OCRScreenState extends State<OCRScreen> {
                 ElevatedButton(
                   onPressed: translate,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Constants.palette1,
+                    backgroundColor: Constants.button,
                     elevation: 1,
                   ),
                   child: Row(
@@ -95,11 +95,11 @@ class _OCRScreenState extends State<OCRScreen> {
                     children: [
                       Icon(
                         Icons.translate,
-                        color: Constants.palette3,
+                        color: Constants.icon,
                       ),
                       Text(
-                        'Translate',
-                        style: TextStyle(color: Constants.palette3),
+                        'Translate to English',
+                        style: TextStyle(color: Constants.textColor),
                       ),
                     ],
                   ),
@@ -154,7 +154,7 @@ Widget displayText(String text) {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            _isLoading ? 'Gathering Information...' : text,
+            _isLoading ? 'Cookin\' up something...' : text,
             style: const TextStyle(fontSize: 14),
           ),
         ),

@@ -75,10 +75,10 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
     return Scaffold(
       backgroundColor: Constants.lightBG,
       appBar: AppBar(
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         title: Text('Chatbot Support',
             style: TextStyle(
-              color: Constants.paletteDark,
+              color: Constants.textColor,
             )),
       ),
       body: Padding(
@@ -95,14 +95,14 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                     child: messageList[index].isMe
                         ? BubbleSpecialThree(
                             text: messageList[index].content,
-                            color: Constants.palette3,
+                            color: const Color.fromARGB(255, 157, 220, 223),
                             tail: index == messageList.length - 1 ||
                                     messageList[index + 1].isMe !=
                                         messageList[index].isMe
                                 ? true
                                 : false,
                             textStyle: TextStyle(
-                              color: Constants.paletteDark,
+                              color: Constants.textColor,
                               fontSize: 16,
                             ),
                           )
@@ -116,7 +116,7 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                                 : false,
                             isSender: false,
                             textStyle: TextStyle(
-                              color: Constants.paletteDark,
+                              color: Constants.textColor,
                               fontSize: 16,
                             ),
                           ),
@@ -133,7 +133,7 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                   tail: true,
                   isSender: false,
                   textStyle: TextStyle(
-                    color: Constants.paletteDark,
+                    color: Constants.textColor,
                     fontSize: 16,
                   ),
                 ),
@@ -152,9 +152,9 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   child: InkWell(
-                    child: const Icon(
+                    child: Icon(
                       Icons.camera_alt,
-                      color: Colors.green,
+                      color: Constants.icon,
                       size: 24,
                     ),
                     onTap: () {},

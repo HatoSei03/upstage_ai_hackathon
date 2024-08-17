@@ -31,7 +31,7 @@ class _ViewSavedTourState extends State<ViewSavedTour> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         title: Text(
           widget.savedTour.name,
           style: const TextStyle(
@@ -111,7 +111,7 @@ class _ViewSavedTourState extends State<ViewSavedTour> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.palette3, // Custom color
+        backgroundColor: Constants.highlight, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),

@@ -46,7 +46,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Text(
                   'Details',
                   style: GoogleFonts.poppins(
-                      color: Constants.paletteDark,
+                      color: Constants.textColor,
                       fontWeight: FontWeight.w600,
                       fontSize: 20),
                 ),
@@ -89,18 +89,23 @@ class _DetailScreenState extends State<DetailScreen> {
                 },
                 child: Row(
                   children: [
-                    Text(
-                      widget.placeToDisplay.name,
-                      style: GoogleFonts.poppins(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          widget.placeToDisplay.name,
+                          style: GoogleFonts.poppins(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                     Icon(
                       isContactInfoExpanded
                           ? Icons.arrow_drop_up
                           : Icons.arrow_drop_down,
-                      size: 18,
+                      size: 25,
                     ),
                   ],
                 ),
@@ -124,8 +129,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               const SizedBox(width: 5),
                               GestureDetector(
                                 onTap: () async {
-                                  // final url = widget.placeToDisplay.website;
-                                  final url = 'https://www.google.com';
+                                  final url = widget.placeToDisplay.website;
                                   if (await canLaunchUrl(Uri.parse(url))) {
                                     await launchUrl(Uri.parse(url));
                                   } else {
@@ -133,8 +137,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   }
                                 },
                                 child: Text(
-                                  // widget.placeToDisplay.website,
-                                  'https://www.google.com',
+                                  widget.placeToDisplay.website,
                                   style: const TextStyle(
                                       fontSize: 16,
                                       color: Color.fromARGB(255, 19, 81, 133)),
@@ -150,8 +153,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                               const SizedBox(width: 5),
                               Text(
-                                // widget.placeToDisplay.contact,
-                                'contact',
+                                widget.placeToDisplay.contact,
                                 style: const TextStyle(fontSize: 16),
                               ),
                             ],
@@ -169,7 +171,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   Icon(
                     Icons.location_pin,
-                    color: Constants.palette2,
+                    color: Constants.textColor,
                     size: 25,
                   ),
                   const SizedBox(width: 5),
@@ -180,7 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         widget.placeToDisplay.address,
                         style: GoogleFonts.poppins(
                           fontSize: 18,
-                          color: Constants.palette2,
+                          color: Constants.textColor,
                         ),
                       ),
                     ),
@@ -206,7 +208,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                              '${widget.placeToDisplay.price.toStringAsFixed(0)}₫',
+                              '${widget.placeToDisplay.price.toStringAsFixed(0)}\$',
                               style: const TextStyle(fontSize: 16))
                         ],
                       ),
@@ -219,7 +221,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                              '${widget.placeToDisplay.openTime.toStringAsFixed(0)}h - ${widget.placeToDisplay.closeTime.toStringAsFixed(0)}h',
+                              '${widget.placeToDisplay.opentime.toStringAsFixed(0)}h - ${widget.placeToDisplay.closetime.toStringAsFixed(0)}h',
                               style: const TextStyle(fontSize: 16))
                         ],
                       ),
@@ -238,7 +240,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       },
                       child: Text(
                         'Leave a Review',
-                        style: TextStyle(color: Constants.palette1),
+                        style: TextStyle(color: Constants.textColor),
                       )),
                 ],
               ),
@@ -252,7 +254,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Text(
                     widget.placeToDisplay.history,
                     style: GoogleFonts.poppins(
-                        fontSize: 18, color: Constants.paletteDark),
+                        fontSize: 18, color: Constants.textColor),
                   ),
                 ),
               ),
@@ -270,7 +272,7 @@ class _DetailScreenState extends State<DetailScreen> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.palette3, // Custom color
+        backgroundColor: Constants.highlight, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),

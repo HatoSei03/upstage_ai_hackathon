@@ -26,7 +26,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
             color: Color.fromARGB(255, 35, 52, 10),
           ),
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back,
               color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
@@ -84,7 +84,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Constants.palette3,
+                    backgroundColor: Constants.button,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16.0),
                     ),
@@ -108,7 +108,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Constants.palette3,
+                    backgroundColor: Constants.button,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16.0),
                     ),

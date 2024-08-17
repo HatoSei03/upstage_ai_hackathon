@@ -33,7 +33,7 @@ class _ReviewScreenState<Reviews> extends State<ReviewScreen> {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
       ),
       body:
           Center(child: GetUIAllReviewsByItemID(locationID: widget.locationID)),
@@ -52,7 +52,7 @@ class _ReviewScreenState<Reviews> extends State<ReviewScreen> {
             });
           }
         },
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.highlight,
         tooltip: "Leave a Review",
         child: const Icon(Icons.add, color: Colors.black),
       ),

@@ -7,12 +7,12 @@ class Place {
   final num price;
   final String history;
   final num duration;
-  final num openTime;
-  final num closeTime;
-  final String district;
-  final String city;
-  // final String website;
-  // final String contact;
+  final num opentime;
+  final num closetime;
+  // final String district;
+  // final String city;
+  final String website;
+  final String contact;
 
   Place({
     required this.id,
@@ -23,12 +23,12 @@ class Place {
     required this.price,
     required this.history,
     required this.duration,
-    required this.district,
-    required this.city,
-    required this.openTime,
-    required this.closeTime,
-    // required this.website,
-    // required this.contact,
+    // required this.district,
+    // required this.city,
+    required this.opentime,
+    required this.closetime,
+    required this.website,
+    required this.contact,
   });
 }
 

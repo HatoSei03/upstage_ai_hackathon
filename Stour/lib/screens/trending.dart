@@ -14,7 +14,7 @@ class Trending extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         title: Text(
           name,
           style: const TextStyle(
@@ -55,7 +55,7 @@ class Trending extends StatelessWidget {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.palette3, // Custom color
+        backgroundColor: Constants.highlight, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),

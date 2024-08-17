@@ -47,7 +47,7 @@ class _ModifyTimelineState extends State<ModifyTimeline> {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -79,7 +79,7 @@ class _ModifyTimelineState extends State<ModifyTimeline> {
                 margin: const EdgeInsets.symmetric(vertical: 4.0),
                 child: ListTile(
                   title: Text('Add or Remove Attractions',
-                      style: TextStyle(color: Constants.text)),
+                      style: TextStyle(color: Constants.textColor)),
                   leading: const Icon(Icons.add_circle_outline_outlined),
                 ),
               ),

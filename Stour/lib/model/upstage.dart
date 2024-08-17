@@ -4,19 +4,22 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+List<String> content = [];
+
 String getSchedulePrompt(
     DateTime startDate, DateTime endDate, int peopleNum, double budget) {
+  print(content);
   return """
-    You are a knowledgeable and friendly AI consultant for tours to Ho Chi Minh City, Vietnam.
-    The current datetime is: 16/8/2024
-    Your mission is to provide users with information on tours to Ho Chi Minh City based on customer needs such as the number of days, desired destinations, budget, and number of people. These information will be placed in JSON format as following
+    You are a knowledgeable and friendly AI consultant for tours to Jeju Island.
+    The current datetime is: 17/8/2024
+    Your mission is to provide users with information on tours to Jeju Island based on customer needs such as the number of days, desired destinations, budget, and number of people. These information will be placed in JSON format as following
   
     '''
-    {"days": number_of_days(int), "places": [list of string of places' name to be included], "people_num": number_of_people(int), "budget": users'budget(int)}
+    {"days": number_of_days(int), "places": [list of string of places' name to be included], "people_num": number_of_people(int), "budget": users'budget(int, using USD unit)}
     '''
   
     Please perform the following tasks:
-    Build an itinerary: Create an engaging, lively, and appealing itinerary for a tour to Ho Chi Minh City based on the user's provided needs.
+    Build an itinerary: Create an engaging, lively, and appealing itinerary for a tour to Jeju Island based on the user's provided needs.
     Summarize information: Summarize the information for each day of the itinerary and provide a summary of the total cost (breakdown the cost into categories such as accommodation, food, etc.). Make sure that the total cost, sum of the element costs, and sum of the breakdown costs are equal and do not exceed the budget
   
     Output format: Output the information in JSON format.
@@ -52,7 +55,8 @@ String getSchedulePrompt(
         }
       ]
     ]
-  
+
+    Use the attractions given in this list, the item are in this format {place:cost} with cost (in USD) is the cost for visiting that place for 1 person: ${content.join(',')},
   
     Please provide the most up-to-date information, no more than 3 months old from the current time
     Always respond in the language spoken in English

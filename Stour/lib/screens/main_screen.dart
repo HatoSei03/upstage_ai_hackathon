@@ -4,24 +4,20 @@ import 'package:stour/screens/home.dart';
 import 'package:stour/screens/timeline.dart';
 import 'package:stour/util/const.dart';
 import 'package:stour/screens/profile.dart';
-import 'package:stour/screens/chatbot.dart';
 import 'package:stour/screens/camera_screen.dart';
 
 List icons = [
   Icons.document_scanner_outlined,
-  Icons.chat_outlined,
-  Icons.home_outlined,
   Icons.timeline_outlined,
+  Icons.home_outlined,
   Icons.person_outline,
 ];
 
 List<Widget> pages = [
   const CameraAwesomeApp(),
-  const ChatbotSupportScreen(),
-  const Home(),
   const Timeline(),
+  const Home(),
   const Profile(),
-  // const ReviewScreen(),
 ];
 
 class MainScreen extends StatefulWidget {
@@ -51,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
               physics: const NeverScrollableScrollPhysics(),
               controller: _pageController,
               // onPageChanged: onPageChanged,
-              children: List.generate(5, (index) => pages[index]),
+              children: List.generate(4, (index) => pages[index]),
             ),
           ),
         ],
@@ -83,15 +79,14 @@ class HomeBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
-      backgroundColor: Constants.palette2,
-      buttonBackgroundColor: Constants.palette3,
+      backgroundColor: Constants.background,
+      buttonBackgroundColor: Constants.highlight,
       index: 2,
       items: [
-        Icon(icons[0], size: 30, color: Constants.paletteDark),
-        Icon(icons[1], size: 30, color: Constants.paletteDark),
-        Icon(icons[2], size: 30, color: Constants.paletteDark),
-        Icon(icons[3], size: 30, color: Constants.paletteDark),
-        Icon(icons[4], size: 30, color: Constants.paletteDark),
+        Icon(icons[0], size: 30, color: Constants.icon),
+        Icon(icons[1], size: 30, color: Constants.icon),
+        Icon(icons[2], size: 30, color: Constants.icon),
+        Icon(icons[3], size: 30, color: Constants.icon),
       ],
       onTap: onTap,
     );

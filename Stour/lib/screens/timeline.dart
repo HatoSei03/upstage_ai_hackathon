@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -23,21 +25,11 @@ class _TimelineState extends State<Timeline> {
   TimeOfDay _endTime = const TimeOfDay(hour: 0, minute: 0);
   // ignore: unused_field
   int _travellerNum = 1;
-  String _currentLocation = 'Ho Chi Minh city';
-  List<String> cities = [
-    "Ho Chi Minh city",
-    "Ha Noi",
-    "Da Nang",
-    "Hoi An",
-    "Can Tho"
-  ];
-  List<String> content = [];
 
   void _generateSchedule() async {
     {
       final response = await getUpstageAIResponse(
-          "Use the places in this list: ${content.join(',')}",
-          getSchedulePrompt(_departureDate, _returnDate, 2, _maxBudget));
+          '', getSchedulePrompt(_departureDate, _returnDate, 2, _maxBudget));
       List<String> placeNames = response.split('"places"');
       placeNames = placeNames.map((e) {
         return e.split('"')[1];
@@ -75,7 +67,7 @@ class _TimelineState extends State<Timeline> {
     _maxBudget = 0;
     _startTime = const TimeOfDay(hour: 0, minute: 0);
     _endTime = const TimeOfDay(hour: 0, minute: 0);
-    content.addAll(places.map((place) => place.name));
+    content.addAll(places.map((place) => '{${place.name}:${place.price}}'));
     super.initState();
   }
 
@@ -83,11 +75,11 @@ class _TimelineState extends State<Timeline> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         title: Text('Initerary Planning',
             style: TextStyle(
               // fontWeight: FontWeight.bold,
-              color: Constants.paletteDark,
+              color: Constants.textColor,
             )),
       ),
       body: Padding(
@@ -96,78 +88,6 @@ class _TimelineState extends State<Timeline> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Icon(
-                    Icons.location_pin, // or Icons.map
-                    size: 25,
-                    color: Constants.paletteDark,
-                  ),
-                  const SizedBox(width: 4.0),
-                  Text(
-                    'Location:',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Constants.paletteDark,
-                    ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  GestureDetector(
-                    onTap: () async {
-                      final String? picked = await showDialog<String>(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Select Location'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  for (int i = 0; i < cities.length; i++)
-                                    ListTile(
-                                      title: Text(
-                                        cities[i],
-                                        style: TextStyle(
-                                          color: Constants.paletteDark,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.pop(context, cities[i]);
-                                      },
-                                    ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                      if (picked != null) {
-                        setState(() {
-                          _currentLocation = picked;
-                        });
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          _currentLocation,
-                          style: const TextStyle(
-                              color: Color(0xFF508C9B),
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(width: 4.0),
-                        const Icon(
-                          Icons.edit, // or Icons.map
-                          size: 16,
-                          color: Color(0xFF508C9B),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
               const SizedBox(height: 32.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -179,7 +99,7 @@ class _TimelineState extends State<Timeline> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Constants.paletteDark,
+                          color: Constants.textColor,
                         ),
                       ),
                       const SizedBox(height: 8.0),
@@ -198,18 +118,18 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.palette3,
+                          backgroundColor: Constants.button,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
                         icon: Icon(
                           CupertinoIcons.calendar,
-                          color: Constants.paletteDark,
+                          color: Constants.icon,
                         ),
                         label: Text(
                           DateFormat('dd/MM/yyyy').format(_departureDate),
-                          style: TextStyle(color: Constants.paletteDark),
+                          style: TextStyle(color: Constants.textColor),
                         ),
                       ),
                     ],
@@ -222,7 +142,7 @@ class _TimelineState extends State<Timeline> {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Constants.paletteDark)),
+                              color: Constants.textColor)),
                       const SizedBox(height: 8.0),
                       ElevatedButton.icon(
                         onPressed: () async {
@@ -239,18 +159,18 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.palette3,
+                          backgroundColor: Constants.button,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
                         icon: Icon(
                           CupertinoIcons.calendar,
-                          color: Constants.paletteDark,
+                          color: Constants.icon,
                         ),
                         label: Text(
                           DateFormat('dd/MM/yyyy').format(_returnDate),
-                          style: TextStyle(color: Constants.paletteDark),
+                          style: TextStyle(color: Constants.textColor),
                         ),
                       ),
                     ],
@@ -259,11 +179,11 @@ class _TimelineState extends State<Timeline> {
               ),
               const SizedBox(height: 16.0),
               Text(
-                'Budget (VND)',
+                'Budget (Dollar)',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Constants.paletteDark),
+                    color: Constants.textColor),
               ),
               const SizedBox(height: 8.0),
               TextFormField(
@@ -281,7 +201,7 @@ class _TimelineState extends State<Timeline> {
                   hintText: 'Enter your budget',
                   prefixIcon: Icon(
                     Icons.account_balance_wallet_outlined,
-                    color: Constants.paletteDark,
+                    color: Constants.icon,
                   ),
                 ),
               ),
@@ -291,14 +211,14 @@ class _TimelineState extends State<Timeline> {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Constants.paletteDark),
+                    color: Constants.textColor),
               ),
               const SizedBox(height: 8.0),
               Row(
                 children: [
                   Radio(
                     value: true,
-                    activeColor: Constants.paletteDark,
+                    activeColor: Constants.button,
                     groupValue: _isTravelingAlone,
                     onChanged: (value) {
                       setState(() {
@@ -308,12 +228,12 @@ class _TimelineState extends State<Timeline> {
                   ),
                   Text('Yes',
                       style: TextStyle(
-                          color: Constants.paletteDark,
+                          color: Constants.textColor,
                           fontWeight: FontWeight.w800)),
                   const SizedBox(width: 16.0),
                   Radio(
                     value: false,
-                    activeColor: Constants.palette2,
+                    activeColor: Constants.textColor,
                     groupValue: _isTravelingAlone,
                     onChanged: (value) {
                       setState(() {
@@ -348,7 +268,7 @@ class _TimelineState extends State<Timeline> {
                       hintText: 'Enter number of travelers',
                       prefixIcon: Icon(
                         Icons.group,
-                        color: Constants.paletteDark,
+                        color: Constants.icon,
                       ),
                     ),
                   ),
@@ -362,7 +282,7 @@ class _TimelineState extends State<Timeline> {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Constants.paletteDark)),
+                              color: Constants.textColor)),
                       const SizedBox(height: 2.0),
                       ElevatedButton.icon(
                         onPressed: () async {
@@ -377,7 +297,7 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.palette3,
+                          backgroundColor: Constants.button,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
@@ -400,7 +320,7 @@ class _TimelineState extends State<Timeline> {
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Constants.paletteDark),
+                            color: Constants.textColor),
                       ),
                       const SizedBox(height: 2.0),
                       ElevatedButton.icon(
@@ -416,7 +336,7 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.palette3,
+                          backgroundColor: Constants.button,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
@@ -476,7 +396,7 @@ class _TimelineState extends State<Timeline> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.palette3, // Custom color
+        backgroundColor: Constants.highlight, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),

@@ -82,7 +82,7 @@ class _PostScreenState extends State<PostScreen> {
                     },
                     child: Icon(
                       Icons.more_vert,
-                      color: Constants.text,
+                      color: Constants.icon,
                     ),
                   ),
                 ],

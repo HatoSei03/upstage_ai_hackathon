@@ -47,7 +47,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               color: Color.fromARGB(255, 35, 52, 10),
             ),
           ),
-          backgroundColor: Constants.palette3,
+          backgroundColor: Constants.header,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back,
                 color:
@@ -95,7 +95,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.palette3,
+        backgroundColor: Constants.header,
         title: const Text(
           'Your Schedule',
           style: TextStyle(
@@ -147,7 +147,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             ),
                           ),
                           Text(
-                            'Estimated Cost: ${totalMoney.toStringAsFixed(0)}₫',
+                            'Estimated Cost: ${totalMoney.toStringAsFixed(0)}\$',
                             style: GoogleFonts.roboto(
                               color: const Color.fromARGB(255, 35, 52, 10),
                               fontSize: 14,
@@ -253,7 +253,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.palette3, // Custom color
+        backgroundColor: Constants.highlight, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),

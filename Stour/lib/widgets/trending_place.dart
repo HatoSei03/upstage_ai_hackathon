@@ -92,7 +92,7 @@ class _TrendingPlaceState extends State<TrendingPlace> {
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            " ${widget.place.openTime.toString()}-${widget.place.closeTime.toString()}",
+                            " ${widget.place.opentime.toString()}-${widget.place.closetime.toString()}",
                             style: const TextStyle(
                               fontSize: 10.0,
                               color: Colors.green,

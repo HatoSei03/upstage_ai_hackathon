@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
                 Text(
                   'Current Location',
                   style: TextStyle(
-                    color: Constants.paletteDark,
+                    color: Constants.textColor,
                     fontSize: 20.0,
                     fontWeight: FontWeight.w800,
                   ),
@@ -171,7 +171,7 @@ class _HomeState extends State<Home> {
             );
           },
           tooltip: 'Floating Action Button',
-          backgroundColor: Constants.palette3, // Custom color
+          backgroundColor: Constants.highlight, // Custom color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0), // Round shape
           ),
@@ -212,7 +212,7 @@ Widget buildPlaceRow(String place, List<Place> source, BuildContext context) {
       Text(
         place,
         style: TextStyle(
-          color: Constants.paletteDark,
+          color: Constants.textColor,
           fontSize: 20.0,
           fontWeight: FontWeight.w800,
         ),
@@ -221,7 +221,7 @@ Widget buildPlaceRow(String place, List<Place> source, BuildContext context) {
         child: Text(
           "See all (${source.length})",
           style: TextStyle(
-            color: Constants.text,
+            color: Constants.textColor,
           ),
         ),
         onPressed: () {

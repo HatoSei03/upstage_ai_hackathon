@@ -98,7 +98,7 @@ class _PlaceCardState extends State<PlaceCard> {
                               size: 20,
                             ),
                             Text(
-                              " ${widget.place.openTime.toStringAsFixed(0)}-${widget.place.closeTime.toStringAsFixed(0)}",
+                              " ${widget.place.opentime.toStringAsFixed(0)}-${widget.place.closetime.toStringAsFixed(0)}",
                               style: const TextStyle(
                                 fontSize: 12.0,
                                 color: Colors.green,
@@ -116,13 +116,18 @@ class _PlaceCardState extends State<PlaceCard> {
                   padding: const EdgeInsets.only(left: 15.0),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      widget.place.name,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
+                    child: Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          widget.place.name,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
                       ),
-                      textAlign: TextAlign.left,
                     ),
                   ),
                 ),
