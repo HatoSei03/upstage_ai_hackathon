@@ -26,6 +26,8 @@ void getAllPlaceFood(String collection) {
           closeTime: data['closetime'],
           district: data['district'],
           openTime: data['opentime'],
+          // website: data['website'],
+          // contact: data['contact'],
         );
         if (collection == 'place') {
           if (places.firstWhereOrNull((element) => element.id == tmpPlace.id) ==

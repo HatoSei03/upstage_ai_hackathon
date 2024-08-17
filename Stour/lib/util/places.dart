@@ -11,6 +11,8 @@ class Place {
   final num closeTime;
   final String district;
   final String city;
+  // final String website;
+  // final String contact;
 
   Place({
     required this.id,
@@ -25,6 +27,8 @@ class Place {
     required this.city,
     required this.openTime,
     required this.closeTime,
+    // required this.website,
+    // required this.contact,
   });
 }
 

@@ -6,6 +6,7 @@ import 'package:stour/util/places.dart';
 import 'package:flutter/services.dart';
 import 'package:stour/screens/review_screen.dart';
 import 'package:stour/screens/chatbot.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.placeToDisplay});
@@ -21,6 +22,8 @@ class _DetailScreenState extends State<DetailScreen> {
   bool hasLiked = false;
   Color buttonColor = Colors.black;
   Icon initialFavIcon = const Icon(Icons.favorite_border, size: 30);
+  bool isContactInfoExpanded = false; // Add this variable
+
   @override
   Widget build(context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
@@ -78,13 +81,85 @@ class _DetailScreenState extends State<DetailScreen> {
             Container(
               padding: const EdgeInsets.only(left: 10),
               alignment: Alignment.centerLeft,
-              child: Text(
-                widget.placeToDisplay.name,
-                style: GoogleFonts.poppins(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isContactInfoExpanded = !isContactInfoExpanded;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      widget.placeToDisplay.name,
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Icon(
+                      isContactInfoExpanded
+                          ? Icons.arrow_drop_up
+                          : Icons.arrow_drop_down,
+                      size: 18,
+                    ),
+                  ],
                 ),
               ),
+            ),
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: isContactInfoExpanded
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.language,
+                                size: 18,
+                              ),
+                              const SizedBox(width: 5),
+                              GestureDetector(
+                                onTap: () async {
+                                  // final url = widget.placeToDisplay.website;
+                                  final url = 'https://www.google.com';
+                                  if (await canLaunchUrl(Uri.parse(url))) {
+                                    await launchUrl(Uri.parse(url));
+                                  } else {
+                                    throw 'Could not launch $url';
+                                  }
+                                },
+                                child: Text(
+                                  // widget.placeToDisplay.website,
+                                  'https://www.google.com',
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromARGB(255, 19, 81, 133)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.phone,
+                                size: 18,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                // widget.placeToDisplay.contact,
+                                'contact',
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container(),
             ),
             const SizedBox(height: 10),
             Padding(
@@ -117,6 +192,7 @@ class _DetailScreenState extends State<DetailScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +222,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               '${widget.placeToDisplay.openTime.toStringAsFixed(0)}h - ${widget.placeToDisplay.closeTime.toStringAsFixed(0)}h',
                               style: const TextStyle(fontSize: 16))
                         ],
-                      )
+                      ),
                     ],
                   ),
                   const Spacer(),

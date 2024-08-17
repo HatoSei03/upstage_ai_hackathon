@@ -11,10 +11,14 @@ class OCRScreen extends StatefulWidget {
   _OCRScreenState createState() => _OCRScreenState();
 }
 
+bool _isLoading = false;
+
 class _OCRScreenState extends State<OCRScreen> {
+  String _currContent = '';
   String _response = '';
   String translated = '';
   String image = '';
+  bool isEn = true;
 
   @override
   void initState() {
@@ -24,17 +28,30 @@ class _OCRScreenState extends State<OCRScreen> {
   }
 
   Future<void> _performOCR() async {
+    setState(() {
+      _isLoading = true;
+    });
     String response = await performOCR(image);
-    // response = parseMainContent(response);
     setState(() {
       _response = response;
+      _currContent = response;
+      _isLoading = false;
     });
   }
 
   Future<void> translate() async {
-    translated = await getTranslation(_response);
     setState(() {
-      _response = translated;
+      _isLoading = true;
+    });
+    translated =
+        translated == '' ? await getTranslation(_response) : translated;
+    setState(() {
+      if (_currContent == _response) {
+        _currContent = translated;
+      } else {
+        _currContent = _response;
+      }
+      _isLoading = false;
     });
   }
 
@@ -67,32 +84,29 @@ class _OCRScreenState extends State<OCRScreen> {
             flex: 1,
             child: Column(
               children: [
+                ElevatedButton(
+                  onPressed: translate,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Constants.palette1,
+                    elevation: 1,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.translate,
+                        color: Constants.palette3,
+                      ),
+                      Text(
+                        'Translate',
+                        style: TextStyle(color: Constants.palette3),
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 15),
-                              child: Tooltip(
-                                message: 'Translate',
-                                child: IconButton(
-                                  onPressed: translate,
-                                  icon: const Icon(Icons.translate, size: 20),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: displayText(_response),
-                        ),
-                      ],
-                    ),
+                  child: Expanded(
+                    child: displayText(_currContent),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -107,12 +121,20 @@ class _OCRScreenState extends State<OCRScreen> {
 
 Widget displayImage(String imagePath) {
   return SizedBox(
-    width: 450,
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      child: Image.file(
-        File(imagePath),
-        fit: BoxFit.contain,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.withOpacity(1)),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Image.file(
+            File(imagePath),
+            fit: BoxFit.contain,
+          ),
+        ),
       ),
     ),
   );
@@ -121,10 +143,21 @@ Widget displayImage(String imagePath) {
 Widget displayText(String text) {
   return Padding(
     padding: const EdgeInsets.all(16.0),
-    child: SingleChildScrollView(
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 14),
+    child: Container(
+      height: 200,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.5)),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            _isLoading ? 'Gathering Information...' : text,
+            style: const TextStyle(fontSize: 14),
+          ),
+        ),
       ),
     ),
   );
