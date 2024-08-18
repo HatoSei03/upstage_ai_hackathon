@@ -122,7 +122,7 @@ class _HomeState extends State<Home> {
         }
       },
       child: Scaffold(
-        backgroundColor: Constants.lightBG,
+        backgroundColor: Constants.background,
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(90),
           child: HomeAppBar(),
@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
                 Text(
                   'Current Location',
                   style: TextStyle(
-                    color: Constants.textColor,
+                    color: Constants.darkText,
                     fontSize: 20.0,
                     fontWeight: FontWeight.w800,
                   ),
@@ -171,13 +171,15 @@ class _HomeState extends State<Home> {
             );
           },
           tooltip: 'Floating Action Button',
-          backgroundColor: Constants.highlight, // Custom color
+        backgroundColor: Constants.header, // Custom color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0), // Round shape
           ),
           elevation: 2.0,
-          child: const Icon(Icons.question_answer),
-        ),
+child: Icon(
+          Icons.question_answer,
+          color: Constants.lightText2,
+        ),        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
@@ -212,7 +214,7 @@ Widget buildPlaceRow(String place, List<Place> source, BuildContext context) {
       Text(
         place,
         style: TextStyle(
-          color: Constants.textColor,
+          color: Constants.darkText,
           fontSize: 20.0,
           fontWeight: FontWeight.w800,
         ),
@@ -221,7 +223,7 @@ Widget buildPlaceRow(String place, List<Place> source, BuildContext context) {
         child: Text(
           "See all (${source.length})",
           style: TextStyle(
-            color: Constants.textColor,
+            color: Constants.darkText,
           ),
         ),
         onPressed: () {

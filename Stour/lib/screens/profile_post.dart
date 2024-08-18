@@ -82,7 +82,7 @@ class _PostScreenState extends State<PostScreen> {
                     },
                     child: Icon(
                       Icons.more_vert,
-                      color: Constants.icon,
+                      color: Constants.darkText,
                     ),
                   ),
                 ],
@@ -132,7 +132,7 @@ class _PostScreenState extends State<PostScreen> {
                     child: Row(
                       children: [
                         Icon(Icons.comment_outlined,
-                            color: Constants.darkgreen),
+                            color: Constants.header),
                         const SizedBox(width: 5),
                         const Text("123"),
                       ],
@@ -142,7 +142,7 @@ class _PostScreenState extends State<PostScreen> {
                     onTap: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.share_outlined, color: Constants.darkpp),
+                        Icon(Icons.share_outlined, color: Constants.darkText),
                         const SizedBox(width: 5),
                         const Text("1"),
                       ],

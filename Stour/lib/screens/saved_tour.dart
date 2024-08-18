@@ -228,13 +228,15 @@ class _SavedTourState extends State<SavedTour> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.highlight, // Custom color
+        backgroundColor: Constants.header, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),
         elevation: 2.0,
-        child: const Icon(Icons.question_answer),
-      ),
+child: Icon(
+          Icons.question_answer,
+          color: Constants.lightText2,
+        ),      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

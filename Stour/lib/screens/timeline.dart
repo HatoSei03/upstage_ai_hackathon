@@ -78,8 +78,8 @@ class _TimelineState extends State<Timeline> {
         backgroundColor: Constants.header,
         title: Text('Initerary Planning',
             style: TextStyle(
-              // fontWeight: FontWeight.bold,
-              color: Constants.textColor,
+              fontWeight: FontWeight.bold,
+              color: Constants.lightText2,
             )),
       ),
       body: Padding(
@@ -99,7 +99,7 @@ class _TimelineState extends State<Timeline> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Constants.textColor,
+                          color: Constants.darkText,
                         ),
                       ),
                       const SizedBox(height: 8.0),
@@ -118,18 +118,18 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.button,
+                          backgroundColor: Constants.header,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
                         icon: Icon(
                           CupertinoIcons.calendar,
-                          color: Constants.icon,
+                          color: Constants.background,
                         ),
                         label: Text(
                           DateFormat('dd/MM/yyyy').format(_departureDate),
-                          style: TextStyle(color: Constants.textColor),
+                          style: TextStyle(color: Constants.background),
                         ),
                       ),
                     ],
@@ -142,7 +142,7 @@ class _TimelineState extends State<Timeline> {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Constants.textColor)),
+                              color: Constants.darkText)),
                       const SizedBox(height: 8.0),
                       ElevatedButton.icon(
                         onPressed: () async {
@@ -159,18 +159,18 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.button,
+                          backgroundColor: Constants.header,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
                         icon: Icon(
                           CupertinoIcons.calendar,
-                          color: Constants.icon,
+                          color: Constants.background,
                         ),
                         label: Text(
                           DateFormat('dd/MM/yyyy').format(_returnDate),
-                          style: TextStyle(color: Constants.textColor),
+                          style: TextStyle(color: Constants.background),
                         ),
                       ),
                     ],
@@ -183,7 +183,7 @@ class _TimelineState extends State<Timeline> {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Constants.textColor),
+                    color: Constants.darkText),
               ),
               const SizedBox(height: 8.0),
               TextFormField(
@@ -201,7 +201,7 @@ class _TimelineState extends State<Timeline> {
                   hintText: 'Enter your budget',
                   prefixIcon: Icon(
                     Icons.account_balance_wallet_outlined,
-                    color: Constants.icon,
+                    color: Constants.darkText,
                   ),
                 ),
               ),
@@ -211,14 +211,14 @@ class _TimelineState extends State<Timeline> {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Constants.textColor),
+                    color: Constants.darkText),
               ),
               const SizedBox(height: 8.0),
               Row(
                 children: [
                   Radio(
                     value: true,
-                    activeColor: Constants.button,
+                    activeColor: Constants.darkText,
                     groupValue: _isTravelingAlone,
                     onChanged: (value) {
                       setState(() {
@@ -228,12 +228,12 @@ class _TimelineState extends State<Timeline> {
                   ),
                   Text('Yes',
                       style: TextStyle(
-                          color: Constants.textColor,
+                          color: Constants.darkText,
                           fontWeight: FontWeight.w800)),
                   const SizedBox(width: 16.0),
                   Radio(
                     value: false,
-                    activeColor: Constants.textColor,
+                    activeColor: Constants.darkText,
                     groupValue: _isTravelingAlone,
                     onChanged: (value) {
                       setState(() {
@@ -268,7 +268,7 @@ class _TimelineState extends State<Timeline> {
                       hintText: 'Enter number of travelers',
                       prefixIcon: Icon(
                         Icons.group,
-                        color: Constants.icon,
+                        color: Constants.darkText,
                       ),
                     ),
                   ),
@@ -282,7 +282,7 @@ class _TimelineState extends State<Timeline> {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Constants.textColor)),
+                              color: Constants.darkText)),
                       const SizedBox(height: 2.0),
                       ElevatedButton.icon(
                         onPressed: () async {
@@ -297,17 +297,18 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.button,
+                          backgroundColor: Constants.header,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-                        icon: const Icon(
+                        icon: Icon(
                           CupertinoIcons.clock,
-                          color: Color.fromARGB(255, 64, 64, 63),
+                          color: Constants.background,
                         ),
                         label: Text(
                           _startTime.format(context),
+                          style: TextStyle(color: Constants.background),
                         ),
                       ),
                     ],
@@ -320,7 +321,7 @@ class _TimelineState extends State<Timeline> {
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Constants.textColor),
+                            color: Constants.darkText),
                       ),
                       const SizedBox(height: 2.0),
                       ElevatedButton.icon(
@@ -336,17 +337,18 @@ class _TimelineState extends State<Timeline> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Constants.button,
+                          backgroundColor: Constants.header,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-                        icon: const Icon(
+                        icon: Icon(
                           CupertinoIcons.clock,
-                          color: Color.fromARGB(255, 64, 64, 63),
+                          color: Constants.background,
                         ),
                         label: Text(
                           _endTime.format(context),
+                          style: TextStyle(color: Constants.background),
                         ),
                       ),
                     ],
@@ -358,7 +360,7 @@ class _TimelineState extends State<Timeline> {
                 child: ElevatedButton(
                   onPressed: _generateSchedule,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFD4E7C5),
+                    backgroundColor: Constants.highlight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -396,12 +398,15 @@ class _TimelineState extends State<Timeline> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.highlight, // Custom color
+        backgroundColor: Constants.header, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),
         elevation: 2.0,
-        child: const Icon(Icons.question_answer),
+        child: Icon(
+          Icons.question_answer,
+          color: Constants.lightText2,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

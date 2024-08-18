@@ -190,11 +190,10 @@ class _QuestionResult extends StatelessWidget {
           icon: const Icon(Icons.arrow_back,
               color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
           onPressed: () {
-            // Handle back button logic
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Constants.lightgreen,
+        backgroundColor: Constants.header,
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),

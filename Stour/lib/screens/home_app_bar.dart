@@ -31,7 +31,7 @@ class HomeAppBar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Constants.button,
+                color: Constants.lightText2,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: const Icon(
@@ -49,7 +49,7 @@ class HomeAppBar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Constants.button,
+                color: Constants.lightText2,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: GestureDetector(

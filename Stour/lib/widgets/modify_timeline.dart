@@ -73,13 +73,13 @@ class _ModifyTimelineState extends State<ModifyTimeline> {
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Constants.darkgreen),
+                  border: Border.all(color: Constants.header),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 margin: const EdgeInsets.symmetric(vertical: 4.0),
                 child: ListTile(
                   title: Text('Add or Remove Attractions',
-                      style: TextStyle(color: Constants.textColor)),
+                      style: TextStyle(color: Constants.darkText)),
                   leading: const Icon(Icons.add_circle_outline_outlined),
                 ),
               ),

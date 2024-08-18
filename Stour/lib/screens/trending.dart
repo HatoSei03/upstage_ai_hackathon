@@ -60,7 +60,10 @@ class Trending extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),
         elevation: 2.0,
-        child: const Icon(Icons.question_answer),
+        child: Icon(
+          Icons.question_answer,
+          color: Constants.lightText2,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

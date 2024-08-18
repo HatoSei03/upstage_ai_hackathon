@@ -87,7 +87,7 @@ class _OCRScreenState extends State<OCRScreen> {
                 ElevatedButton(
                   onPressed: translate,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Constants.button,
+                    backgroundColor: Constants.header,
                     elevation: 1,
                   ),
                   child: Row(
@@ -95,11 +95,11 @@ class _OCRScreenState extends State<OCRScreen> {
                     children: [
                       Icon(
                         Icons.translate,
-                        color: Constants.icon,
+                        color: Constants.lightText,
                       ),
                       Text(
                         'Translate to English',
-                        style: TextStyle(color: Constants.textColor),
+                        style: TextStyle(color: Constants.lightText),
                       ),
                     ],
                   ),
@@ -154,7 +154,7 @@ Widget displayText(String text) {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            _isLoading ? 'Cookin\' up something...' : text,
+            _isLoading ? 'Gathering Information...' : text,
             style: const TextStyle(fontSize: 14),
           ),
         ),

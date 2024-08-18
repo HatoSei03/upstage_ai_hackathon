@@ -52,9 +52,9 @@ class _ReviewScreenState<Reviews> extends State<ReviewScreen> {
             });
           }
         },
-        backgroundColor: Constants.highlight,
+        backgroundColor: Constants.header,
         tooltip: "Leave a Review",
-        child: const Icon(Icons.add, color: Colors.black),
+        child:  Icon(Icons.add, color: Constants.lightText2),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

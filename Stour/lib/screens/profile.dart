@@ -50,12 +50,15 @@ class _ProfileState extends State<Profile> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.highlight, // Custom color
+        backgroundColor: Constants.header, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),
         elevation: 2.0,
-        child: const Icon(Icons.question_answer),
+        child: Icon(
+          Icons.question_answer,
+          color: Constants.lightText2,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -74,14 +77,13 @@ class _ProfileState extends State<Profile> {
                 elevation: 0.5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
-                    side: BorderSide(color: Constants.darkPrimary)),
-                color:
-                    _selectedEvent == 1 ? Constants.lightPrimary : Colors.white,
+                    side: BorderSide(color: Constants.darkText)),
+                color: _selectedEvent == 1 ? Constants.darkText : Colors.white,
                 onPressed: () {},
                 child: Text("POST",
                     style: TextStyle(
                       color: _selectedEvent == 1
-                          ? Constants.lightPrimary
+                          ? Constants.lightText
                           : const Color.fromARGB(255, 0, 0, 0),
                     )),
               ),
@@ -95,9 +97,8 @@ class _ProfileState extends State<Profile> {
                 elevation: 0.5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
-                    side: BorderSide(color: Constants.darkPrimary)),
-                color:
-                    _selectedEvent == 1 ? Constants.lightPrimary : Colors.white,
+                    side: BorderSide(color: Constants.darkText)),
+                color: _selectedEvent == 1 ? Constants.darkText : Colors.white,
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -111,7 +112,7 @@ class _ProfileState extends State<Profile> {
                 child: Text("YOUR TOURS",
                     style: TextStyle(
                       color: _selectedEvent == 1
-                          ? Constants.lightPrimary
+                          ? Constants.lightText
                           : const Color.fromARGB(255, 0, 0, 0),
                     )),
               ),

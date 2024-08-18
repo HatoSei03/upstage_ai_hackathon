@@ -36,11 +36,11 @@ class _CouponScreenState extends State<CouponScreen> {
         itemCount: listCoupon.length,
         itemBuilder: (context, index) {
           return ListTile(
-            hoverColor: Constants.button,
+            hoverColor: Constants.header,
             title: Text(
               listCoupon[index].name,
               style: GoogleFonts.roboto(
-                color: Constants.textColor,
+                color: Constants.darkText,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -71,13 +71,15 @@ class _CouponScreenState extends State<CouponScreen> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.highlight, // Custom color
+        backgroundColor: Constants.header, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),
         elevation: 2.0,
-        child: const Icon(Icons.question_answer),
-      ),
+child: Icon(
+          Icons.question_answer,
+          color: Constants.lightText2,
+        ),      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

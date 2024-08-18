@@ -73,12 +73,12 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.lightBG,
+      backgroundColor: Constants.background,
       appBar: AppBar(
         backgroundColor: Constants.header,
         title: Text('Chatbot Support',
             style: TextStyle(
-              color: Constants.textColor,
+              color: Constants.lightText2,
             )),
       ),
       body: Padding(
@@ -102,7 +102,7 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                                 ? true
                                 : false,
                             textStyle: TextStyle(
-                              color: Constants.textColor,
+                              color: Constants.darkText,
                               fontSize: 16,
                             ),
                           )
@@ -116,7 +116,7 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                                 : false,
                             isSender: false,
                             textStyle: TextStyle(
-                              color: Constants.textColor,
+                              color: Constants.darkText,
                               fontSize: 16,
                             ),
                           ),
@@ -133,7 +133,7 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                   tail: true,
                   isSender: false,
                   textStyle: TextStyle(
-                    color: Constants.textColor,
+                    color: Constants.darkText,
                     fontSize: 16,
                   ),
                 ),
@@ -154,14 +154,13 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                   child: InkWell(
                     child: Icon(
                       Icons.camera_alt,
-                      color: Constants.icon,
+                      color: Constants.header,
                       size: 24,
                     ),
                     onTap: () {},
                   ),
                 ),
               ],
-              
             ),
           ],
         ),

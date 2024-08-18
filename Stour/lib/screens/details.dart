@@ -46,7 +46,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Text(
                   'Details',
                   style: GoogleFonts.poppins(
-                      color: Constants.textColor,
+                      color: Constants.darkText,
                       fontWeight: FontWeight.w600,
                       fontSize: 20),
                 ),
@@ -171,7 +171,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   Icon(
                     Icons.location_pin,
-                    color: Constants.textColor,
+                    color: Constants.darkText,
                     size: 25,
                   ),
                   const SizedBox(width: 5),
@@ -182,7 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         widget.placeToDisplay.address,
                         style: GoogleFonts.poppins(
                           fontSize: 18,
-                          color: Constants.textColor,
+                          color: Constants.darkText,
                         ),
                       ),
                     ),
@@ -240,7 +240,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       },
                       child: Text(
                         'Leave a Review',
-                        style: TextStyle(color: Constants.textColor),
+                        style: TextStyle(color: Constants.darkText),
                       )),
                 ],
               ),
@@ -254,7 +254,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Text(
                     widget.placeToDisplay.history,
                     style: GoogleFonts.poppins(
-                        fontSize: 18, color: Constants.textColor),
+                        fontSize: 18, color: Constants.darkText),
                   ),
                 ),
               ),
@@ -272,13 +272,15 @@ class _DetailScreenState extends State<DetailScreen> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.highlight, // Custom color
+        backgroundColor: Constants.header, // Custom color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0), // Round shape
         ),
         elevation: 2.0,
-        child: const Icon(Icons.question_answer),
-      ),
+child: Icon(
+          Icons.question_answer,
+          color: Constants.lightText2,
+        ),      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
