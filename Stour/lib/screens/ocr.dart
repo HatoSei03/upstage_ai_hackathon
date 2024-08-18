@@ -59,16 +59,14 @@ class _OCRScreenState extends State<OCRScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Translator',
           style: TextStyle(
-            color: Color.fromARGB(255, 35, 52, 10),
-          ),
+              color: Constants.lightText2, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Constants.header,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)),
+          icon: Icon(Icons.arrow_back, color: Constants.lightText2),
           onPressed: () {
             Navigator.pop(context);
           },
