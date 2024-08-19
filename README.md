@@ -5,9 +5,13 @@
 
 ## Main features
 ### Initerary planning & customize tour
+JUJU can help users customize their tour exploring Jeju Island based on their input constraints. They just need provide JUJU with their budget, places they want to go, the rest JUJU can do
 ### Community
+A traveler community share useful information 
 ### Chatbot
+Answer users' questions about Jeju. It helps them understand more about Jeju
 ### Photo translator
+It helps foreign visistors can access Korean documents like menu, instructions, etc
 ### complete quiz & claim vouchers
 
 ## Techniques
