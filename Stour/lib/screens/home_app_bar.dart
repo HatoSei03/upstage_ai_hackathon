@@ -31,12 +31,12 @@ class HomeAppBar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Constants.lightText2,
+                color: Constants.header,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.discount_outlined,
-                color: Color.fromARGB(255, 35, 52, 10),
+                color: Constants.lightText2,
                 size: 24,
               ),
             ),
@@ -49,16 +49,16 @@ class HomeAppBar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Constants.lightText2,
+                color: Constants.header,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: GestureDetector(
                 onTap: () {
                   buildSearchBar(context);
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.search,
-                  color: Color.fromARGB(255, 35, 52, 10),
+                  color: Constants.lightText2,
                   size: 24,
                 ),
               ),

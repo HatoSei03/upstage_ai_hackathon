@@ -36,12 +36,12 @@ class _ModifyTimelineState extends State<ModifyTimeline> {
         title: Text(
           'Modify Timeline',
           style: TextStyle(
-            color: Constants.lightText2,
+            color: Constants.lightText,
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Constants.lightText2),
+          icon: Icon(Icons.arrow_back, color: Constants.lightText,),
           onPressed: () {
             Navigator.pop(context);
           },

@@ -50,9 +50,9 @@ class _ProfileState extends State<Profile> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header, 
+        backgroundColor: Constants.header,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0), 
+          borderRadius: BorderRadius.circular(30.0),
         ),
         elevation: 2.0,
         child: Icon(
@@ -153,7 +153,7 @@ Container profileInfo() {
                   color: Color.fromARGB(255, 35, 52, 10),
                 ),
                 Text(
-                  "Can Tho",
+                  "Jeju-si, South Korea",
                   style: TextStyle(
                       color: Color.fromARGB(255, 35, 52, 10), fontSize: 12),
                 ),

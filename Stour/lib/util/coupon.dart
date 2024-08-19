@@ -28,12 +28,17 @@ List<Coupon> listCoupon = [
     startDate: 'startDate',
     endDate: 'endDate',
     listQuestion: [
-      Question(ques: 'Dinh Độc lập nằm ở Quận 1 ?', answ: true),
       Question(
-          ques: 'Bánh xèo có nguồn gốc từ tỉnh Quảng Trị của nước ta ?',
+          ques: 'Hallasan Mountain is the highest peak in South Korea?',
+          answ: true),
+      Question(
+        ques: 'There are volcanic caves to explore in Jeju?',
+        answ: true,
+      ),
+      Question(
+          ques:
+              'You can go on a submarine tour to see underwater volcanic formations?',
           answ: false),
-      Question(
-          ques: 'Dân tộc Hoa là dân tộc tạo ra món Chè mè đen ?', answ: true),
     ],
   ),
   Coupon(
@@ -45,15 +50,12 @@ List<Coupon> listCoupon = [
     endDate: 'endDate',
     listQuestion: [
       Question(
-          ques: 'Nhà hát Thành phố Hồ Chí Minh được xây dựng vào năm 1897 ?',
+          ques:
+              'You can experience the local culture through traditional performances? ',
           answ: true),
       Question(
-          ques: 'Đền trần hưng đạo nằm ở tỉnh Thừa Thiên Huế  ?', answ: false),
-      Question(
-          ques: 'Bưu điện trung tâm TPHCM nằm ở trung tâm thành phố ?',
-          answ: true),
-      Question(
-          ques: 'Chùa Ông là một ngôi chùa nổi tiếng tại TPHCM ?', answ: true),
+          ques: 'Seaweed is a common ingredient in Jeju cuisine ?', answ: true),
+      Question(ques: 'Jeju has a traditional wedding ceremony ?', answ: true),
     ],
   ),
   Coupon(
@@ -66,32 +68,11 @@ List<Coupon> listCoupon = [
     listQuestion: [
       Question(
           ques:
-              'Chùa Ông có liên quan đến nguồn gốc và phát triển của đạo Phật tại Việt Nam? ?',
+              'You can experience the local culture through traditional performances? ',
           answ: true),
       Question(
-          ques:
-              'Bánh mì Huỳnh Hoa là tiệm bánh mì thuộc hàng lâu đời nhất Sài Gòn, tận 10 năm lịch sử?',
-          answ: false),
-      Question(
-          ques:
-              'Chợ nổi Cái Răng là biểu tưởng văn hóa  của vùng đồng bằng Sông Hồng?',
-          answ: false),
-      Question(
-          ques:
-              'Đình Thạnh Hòa được hình thành từ những năm giữa thế kỉ XIX đầu thế kỉ XX ?',
-          answ: true),
-      Question(
-          ques:
-              'Khu tưởng niệm Thủ Khoa Bùi Hữu Nghĩa nằm tọa lạc ở thành phố Hồ Chí Minh ?',
-          answ: false),
-      Question(
-          ques:
-              'Cà phê bệt sở dĩ có cái tên vậy là vì hình thức uống cà phê, không bàn ghế có đúng không ?',
-          answ: true),
-      Question(
-          ques:
-              'Một công trình được xây dựng từ năm 1886 đến năm 1891 nằm ở trung tâm thành phố Hồ Chí Minh, đó là Bảo Tàng Mỹ Thuật Hồ Chí Minh ?',
-          answ: false),
+          ques: 'Seaweed is a common ingredient in Jeju cuisine ?', answ: true),
+      Question(ques: 'Jeju has a traditional wedding ceremony ?', answ: true),
     ],
   ),
 ];

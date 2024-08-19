@@ -60,9 +60,9 @@ class _OCRScreenState extends State<OCRScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Document Reader',
+          'PhotoTranslator',
           style: TextStyle(
-            color: Constants.lightText2,
+            color: Constants.lightText,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -70,7 +70,7 @@ class _OCRScreenState extends State<OCRScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
           onPressed: () {
             Navigator.pop(context);

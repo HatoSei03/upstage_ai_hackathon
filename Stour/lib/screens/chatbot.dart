@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stour/util/const.dart';
@@ -42,7 +44,9 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
         _isThinking = true;
       });
 
-      final response = await getUpstageAIResponse(getChatbotContent(), msg);
+      final responseJson = await getUpstageAIResponse(getChatbotContent(), msg);
+      final Map<String, dynamic> responseData = jsonDecode(responseJson);
+      final String response = responseData['answer'];
       setState(() {
         messageList.add(Message(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -76,13 +80,17 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
       backgroundColor: Constants.background,
       appBar: AppBar(
         backgroundColor: Constants.header,
-        title: Text('Chatbot Support',
-            style: TextStyle(
-                color: Constants.lightText, fontWeight: FontWeight.bold)),
+        title: Text(
+          'Chatbot Support',
+          style: TextStyle(
+            color: Constants.lightText,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
           onPressed: () {
             Navigator.pop(context);

@@ -21,13 +21,13 @@ class _ReviewScreenState<Reviews> extends State<ReviewScreen> {
         title: Text(
           'Reviews',
           style: TextStyle(
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
         ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
           onPressed: () {
             Navigator.pop(context);

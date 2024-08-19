@@ -30,14 +30,14 @@ class _AddLocationState extends State<AddLocation> {
         title: Text(
           'Add Location',
           style: TextStyle(
-            color: Constants.lightText2,
+            color: Constants.lightText,
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
           onPressed: () {
             Navigator.pop(context);

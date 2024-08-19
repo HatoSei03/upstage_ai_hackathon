@@ -20,18 +20,15 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Add Review',
           style: TextStyle(
-            color: Color.fromARGB(255, 35, 52, 10),
-          ),
+              color: Constants.lightText, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Constants.header,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(Icons.arrow_back, color: Constants.lightText),
           onPressed: () {
-            // Handle back button logic
             Navigator.pop(context);
           },
         ),
@@ -59,10 +56,10 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
               ],
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Review:',
               style: TextStyle(
-                  color: Color.fromARGB(255, 35, 52, 10),
+                  color: Constants.lightText,
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
             ),
@@ -89,9 +86,11 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Cancel',
-                    style: TextStyle(color: Color.fromARGB(255, 35, 52, 10)),
+                    style: TextStyle(
+                      color: Constants.lightText,
+                    ),
                   ),
                 ),
                 ElevatedButton(
@@ -113,9 +112,9 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Post',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Constants.lightText),
                   ),
                 ),
               ],

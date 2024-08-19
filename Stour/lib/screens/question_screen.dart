@@ -50,13 +50,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
         title: Text(
           'Question ${count.toString()}/${widget.listquestion.length.toString()}',
           style: TextStyle(
-              color: Constants.lightText2, fontWeight: FontWeight.bold),
+              color: Constants.lightText, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Constants.header,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -188,17 +188,10 @@ class _QuestionResult extends StatelessWidget {
         : 'You have excellently passed the test and aced our heart! Here\'s a voucher to thank you for your participation!';
     return Scaffold(
       appBar: AppBar(
-        // title: Text(
-        //   'Result',
-        //   style: TextStyle(
-        //     color: Constants.lightText2,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -258,7 +251,7 @@ class _QuestionResult extends StatelessWidget {
               ),
               child: Text(
                 'Home',
-                style: TextStyle(fontSize: 18, color: Constants.lightText2),
+                style: TextStyle(fontSize: 18, color: Constants.lightText),
               ),
             )
           ],

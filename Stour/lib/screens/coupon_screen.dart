@@ -19,12 +19,12 @@ class _CouponScreenState extends State<CouponScreen> {
         title: Text(
           'Coupons',
           style: TextStyle(
-            color: Constants.lightText2,
+            color: Constants.lightText,
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Constants.lightText2),
+          icon: Icon(Icons.arrow_back, color: Constants.lightText,),
           onPressed: () {
             Navigator.pop(context);
           },

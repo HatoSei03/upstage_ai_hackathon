@@ -108,7 +108,7 @@ class _SavedTourState extends State<SavedTour> {
           title: Text(
             'Saved Tours',
             style: TextStyle(
-              color: Constants.lightText2,
+              color: Constants.lightText,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -116,7 +116,7 @@ class _SavedTourState extends State<SavedTour> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Constants.lightText2,
+              color: Constants.lightText,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -179,13 +179,13 @@ class _SavedTourState extends State<SavedTour> {
         title: Text(
           'Saved Tours',
           style: TextStyle(
-              color: Constants.lightText2, fontWeight: FontWeight.bold),
+              color: Constants.lightText, fontWeight: FontWeight.bold,),
         ),
         backgroundColor: Constants.header,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Constants.lightText2,
+            color: Constants.lightText,
           ),
           onPressed: () {
             Navigator.pop(context);

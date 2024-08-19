@@ -44,7 +44,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           title: Text(
             'Your Schedule',
             style: TextStyle(
-              color: Constants.lightText2,
+              color: Constants.lightText,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -52,7 +52,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Constants.lightText2,
+              color: Constants.lightText,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -100,12 +100,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         title: Text(
           'Your Schedule',
           style: TextStyle(
-            color: Constants.lightText2,
+            color: Constants.lightText,
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Constants.lightText2),
+          icon: Icon(Icons.arrow_back, color: Constants.lightText,),
           onPressed: () {
             Navigator.pop(context);
           },

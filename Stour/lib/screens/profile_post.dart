@@ -91,7 +91,11 @@ class _PostScreenState extends State<PostScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               child: const Text(
-                "The museum has very unique architecture, and I was pleasantly surprised by the harmony between Eastern and Western colors. I was especially impressed and fond of the spiral staircase. The exhibits are also very artistic and rich in the cultural essence of different eras. I took a ton of photos here! :3",
+                """
+Stepping into Manjanggul is like time traveling millions of years back. This massive lava tube is an awe-inspiring testament to nature's raw power. The sheer scale of the cavern is mind-boggling, and the unique rock formations are truly captivating. It's a must-see for anyone visiting Jeju Island. Just remember to wear comfortable shoes, as the path can be uneven.
+
+#Manjanggul #JejuIsland #LavaTube #NatureWonders #TravelKorea
+""",
                 style: TextStyle(
                     fontSize: 18, color: Color.fromARGB(255, 35, 52, 10)),
               ),
@@ -106,7 +110,7 @@ class _PostScreenState extends State<PostScreen> {
                 ),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Image.asset(
-                  "assets/img/BaoTangMyThuat/Bao-tang-My-thuat-TP-HCM-ivivu.jpg",
+                  "assets/localImg/Manjanggul-Lava-Tube.jpg",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -131,8 +135,7 @@ class _PostScreenState extends State<PostScreen> {
                     onTap: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.comment_outlined,
-                            color: Constants.header),
+                        Icon(Icons.comment_outlined, color: Constants.header),
                         const SizedBox(width: 5),
                         const Text("123"),
                       ],
