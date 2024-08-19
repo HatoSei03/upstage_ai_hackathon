@@ -54,14 +54,13 @@ Once the app is running, you can explore the following key features:
 ## Upstage API Integration
 Juju utilizes the Upstage API extensively to deliver its core functionalities. Below are the key areas where Upstage API was integrated:
 
-- Chat API:
-
+- **Chat API:**
   - Chatbot: Provides answers to general questions about Jeju Island.
   - Itinerary Generation: Generates optimized travel itineraries based on user input.
   - OCR Text Restructuring: Enhances the readability of text extracted using OCR.
-- OCR Document API:
+- **OCR Document API:**
   - PhotoTranslator: Extracts Korean text from images captured by users.
-- Translation API:
+- **Translation API:**
   - PhotoTranslator: Translates the extracted Korean text into English, making it accessible to a wider audience.
 
 ## Technology Stack
