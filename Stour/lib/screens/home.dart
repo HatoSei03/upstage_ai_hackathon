@@ -160,7 +160,6 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
-        //bottomNavigationBar: HomeBottomBar(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
@@ -171,9 +170,9 @@ class _HomeState extends State<Home> {
             );
           },
           tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header, // Custom color
+        backgroundColor: Constants.header, 
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0), // Round shape
+            borderRadius: BorderRadius.circular(30.0), 
           ),
           elevation: 2.0,
 child: Icon(

@@ -22,7 +22,7 @@ class _DetailScreenState extends State<DetailScreen> {
   bool hasLiked = false;
   Color buttonColor = Colors.black;
   Icon initialFavIcon = const Icon(Icons.favorite_border, size: 30);
-  bool isContactInfoExpanded = false; // Add this variable
+  bool isContactInfoExpanded = false;
 
   @override
   Widget build(context) {
@@ -171,7 +171,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   Icon(
                     Icons.location_pin,
-                    color: Constants.darkText,
+                    color: Constants.header2,
                     size: 25,
                   ),
                   const SizedBox(width: 5),
@@ -182,7 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         widget.placeToDisplay.address,
                         style: GoogleFonts.poppins(
                           fontSize: 18,
-                          color: Constants.darkText,
+                          color: Constants.header2,
                         ),
                       ),
                     ),
@@ -229,6 +229,8 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   const Spacer(),
                   ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Constants.header),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -240,7 +242,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       },
                       child: Text(
                         'Leave a Review',
-                        style: TextStyle(color: Constants.darkText),
+                        style: TextStyle(color: Constants.lightText),
                       )),
                 ],
               ),
@@ -272,15 +274,16 @@ class _DetailScreenState extends State<DetailScreen> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header, // Custom color
+        backgroundColor: Constants.header,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0), // Round shape
+          borderRadius: BorderRadius.circular(30.0),
         ),
         elevation: 2.0,
-child: Icon(
+        child: Icon(
           Icons.question_answer,
           color: Constants.lightText2,
-        ),      ),
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

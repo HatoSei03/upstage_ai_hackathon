@@ -29,15 +29,17 @@ class _AddLocationState extends State<AddLocation> {
       appBar: AppBar(
         title: Text(
           'Add Location',
-          style: GoogleFonts.roboto(
-            color: const Color.fromARGB(255, 35, 52, 10),
+          style: TextStyle(
+            color: Constants.lightText2,
+            fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
           onPressed: () {
-            // Handle back button logic
             Navigator.pop(context);
           },
         ),
@@ -64,6 +66,7 @@ class _AddLocationState extends State<AddLocation> {
               itemBuilder: (context, index) {
                 return CheckboxListTile(
                   title: Text(places[index].name),
+                  activeColor: Constants.header,
                   value: widget.newList.contains(places[index]),
                   onChanged: (value) {
                     setState(() {

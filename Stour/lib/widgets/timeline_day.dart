@@ -39,7 +39,7 @@ class _TimelineDayState extends State<TimelineDay> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Day ${widget.dayNum} - ${totalCost.toStringAsFixed(0)}₫',
+                'Day ${widget.dayNum} - ${totalCost.toStringAsFixed(0)}\$',
                 style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w800,

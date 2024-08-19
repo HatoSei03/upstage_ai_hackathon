@@ -50,9 +50,9 @@ class _ProfileState extends State<Profile> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header, // Custom color
+        backgroundColor: Constants.header, 
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0), // Round shape
+          borderRadius: BorderRadius.circular(30.0), 
         ),
         elevation: 2.0,
         child: Icon(

@@ -34,13 +34,16 @@ class _ViewSavedTourState extends State<ViewSavedTour> {
         backgroundColor: Constants.header,
         title: Text(
           widget.savedTour.name,
-          style: const TextStyle(
-            color: Color.fromARGB(255, 35, 52, 10),
+          style: TextStyle(
+            color: Constants.lightText2,
+            fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -111,15 +114,16 @@ class _ViewSavedTourState extends State<ViewSavedTour> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.highlight, // Custom color
+        backgroundColor: Constants.header,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0), // Round shape
+          borderRadius: BorderRadius.circular(30.0),
         ),
         elevation: 2.0,
-child: Icon(
+        child: Icon(
           Icons.question_answer,
           color: Constants.lightText2,
-        ),      ),
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

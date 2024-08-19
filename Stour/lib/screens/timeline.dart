@@ -79,7 +79,7 @@ class _TimelineState extends State<Timeline> {
         title: Text('Initerary Planning',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Constants.lightText2,
+              color: Constants.lightText,
             )),
       ),
       body: Padding(

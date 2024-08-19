@@ -49,19 +49,19 @@ class _QuestionScreenState extends State<QuestionScreen> {
       appBar: AppBar(
         title: Text(
           'Question ${count.toString()}/${widget.listquestion.length.toString()}',
-          style: GoogleFonts.roboto(
-            color: const Color.fromARGB(255, 35, 52, 10),
-          ),
+          style: TextStyle(
+              color: Constants.lightText2, fontWeight: FontWeight.bold),
         ),
+        backgroundColor: Constants.header,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
           onPressed: () {
-            // Handle back button logic
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Constants.background,
       ),
       body: Column(
         children: <Widget>[
@@ -126,7 +126,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
                               ? true
                               : false);
                     },
-                    child: const Text('Correct'),
+                    child: Text(
+                      'Correct',
+                      style: TextStyle(
+                        color: Constants.lightText,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -138,9 +143,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       foregroundColor: WidgetStateProperty.resolveWith<Color>(
                         (Set<WidgetState> states) {
                           if (states.contains(WidgetState.pressed)) {
-                            return Colors.orange; // Màu đỏ khi nhấn
+                            return Colors.orange;
                           }
-                          return Colors.black; // Màu mặc định khi không nhấn
+                          return Colors.black;
                         },
                       ),
                       backgroundColor:
@@ -157,10 +162,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
                               ? true
                               : false);
                     },
-                    child: const Text('False'),
+                    child: Text(
+                      'False',
+                      style: TextStyle(color: Constants.lightText),
+                    ),
                   ),
                 ),
-              )
+              ),
             ],
           )
         ],
@@ -180,15 +188,18 @@ class _QuestionResult extends StatelessWidget {
         : 'You have excellently passed the test and aced our heart! Here\'s a voucher to thank you for your participation!';
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Result',
-          style: GoogleFonts.roboto(
-            color: const Color.fromARGB(255, 35, 52, 10),
-          ),
-        ),
+        // title: Text(
+        //   'Result',
+        //   style: TextStyle(
+        //     color: Constants.lightText2,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -240,9 +251,14 @@ class _QuestionResult extends StatelessWidget {
                   ),
                 );
               },
+              style: ButtonStyle(
+                backgroundColor:
+                    WidgetStateProperty.all<Color>(Constants.header),
+                minimumSize: WidgetStateProperty.all<Size>(const Size(120, 50)),
+              ),
               child: Text(
                 'Home',
-                style: GoogleFonts.roboto(fontSize: 16),
+                style: TextStyle(fontSize: 18, color: Constants.lightText2),
               ),
             )
           ],

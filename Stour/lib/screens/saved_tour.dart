@@ -105,19 +105,20 @@ class _SavedTourState extends State<SavedTour> {
     if (savedTour.isEmpty) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             'Saved Tours',
             style: TextStyle(
-              color: Color.fromARGB(255, 35, 52, 10),
+              color: Constants.lightText2,
+              fontWeight: FontWeight.bold,
             ),
           ),
           backgroundColor: Constants.header,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back,
-                color:
-                    Color.fromARGB(255, 35, 52, 10)), // Change the color here
+            icon: Icon(
+              Icons.arrow_back,
+              color: Constants.lightText2,
+            ),
             onPressed: () {
-              // Handle back button logic
               Navigator.pop(context);
             },
           ),
@@ -163,30 +164,30 @@ class _SavedTourState extends State<SavedTour> {
             );
           },
           tooltip: 'Floating Action Button',
-          backgroundColor: Constants.highlight, // Custom color
+          backgroundColor: Constants.header,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0), // Round shape
+            borderRadius: BorderRadius.circular(30.0),
           ),
           elevation: 2.0,
-          child: const Icon(Icons.question_answer),
+          child: Icon(Icons.question_answer, color: Constants.lightText2),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       );
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Saved Tours',
           style: TextStyle(
-            color: Color.fromARGB(255, 35, 52, 10),
-          ),
+              color: Constants.lightText2, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Constants.header,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
           onPressed: () {
-            // Handle back button logic
             Navigator.pop(context);
           },
         ),
@@ -228,15 +229,16 @@ class _SavedTourState extends State<SavedTour> {
           );
         },
         tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header, // Custom color
+        backgroundColor: Constants.header,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0), // Round shape
+          borderRadius: BorderRadius.circular(30.0),
         ),
         elevation: 2.0,
-child: Icon(
+        child: Icon(
           Icons.question_answer,
           color: Constants.lightText2,
-        ),      ),
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

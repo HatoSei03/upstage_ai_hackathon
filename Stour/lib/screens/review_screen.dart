@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stour/model/review.dart';
 import 'package:stour/util/const.dart';
 import 'package:stour/util/reviews.dart';
-// import 'package:stour/widgets/review_card.dart';
 import 'package:stour/screens/create_review_screen.dart';
 import 'package:stour/model/ui_reviews.dart';
 
@@ -19,17 +18,18 @@ class _ReviewScreenState<Reviews> extends State<ReviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Reviews',
           style: TextStyle(
-            color: Color.fromARGB(255, 35, 52, 10),
+            color: Constants.lightText2,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
           onPressed: () {
-            // Handle back button logic
             Navigator.pop(context);
           },
         ),
@@ -54,7 +54,7 @@ class _ReviewScreenState<Reviews> extends State<ReviewScreen> {
         },
         backgroundColor: Constants.header,
         tooltip: "Leave a Review",
-        child:  Icon(Icons.add, color: Constants.lightText2),
+        child: Icon(Icons.add, color: Constants.lightText2),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

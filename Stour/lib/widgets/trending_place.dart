@@ -109,13 +109,16 @@ class _TrendingPlaceState extends State<TrendingPlace> {
                   padding: const EdgeInsets.only(left: 15.0),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      widget.place.name,
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w800,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        widget.place.name,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      textAlign: TextAlign.left,
                     ),
                   ),
                 ),

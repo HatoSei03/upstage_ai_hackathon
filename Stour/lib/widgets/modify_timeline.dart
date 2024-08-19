@@ -33,17 +33,16 @@ class _ModifyTimelineState extends State<ModifyTimeline> {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Modify Timeline',
           style: TextStyle(
-            color: Color.fromARGB(255, 35, 52, 10),
+            color: Constants.lightText2,
+            fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromARGB(255, 35, 52, 10)), // Change the color here
+          icon: Icon(Icons.arrow_back, color: Constants.lightText2),
           onPressed: () {
-            // Handle back button logic
             Navigator.pop(context);
           },
         ),

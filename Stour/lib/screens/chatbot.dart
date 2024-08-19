@@ -78,8 +78,16 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
         backgroundColor: Constants.header,
         title: Text('Chatbot Support',
             style: TextStyle(
-              color: Constants.lightText2,
-            )),
+                color: Constants.lightText, fontWeight: FontWeight.bold)),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),

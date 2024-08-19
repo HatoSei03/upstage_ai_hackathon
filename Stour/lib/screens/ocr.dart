@@ -60,13 +60,18 @@ class _OCRScreenState extends State<OCRScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Translator',
+          'Document Reader',
           style: TextStyle(
-              color: Constants.lightText2, fontWeight: FontWeight.bold),
+            color: Constants.lightText2,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: Constants.header,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Constants.lightText2),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText2,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
