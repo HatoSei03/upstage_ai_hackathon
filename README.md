@@ -1,5 +1,11 @@
 # Juju - AI-Powered Tourism App for Jeju Island
 
+<br>
+<div align="center">
+  <img src="https://i.ibb.co/yXRCFbv/ic-launcher.png" height='200px'>
+</div>
+<br>
+
 ## Project Overview
 
 **Juju** is an AI-powered mobile application designed to enhance the tourism experience on Jeju Island. The app offers personalized itinerary planning, real-time language translation, cultural information, and a vibrant community platform. Juju aims to break down barriers such as language difficulties and unoptimized travel plans, providing a seamless and enriching experience for tourists visiting Jeju Island.
