@@ -43,7 +43,7 @@ class GroceryItemTile extends StatelessWidget {
               itemPrice: itemPrice,
               imagePaths: [imagePath], // Convert single imagePath to list
               description: description,
-              suggestions: [], // Provide suggestions as needed
+              suggestions: [], imagePath: '', // Provide suggestions as needed
             ),
           ),
         );
