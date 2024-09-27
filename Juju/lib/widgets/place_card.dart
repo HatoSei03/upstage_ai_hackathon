@@ -1,8 +1,9 @@
-// @dart=2.17
 import 'package:flutter/material.dart';
-import 'package:juju/util/const.dart';
-import 'package:juju/util/places.dart';
-import 'package:juju/screens/details.dart';
+import 'package:juju/model/places.dart';
+import 'package:juju/screens/details/details.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class PlaceCard extends StatefulWidget {
   final Place place;
@@ -22,127 +23,152 @@ class _PlaceCardState extends State<PlaceCard> {
     return Padding(
       padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height / 2.9,
-        width: MediaQuery.of(context).size.width / 1.5,
+        width: 230,
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) {
-                  return DetailScreen(placeToDisplay: widget.place);
-                },
-              ),
+            Get.to(
+              () => DetailsScreen(widget.place),
+              transition: Transition.zoom,
             );
           },
           child: Card(
+            color: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(16.0),
             ),
             elevation: 3.0,
             child: Column(
-              children: <Widget>[
+              children: [
                 Stack(
                   children: <Widget>[
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 3.7,
-                      width: MediaQuery.of(context).size.width,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10.0),
-                          topRight: Radius.circular(10.0),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.4),
+                              blurRadius: 12,
+                              offset: const Offset(0, 10),
+                              spreadRadius: -8,
+                            ),
+                          ],
                         ),
-                        child: Image.network(
-                          widget.place.img,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 6.0,
-                      right: 6.0,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.star,
-                                color: Constants.ratingBG,
-                                size: 20,
-                              ),
-                              Text(
-                                " ${widget.place.rating} ",
-                                style: const TextStyle(
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                            ],
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: SizedBox(
+                            height: 130,
+                            width: MediaQuery.of(context).size.width,
+                            child: FadeInImage.assetNetwork(
+                              placeholder: 'assets/localImg/placeholder.jpg',
+                              image: widget.place.img[0],
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
                     ),
                     Positioned(
-                      top: 6.0,
-                      left: 6.0,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(3.0)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Row(children: [
-                            const Icon(
-                              Icons.access_time,
-                              size: 20,
-                            ),
-                            Text(
-                              " ${widget.place.opentime.toStringAsFixed(0)}-${widget.place.closetime.toStringAsFixed(0)}",
-                              style: const TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ]),
+                      top: 10.0,
+                      right: 10.0,
+                      child: IconButton(
+                        iconSize: 20.0,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 30,
+                          minHeight: 30,
                         ),
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all<Color>(
+                              Colors.white.withOpacity(0.3)),
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                          ),
+                        ),
+                        icon: const Icon(
+                          Icons.favorite_border,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {},
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 7),
                 Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Text(
-                          widget.place.name,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800,
-                          ),
-                          textAlign: TextAlign.left,
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Text(
+                                  widget.place.name,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 18,
+                                    color: const Color(0xff0A2753),
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Stack(children: [
+                              Positioned(
+                                top: 3,
+                                child: Icon(BoxIcons.bxs_map,
+                                    size: 14,
+                                    color: const Color(0xffEF7168)
+                                        .withOpacity(0.5)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 18.0),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                      widget.place.address,
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w300,
+                                        color: const Color(0xff6A778B),
+                                      ),
+                                      overflow: TextOverflow.fade,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ],
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      widget.place.address,
-                      style: const TextStyle(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w300,
+                      const SizedBox(width: 5),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.star_rounded,
+                            color: Color(0xffFFEB0E),
+                            size: 16,
+                          ),
+                          Text(
+                            widget.place.rating.toString(),
+                            style: GoogleFonts.montserrat(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 10.0),

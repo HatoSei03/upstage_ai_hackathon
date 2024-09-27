@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:juju/util/coupon.dart';
+import 'package:juju/model/coupon.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:juju/util/const.dart';
 import 'package:juju/screens/question_screen.dart';
-import 'package:juju/screens/chatbot.dart';
+import 'package:juju/widgets/chatbot_float_button.dart';
+import 'package:get/get.dart';
 
 class CouponScreen extends StatefulWidget {
   const CouponScreen({super.key});
@@ -24,9 +25,12 @@ class _CouponScreenState extends State<CouponScreen> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Constants.lightText,),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.lightText,
+          ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         backgroundColor: Constants.header,
@@ -47,39 +51,17 @@ class _CouponScreenState extends State<CouponScreen> {
             subtitle:
                 Text('Apply to all locations', style: GoogleFonts.roboto()),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return QuestionScreen(
-                        listquestion: listCoupon[index].listQuestion);
-                  },
+              Get.to(
+                () => QuestionScreen(
+                  listquestion: listCoupon[index].listQuestion,
                 ),
+                transition: Transition.zoom,
               );
             },
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ChatbotSupportScreen(),
-            ),
-          );
-        },
-        tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        elevation: 2.0,
-        child: Icon(
-          Icons.question_answer,
-          color: Constants.lightText2,
-        ),
-      ),
+      floatingActionButton: const ChatbotFloatButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

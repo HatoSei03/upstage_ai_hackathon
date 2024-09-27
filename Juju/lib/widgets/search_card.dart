@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:juju/model/place.dart';
+import 'package:juju/util/place.dart';
 
 class SearchCard extends StatelessWidget {
   SearchCard({super.key});

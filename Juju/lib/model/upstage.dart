@@ -3,26 +3,30 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import 'package:juju/model/places.dart';
 
-List<String> content = [];
-
-String getSchedulePrompt(
+List<String> placeList = [];
+List<String> getSchedulePrompt(
     DateTime startDate, DateTime endDate, int peopleNum, double budget) {
-  print(content);
-  return """
+  if (placeList.isEmpty) {
+    for (var item in places) {
+      placeList.add('{"${item.name}":${item.price}}');
+    }
+  }
+  String cntx = '''
     You are a knowledgeable and friendly AI consultant for tours to Jeju Island.
-    The current datetime is: 17/8/2024
-    Your mission is to provide users with information on tours to Jeju Island based on customer needs such as the number of days, desired destinations, budget, and number of people. These information will be placed in JSON format as following
+    The current datetime is: ${startDate.toString()}.
+    Your mission is to construct wise itinerary to Jeju Island based on customer needs such as the number of days, desired destinations, budget, and number of people. These information will be placed in JSON format as following
   
-    '''
+    \'\'\'
     {"days": number_of_days(int), "places": [list of string of places' name to be included], "people_num": number_of_people(int), "budget": users'budget(int, using USD unit)}
-    '''
+    \'\'\'
   
     Please perform the following tasks:
     Build an itinerary: Create an engaging, lively, and appealing itinerary for a tour to Jeju Island based on the user's provided needs.
     Summarize information: Summarize the information for each day of the itinerary and provide a summary of the total cost (breakdown the cost into categories such as accommodation, food, etc.). Make sure that the total cost, sum of the element costs, and sum of the breakdown costs are equal and do not exceed the budget
   
-    Output format: Output the information in JSON format.
+    Output format: alwaysutput the information in JSON format.
   
     Example JSON format
     [
@@ -30,17 +34,17 @@ String getSchedulePrompt(
         {
           "morning": {
             "places": "place to go for day 1 morning",
-            "activities": "activities to do here",
+            "activities": "an attractive description about activities to do here",
             "cost": cost(int)
           },
           "afternoon": {
             "places": "place to go for day 1 afternoon",
-            "activities": "activities to do here",
+            "activities": "an attractive description about activities to do here",
             "cost": cost(int)
           },
           "evening": {
             "places": "place to go for day 1 evening",
-            "activities": "activities to do here",
+            "activities": "an attractive description about activities to do here",
             "cost": cost(int)
           }
         }
@@ -55,14 +59,18 @@ String getSchedulePrompt(
         }
       ]
     ]
-
-    Use the attractions given in this list, the item are in this format {place:cost} with cost (in USD) is the cost for visiting that place for 1 person: ${content.join(',')},
+	
+    Use the attractions given in this list, the item are in this format {place:cost} with cost (in USD) is the cost for visiting that place for 1 person: ${placeList.join(',')},
   
     Please provide the most up-to-date information, no more than 3 months old from the current time
     Always respond in the language spoken in English
-
-    {"days": ${startDate.day - endDate.day}, "places": [], "people_num": $peopleNum, "budget": $budget dollars}
-      """;
+''';
+  return [
+    cntx,
+    """
+{"days": ${endDate.day - startDate.day + 1}, "places": [], "people_num": $peopleNum, "budget": $budget dollars}
+      """
+  ];
 }
 
 String getChatbotContent() {
@@ -112,7 +120,7 @@ Future<String> getUpstageAIResponse(String content, String prompt) async {
   };
 
   final Map<String, dynamic> body = {
-    'model': 'solar-1-mini-chat',
+    'model': 'solar-pro',
     'messages': [
       {'role': 'system', 'content': content},
       {

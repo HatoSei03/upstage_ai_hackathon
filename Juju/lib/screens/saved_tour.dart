@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:juju/util/places.dart';
+import 'package:juju/model/places.dart';
 import 'package:intl/intl.dart';
-import 'package:juju/screens/view_saved_tour.dart';
+import 'package:juju/model/schedule.dart';
+import 'package:juju/screens/schedule/view_saved_tour.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:juju/util/const.dart';
-import 'package:juju/screens/chatbot.dart';
+import 'package:get/get.dart';
+import 'package:juju/widgets/chatbot_float_button.dart';
 
 class SavedTour extends StatefulWidget {
   const SavedTour({super.key});
@@ -119,7 +121,7 @@ class _SavedTourState extends State<SavedTour> {
               color: Constants.lightText,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
           ),
         ),
@@ -154,23 +156,7 @@ class _SavedTourState extends State<SavedTour> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ChatbotSupportScreen(),
-              ),
-            );
-          },
-          tooltip: 'Floating Action Button',
-          backgroundColor: Constants.header,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          elevation: 2.0,
-          child: Icon(Icons.question_answer, color: Constants.lightText2),
-        ),
+        floatingActionButton: const ChatbotFloatButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       );
     }
@@ -179,7 +165,9 @@ class _SavedTourState extends State<SavedTour> {
         title: Text(
           'Saved Tours',
           style: TextStyle(
-              color: Constants.lightText, fontWeight: FontWeight.bold,),
+            color: Constants.lightText,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: Constants.header,
         leading: IconButton(
@@ -188,29 +176,23 @@ class _SavedTourState extends State<SavedTour> {
             color: Constants.lightText,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
       ),
       body: ListView.builder(
         itemCount: savedTour.length,
         itemBuilder: (BuildContext context, int index) {
-          SavedTourClass tour = savedTour[index];
+          Schedule tour = savedTour[index];
           return ListTile(
             title: Text(tour.name,
                 style: const TextStyle(fontWeight: FontWeight.w500)),
-            subtitle:
-                Text('Created in: ${DateFormat.yMd().format(tour.timeSaved)}'),
+            subtitle: Text(
+                'Created in: ${DateFormat.yMd().format(tour.createdDate)}'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return ViewSavedTour(
-                      savedTour: savedTour[index],
-                    );
-                  },
-                ),
+              Get.to(
+                () => ViewSavedTour(savedTour[index]),
+                transition: Transition.zoom,
               );
             },
             onLongPress: () {
@@ -219,26 +201,7 @@ class _SavedTourState extends State<SavedTour> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ChatbotSupportScreen(),
-            ),
-          );
-        },
-        tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        elevation: 2.0,
-        child: Icon(
-          Icons.question_answer,
-          color: Constants.lightText2,
-        ),
-      ),
+      floatingActionButton: const ChatbotFloatButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

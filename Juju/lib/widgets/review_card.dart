@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:juju/util/reviews.dart';
+import 'package:juju/model/reviews.dart';
 
 class ReviewWidget extends StatelessWidget {
   final Reviews review;

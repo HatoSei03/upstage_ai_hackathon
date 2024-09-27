@@ -1,48 +1,46 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
-
 import 'package:flutter/material.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:juju/screens/home.dart';
+import 'package:lottie/lottie.dart';
+import 'package:juju/screens/main_screen.dart';
+import 'package:juju/screens/schedule/review_trip.dart';
+import 'package:juju/model/schedule.dart';
+import 'package:juju/screens/schedule/generate_timeline.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  double _opacity = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _animateLogo();
-  }
-
-  void _animateLogo() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    setState(() {
-      _opacity = 1;
-    });
-    await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, '/home');
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnimatedOpacity(
-        opacity: _opacity,
-        duration: const Duration(seconds: 2),
-        child: Container(
-          color: const Color(0xFF18afba),
-          child: Center(
-            child: Image.asset(
-              'assets\\splash_screen.png',
-              height: 150,
+    return AnimatedSplashScreen(
+      splash: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(
+            'assets/Lottie/splash_screen.json',
+            height: 200,
+            repeat: true,
+            // reverse: true,
+          ),
+          const SizedBox(height: 20),
+          // Image.asset(
+          //   'assets/splash_screen.png',
+          //   height: 150,
+          // ),
+          const Text(
+            'Welcome to Juju',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w500,
             ),
           ),
-        ),
+        ],
       ),
+      nextScreen: const MainScreen(),
+      splashTransition: SplashTransition.fadeTransition,
+      backgroundColor: const Color(0xFF18afba),
+      splashIconSize: 400,
+      duration: 2000,
     );
   }
 }

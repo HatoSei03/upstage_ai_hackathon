@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:juju/screens/question_screen.dart';
-import 'package:juju/util/coupon.dart';
+import 'package:juju/model/coupon.dart';
+import 'package:get/get.dart';
 
 class CouponCard extends StatefulWidget {
   final Coupon coupon;
@@ -18,14 +19,11 @@ class _CouponCardState extends State<CouponCard> {
             const EdgeInsets.only(bottom: 30, top: 30, left: 30, right: 30),
         child: GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return QuestionScreen(
-                        listquestion: widget.coupon.listQuestion);
-                  },
+              Get.to(
+                () => QuestionScreen(
+                  listquestion: widget.coupon.listQuestion,
                 ),
+                transition: Transition.zoom,
               );
             },
             child: Container(

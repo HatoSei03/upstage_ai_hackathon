@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:juju/util/places.dart';
+import 'package:juju/model/places.dart';
 import 'package:juju/util/const.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class AddLocation extends StatefulWidget {
@@ -10,6 +11,7 @@ class AddLocation extends StatefulWidget {
   final void Function(List<Place>) updateOriginalList;
   final void Function(List<Place>, int) updateResultList;
   final int idx;
+
   AddLocation(
       {required this.newList,
       required this.updateNewList,
@@ -29,9 +31,10 @@ class _AddLocationState extends State<AddLocation> {
       appBar: AppBar(
         title: Text(
           'Add Location',
-          style: TextStyle(
+          style: GoogleFonts.rubik(
             color: Constants.lightText,
             fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
         leading: IconButton(
@@ -40,22 +43,28 @@ class _AddLocationState extends State<AddLocation> {
             color: Constants.lightText,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         backgroundColor: Constants.header,
+        elevation: 0,
       ),
       body: Column(
         children: [
           SizedBox(
-            height: 75,
+            height: 80,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(16.0),
               child: Center(
                 child: Text(
-                  'Add or remove attractions from your tour: ',
-                  style: GoogleFonts.roboto(fontSize: 18),
+                  'Add or remove attractions from your tour:',
+                  style: GoogleFonts.rubik(
+                    fontSize: 18,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -65,8 +74,15 @@ class _AddLocationState extends State<AddLocation> {
               itemCount: places.length,
               itemBuilder: (context, index) {
                 return CheckboxListTile(
-                  title: Text(places[index].name),
+                  title: Text(
+                    places[index].name,
+                    style: GoogleFonts.rubik(
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                  ),
                   activeColor: Constants.header,
+                  checkColor: Colors.white,
                   value: widget.newList.contains(places[index]),
                   onChanged: (value) {
                     setState(() {
@@ -85,12 +101,15 @@ class _AddLocationState extends State<AddLocation> {
                       }
                     });
                   },
+                  controlAffinity: ListTileControlAffinity.leading,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
                 );
               },
             ),
           ),
         ],
       ),
+      backgroundColor: Constants.background,
     );
   }
 }

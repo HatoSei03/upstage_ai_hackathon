@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:juju/screens/main_screen.dart';
-import 'package:juju/util/question.dart';
+import 'package:juju/model/question.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:juju/util/const.dart';
+import 'package:get/get.dart';
 
 class QuestionScreen extends StatefulWidget {
   final List<Question> listquestion;
@@ -27,16 +28,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   void finished(int result) {
     setState(() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) {
-            return _QuestionResult(
-              result: result,
-              valiResult: widget.listquestion.length - 1,
-            );
-          },
+      Get.to(
+        () => _QuestionResult(
+          result: result,
+          valiResult: widget.listquestion.length - 1,
         ),
+        transition: Transition.zoom,
       );
     });
   }
@@ -59,7 +56,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             color: Constants.lightText,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
       ),
@@ -194,7 +191,7 @@ class _QuestionResult extends StatelessWidget {
             color: Constants.lightText,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         backgroundColor: Constants.header,
@@ -235,14 +232,7 @@ class _QuestionResult extends StatelessWidget {
             const SizedBox(height: 80),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return const MainScreen();
-                    },
-                  ),
-                );
+                Get.to(() => const MainScreen(), transition: Transition.fade);
               },
               style: ButtonStyle(
                 backgroundColor:

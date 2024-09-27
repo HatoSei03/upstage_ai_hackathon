@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:juju/util/const.dart';
-import 'package:juju/util/places.dart';
+import 'package:juju/model/places.dart';
 import 'package:juju/widgets/search_card.dart';
 import 'package:juju/widgets/trending_place.dart';
-import 'package:juju/screens/chatbot.dart';
+import 'package:get/get.dart';
+import 'package:juju/widgets/chatbot_float_button.dart';
 
 class Trending extends StatelessWidget {
   final List<Place> source;
@@ -28,7 +29,7 @@ class Trending extends StatelessWidget {
             color: Constants.lightText,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         centerTitle: true,
@@ -55,26 +56,7 @@ class Trending extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ChatbotSupportScreen(),
-            ),
-          );
-        },
-        tooltip: 'Floating Action Button',
-        backgroundColor: Constants.header,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        elevation: 2.0,
-        child: Icon(
-          Icons.question_answer,
-          color: Constants.lightText2,
-        ),
-      ),
+      floatingActionButton: const ChatbotFloatButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

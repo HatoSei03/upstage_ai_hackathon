@@ -1,12 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:juju/util/const.dart';
 import 'package:juju/model/message.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:juju/model/upstage.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ChatbotSupportScreen extends StatefulWidget {
   const ChatbotSupportScreen({super.key});
@@ -30,12 +29,6 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
           time: DateFormat('hh:mm a').format(DateTime.now()),
           isMe: true,
         ));
-
-        FirebaseFirestore.instance.collection('chat').add({
-          'content': message,
-          'time': DateTime.now(),
-          'isMe': true,
-        });
         msg = message;
       });
       _scrollToBottom();
@@ -54,12 +47,6 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
           time: DateFormat('hh:mm a').format(DateTime.now()),
           isMe: false,
         ));
-
-        FirebaseFirestore.instance.collection('chat').add({
-          'content': response,
-          'time': DateTime.now(),
-          'isMe': false,
-        });
         _isThinking = false;
       });
       _scrollToBottom();
@@ -93,7 +80,7 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
             color: Constants.lightText,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
       ),

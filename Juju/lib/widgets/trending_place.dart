@@ -1,8 +1,9 @@
 // @dart=2.17
 import 'package:flutter/material.dart';
-import 'package:juju/screens/details.dart';
+import 'package:juju/screens/details/details.dart';
 import 'package:juju/util/const.dart';
-import 'package:juju/util/places.dart';
+import 'package:juju/model/places.dart';
+import 'package:get/get.dart';
 
 class TrendingPlace extends StatefulWidget {
   final Place place;
@@ -21,13 +22,9 @@ class _TrendingPlaceState extends State<TrendingPlace> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) {
-              return DetailScreen(placeToDisplay: widget.place);
-            },
-          ),
+        Get.to(
+          () => DetailsScreen(widget.place),
+          transition: Transition.zoom,
         );
       },
       child: Padding(
@@ -47,15 +44,15 @@ class _TrendingPlaceState extends State<TrendingPlace> {
                       height: MediaQuery.of(context).size.height / 3.5,
                       width: MediaQuery.of(context).size.width,
                       child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                        child: Image.network(
-                          widget.place.img,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child: FadeInImage.assetNetwork(
+                            placeholder: 'assets/localImg/placeholder.jpg',
+                            image: widget.place.img[0],
+                            fit: BoxFit.cover,
+                          )),
                     ),
                     Positioned(
                       top: 6.0,

@@ -1,9 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:juju/util/places.dart';
-import 'package:juju/screens/home.dart';
+import 'package:juju/model/places.dart';
 import 'package:juju/widgets/modify_timeline.dart';
+import 'package:get/get.dart';
+import 'package:juju/widgets/place_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TimelineDay extends StatefulWidget {
   List<Place> placesToGo;
@@ -21,7 +23,29 @@ class _TimelineDayState extends State<TimelineDay> {
   void _updatePlaceList(List<Place> newList) {
     setState(() {
       widget.placesToGo = newList;
+      widget.updateResultList(
+          newList, widget.dayNum - 1); // Ensure the parent is updated
     });
+  }
+
+  Widget buildPlaceList(BuildContext context, List<Place> source) {
+    return SizedBox(
+      height: 250,
+      width: MediaQuery.of(context).size.width,
+      child: ListView.builder(
+        primary: false,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: source.length,
+        itemBuilder: (BuildContext context, int index) {
+          Place place = source[index];
+          return Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: PlaceCard(place: place),
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -40,9 +64,11 @@ class _TimelineDayState extends State<TimelineDay> {
             children: <Widget>[
               Text(
                 'Day ${widget.dayNum} - ${totalCost.toStringAsFixed(0)}\$',
-                style: const TextStyle(
+                style: GoogleFonts.rubik(
+                  // Changed from default TextStyle to Rubik
                   fontSize: 20.0,
                   fontWeight: FontWeight.w800,
+                  color: Colors.black, // Updated text color to match app style
                 ),
               ),
               TextButton(
@@ -53,18 +79,14 @@ class _TimelineDayState extends State<TimelineDay> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ModifyTimeline(
-                          placeList: widget.placesToGo,
-                          updatePlaceListFunc: _updatePlaceList,
-                          updateResultList: widget.updateResultList,
-                          idx: widget.dayNum - 1,
-                        );
-                      },
+                  Get.to(
+                    () => ModifyTimeline(
+                      placeList: widget.placesToGo,
+                      updatePlaceListFunc: _updatePlaceList,
+                      updateResultList: widget.updateResultList,
+                      idx: widget.dayNum - 1,
                     ),
+                    transition: Transition.rightToLeftWithFade,
                   );
                 },
               ),
