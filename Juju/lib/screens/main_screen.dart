@@ -165,7 +165,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               _buildBarItem(1, 'Timeline'),
               _buildBarItem(2, 'Home'),
               _buildBarItem(3, 'Shop'),
-              _buildBarItem(4, 'Profile'),
+              _buildBarItem(4, 'Community'),
             ],
           ),
         ),

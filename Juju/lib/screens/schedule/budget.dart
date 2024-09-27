@@ -66,12 +66,12 @@ class _BudgetScreenState extends State<BudgetScreen>
       travelingAlone = value;
       if (!travelingAlone) {
         _animationController.forward();
-        widget.schedule.travelerNum = 1;
-        travelersController.text = '1';
-      } else {
-        _animationController.reverse();
         widget.schedule.travelerNum = 2;
         travelersController.text = '2';
+      } else {
+        _animationController.reverse();
+        widget.schedule.travelerNum = 1;
+        travelersController.text = '1';
       }
     });
   }

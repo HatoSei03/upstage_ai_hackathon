@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../components/grocery_item_tile.dart';
 import '../model/cart_model.dart';
 import 'cart_page.dart';
-import 'notification_screen.dart'; // Thêm file màn hình thông báo
+import 'notification_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                 icon: const Icon(Icons.notifications),
                 onPressed: () {
-                  // Điều hướng tới màn hình thông báo
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -54,85 +53,97 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          const SizedBox(height: 16),
-
-          // Thanh catergory
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Text(
-              "Categories",
-              style: GoogleFonts.notoSerif(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-
-          // Hiển thị danh sách các danh mục bằng ListView horizontal
-          SizedBox(
-            height: 60,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: const [
-                CategoryTile(title: 'Food'),
-                CategoryTile(title: 'Souvenir'),
-                // Các danh mục khác
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-
-          // Grid sản phẩm
-          Expanded(
-            child: Consumer<CartModel>(
-              builder: (context, value, child) {
-                return GridView.builder(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: value.shopItems.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 cột
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                    childAspectRatio: 1 / 1.4,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Text(
+                  "Categories",
+                  style: GoogleFonts.notoSerif(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  itemBuilder: (context, index) {
-                    var item = value.shopItems[index];
-                    return GroceryItemTile(
-                      itemName: item[0],
-                      itemPrice: item[1],
-                      imagePath: item[4],
-                      itemWeight: item[2],
-                      itemCount: item[3],
-                      description: item[5],
-                      generalInfo: item[6],
-                      onPressed: () {
-                        Provider.of<CartModel>(context, listen: false)
-                            .addItemToCart(index);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('$item[0] added to cart'),
-                            duration: const Duration(seconds: 2),
-                          ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 60,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CategoryTile(title: 'Food'),
+                    CategoryTile(title: 'Souvenir'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: Consumer<CartModel>(
+                  builder: (context, value, child) {
+                    return GridView.builder(
+                      padding: const EdgeInsets.all(12),
+                      itemCount: value.shopItems.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 1 / 1.4,
+                      ),
+                      itemBuilder: (context, index) {
+                        var item = value.shopItems[index];
+                        return GroceryItemTile(
+                          itemName: item[0],
+                          itemPrice: item[1],
+                          imagePath: item[4],
+                          itemWeight: item[2],
+                          itemCount: item[3],
+                          description: item[5],
+                          generalInfo: item[6],
+                          onPressed: () {
+                            Provider.of<CartModel>(context, listen: false)
+                                .addItemToCart(index);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('$item[0] added to cart'),
+                                duration: const Duration(seconds: 2),
+                              ),
+                            );
+                          },
+                          rating: 4.5,
+                          sold: 100,
                         );
                       },
-                      rating: 4.5,
-                      sold: 100,
                     );
                   },
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: AdvertisementBanner(),
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartPage(),
+                  ),
                 );
               },
+              backgroundColor: Colors.green,
+              child: const Icon(Icons.shopping_cart),
             ),
-          ),
-
-          // Quảng cáo hoặc voucher
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: AdvertisementBanner(),
           ),
         ],
       ),
@@ -143,7 +154,7 @@ class _HomePageState extends State<HomePage> {
 class CategoryTile extends StatelessWidget {
   final String title;
 
-  const CategoryTile({required this.title});
+  const CategoryTile({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +176,8 @@ class CategoryTile extends StatelessWidget {
 }
 
 class AdvertisementBanner extends StatelessWidget {
+  const AdvertisementBanner({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

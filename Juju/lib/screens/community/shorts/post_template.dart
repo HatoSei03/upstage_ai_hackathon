@@ -23,10 +23,7 @@ class PostTemplate extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // user post (at the very back)
           userPost,
-
-          // user name and caption
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(

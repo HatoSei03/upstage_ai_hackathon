@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../model/cart_model.dart';
+import 'package:juju/screens/shop/pages/item_details.dart';
+import 'package:get/get.dart';
 
 class GroceryItemTile extends StatelessWidget {
   final String itemName;
@@ -11,8 +13,9 @@ class GroceryItemTile extends StatelessWidget {
   final String itemCount;
   final String description;
   final String generalInfo;
-  final double rating; // Đánh giá sao
-  final int sold; // Số lượt bán
+  final double rating;
+  final int sold;
+
   void Function()? onPressed;
 
   GroceryItemTile({
@@ -33,45 +36,14 @@ class GroceryItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(itemName, style: GoogleFonts.notoSerif(fontSize: 24)),
-              content: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(imagePath, height: 150),
-                    SizedBox(height: 16),
-                    Text("Price: \$$itemPrice", style: TextStyle(fontSize: 16)),
-                    Text("Weight: $itemWeight", style: TextStyle(fontSize: 16)),
-                    Text("Available: $itemCount",
-                        style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 16),
-                    Text("Description:",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(description),
-                    SizedBox(height: 8),
-                    Text("General Information:",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(generalInfo),
-                  ],
-                ),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: onPressed,
-                  child: Text('Add to Cart',
-                      style: TextStyle(color: Colors.green)),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Close'),
-                ),
-              ],
-            );
-          },
+        Get.to(
+          () => ProductDetailPage(
+            itemName: itemName,
+            itemPrice: itemPrice,
+            imagePaths: [imagePath],
+            description: description,
+            suggestions: [],
+          ),
         );
       },
       child: Padding(
@@ -85,7 +57,6 @@ class GroceryItemTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Ảnh sản phẩm
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Image.asset(
@@ -93,12 +64,10 @@ class GroceryItemTile extends StatelessWidget {
                   height: 64,
                 ),
               ),
-              // Tên sản phẩm
               Text(
                 itemName,
                 style: const TextStyle(fontSize: 16),
               ),
-              // Giá, số lượt bán, và đánh giá sao
               Text(
                 '\$$itemPrice - Sold: $sold',
                 style:
@@ -114,7 +83,6 @@ class GroceryItemTile extends StatelessWidget {
                   );
                 }),
               ),
-              // Nút thêm vào giỏ hàng
               MaterialButton(
                 onPressed: onPressed,
                 color: Colors.green,

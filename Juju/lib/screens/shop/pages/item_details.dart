@@ -8,7 +8,7 @@ class ProductDetailPage extends StatelessWidget {
   final String itemPrice;
   final List<String> imagePaths;
   final String description;
-  final List<String> suggestions; // Gợi ý sản phẩm tương tự
+  final List<String> suggestions; 
 
   ProductDetailPage({
     super.key,
@@ -30,7 +30,6 @@ class ProductDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Scroll hình ảnh ngang
             SizedBox(
               height: 200,
               child: ListView.builder(
