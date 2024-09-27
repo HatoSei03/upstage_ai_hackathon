@@ -4,7 +4,7 @@ import 'package:juju/screens/home.dart';
 import 'package:juju/util/const.dart';
 import 'package:juju/screens/community/widget/profile.dart';
 import 'package:juju/screens/ocr/camera_screen.dart';
-import 'package:juju/screens/schedule/schedule.dart';
+import 'package:juju/screens/schedule/onboarding.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:juju/screens/community/onboarding/onboarding.dart';
@@ -23,18 +23,7 @@ List<IconData> icons = [
 
 List<Widget> pages = [
   const CameraAwesomeApp(),
-  ScheduleScreen(Schedule(
-    "Jeju Trip",
-    "Budget friendly",
-    [0, 0],
-    1,
-    [DateTime.now(), DateTime.now()],
-    [
-      const TimeOfDay(hour: 0, minute: 0),
-      const TimeOfDay(hour: 23, minute: 59)
-    ],
-    [],
-  )),
+  const OnboardingSchedule(),
   const Home(),
   ChangeNotifierProvider(
     create: (context) => CartModel(),

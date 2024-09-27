@@ -22,6 +22,12 @@ class NotificationScreen extends StatelessWidget {
             icon: Icons.card_giftcard,
             color: Colors.red,
           ),
+          NotificationTile(
+            title: "New Arrival",
+            subtitle: "Check out the latest products in our store.",
+            icon: Icons.new_releases,
+            color: Colors.purple,
+          ),
           // Các thông báo khác
         ],
       ),
@@ -52,6 +58,9 @@ class NotificationTile extends StatelessWidget {
       title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(subtitle),
       trailing: Icon(Icons.arrow_forward_ios),
+      onTap: () {
+        // Handle notification tap if needed
+      },
     );
   }
 }

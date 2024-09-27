@@ -101,11 +101,8 @@ flutter:
     - assets\localImg\placeholder.jpg
     - assets\localImg\Background.png
     - assets\Lottie\splash_screen.json
-    - assets\animation\onboarding1.gif
-    - assets\animation\onboarding2.gif
-    - assets\animation\onboarding3.gif
-    - assets\img\google.png
     - assets\video\jeju.mp4
+    - assets\img\onboarding_schedule.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

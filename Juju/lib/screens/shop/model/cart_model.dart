@@ -210,6 +210,14 @@ class CartModel extends ChangeNotifier {
     notifyListeners();
   }
 
+    void addItemToCartByName(String itemName) {
+    var item = shopItems.firstWhere((element) => element[0] == itemName, orElse: () => []);
+    if (item.isNotEmpty) {
+      cartItems.add(item);
+      notifyListeners();
+    }
+  }
+
   // Remove item from cart
   void removeItemFromCart(int index) {
     _cartItems.removeAt(index);
