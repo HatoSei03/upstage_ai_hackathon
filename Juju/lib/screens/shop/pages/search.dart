@@ -1,9 +1,13 @@
+// search.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/cart_model.dart';
 import 'item_details.dart'; // Import the ProductDetailPage
+import '../model/item.dart'; // Import the Item class
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -11,7 +15,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   String searchQuery = '';
   List<String> searchHistory = [];
-  List filteredItems = [];
+  List<Item> filteredItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +26,13 @@ class _SearchPageState extends State<SearchPage> {
         title: TextField(
           decoration: InputDecoration(
             hintText: 'Search...',
+            border: InputBorder.none,
           ),
           onChanged: (value) {
             setState(() {
               searchQuery = value;
               filteredItems = shopItems
-                  .where((item) => item[0]
+                  .where((item) => item.name
                       .toLowerCase()
                       .contains(searchQuery.toLowerCase()))
                   .toList();
@@ -44,10 +49,11 @@ class _SearchPageState extends State<SearchPage> {
             }
           },
         ),
+        backgroundColor: Colors.green,
       ),
       body: Column(
         children: [
-          // Lịch sử tìm kiếm
+          // Search History Section
           if (searchHistory.isNotEmpty) ...[
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -68,7 +74,7 @@ class _SearchPageState extends State<SearchPage> {
                       setState(() {
                         searchQuery = history;
                         filteredItems = shopItems
-                            .where((item) => item[0]
+                            .where((item) => item.name
                                 .toLowerCase()
                                 .contains(searchQuery.toLowerCase()))
                             .toList();
@@ -87,7 +93,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ],
-          // Kết quả tìm kiếm
+          // Search Results Section
           if (searchQuery.isNotEmpty) ...[
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -110,19 +116,20 @@ class _SearchPageState extends State<SearchPage> {
                       itemBuilder: (context, index) {
                         var item = filteredItems[index];
                         return ListTile(
-                          title: Text(item[0]),
-                          subtitle: Text('\$${item[1]}'),
-                          leading: Image.asset(item[4]),
+                          title: Text(item.name),
+                          subtitle: Text('\$${item.price}'),
+                          leading: Image.network(
+                            item.img,
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ProductDetailPage(
-                                  itemName: item[0],
-                                  itemPrice: item[1],
-                                  imagePaths: [item[4]],
-                                  description: item[5],
-                                  suggestions: [], // Add suggestions as needed
+                                  item: item,
                                 ),
                               ),
                             );

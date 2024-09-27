@@ -1,8 +1,11 @@
+// cart_page.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../model/cart_model.dart';
+import '../model/item.dart'; // Import the Item class
+import 'item_details.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -25,7 +28,7 @@ class CartPage extends StatelessWidget {
         ),
       ),
       body: Consumer<CartModel>(
-        builder: (context, value, child) {
+        builder: (context, cartModel, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,7 +36,7 @@ class CartPage extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: value.cartItems.isEmpty
+                  child: cartModel.cartItems.isEmpty
                       ? Center(
                           child: Text(
                             'Your cart is empty.',
@@ -41,23 +44,26 @@ class CartPage extends StatelessWidget {
                           ),
                         )
                       : ListView.builder(
-                          itemCount: value.cartItems.length,
+                          itemCount: cartModel.cartItems.length,
                           itemBuilder: (context, index) {
-                            var item = value.cartItems[index];
+                            Item item = cartModel.cartItems[index];
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(8)),
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                                 child: ListTile(
-                                  leading: Image.asset(
-                                    item[4],
+                                  leading: Image.network(
+                                    item.img,
                                     height: 36,
+                                    width: 36,
+                                    fit: BoxFit.cover,
                                   ),
                                   title: Text(
-                                    item[0],
+                                    item.name,
                                     style: const TextStyle(fontSize: 18),
                                   ),
                                   subtitle: Column(
@@ -65,26 +71,35 @@ class CartPage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Price: \$${item[1]}',
+                                        'Price: \$${item.price}',
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       Text(
-                                        'Weight: ${item[2]}',
+                                        'Category: ${item.category}',
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       Text(
-                                        'Available: ${item[3]}',
+                                        'Stock: ${item.stock}',
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                     ],
                                   ),
                                   trailing: IconButton(
                                     icon: const Icon(Icons.cancel),
-                                    onPressed: () => Provider.of<CartModel>(
-                                            context,
-                                            listen: false)
-                                        .removeItemFromCart(index),
+                                    onPressed: () =>
+                                        cartModel.removeItemFromCart(index),
                                   ),
+                                  onTap: () {
+                                    // Navigate to ProductDetailPage
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ProductDetailPage(
+                                          item: item,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             );
@@ -94,7 +109,7 @@ class CartPage extends StatelessWidget {
               ),
 
               // Total amount + Pay now
-              if (value.cartItems.isNotEmpty)
+              if (cartModel.cartItems.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Container(
@@ -117,7 +132,7 @@ class CartPage extends StatelessWidget {
                             const SizedBox(height: 8),
                             // Total price
                             Text(
-                              '\$${value.calculateTotal()}',
+                              '\$${cartModel.calculateTotal()}',
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,

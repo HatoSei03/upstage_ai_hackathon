@@ -1,10 +1,12 @@
+// home_page.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../components/grocery_item_tile.dart';
 import '../model/cart_model.dart';
 import 'cart_page.dart';
-import 'notification_screen.dart'; // Thêm file màn hình thông báo
+import 'notification_screen.dart';
+import '../model/item.dart'; // Import the Item class
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,12 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String selectedCategory = 'All';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Row(
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                 icon: const Icon(Icons.notifications),
                 onPressed: () {
-                  // Điều hướng tới màn hình thông báo
+                  // Navigate to the NotificationScreen
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -53,6 +55,8 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Stack(
         children: [
@@ -61,7 +65,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               const SizedBox(height: 16),
 
-              // Thanh catergory
+              // Categories Section
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Text(
@@ -74,55 +78,57 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 16),
 
-              // Hiển thị danh sách các danh mục bằng ListView horizontal
+              // Horizontal List of Categories
               SizedBox(
                 height: 60,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: const [
+                    CategoryTile(title: 'All'),
                     CategoryTile(title: 'Food'),
                     CategoryTile(title: 'Souvenir'),
-                    // Các danh mục khác
+                    // Add more categories as needed
                   ],
                 ),
               ),
               const SizedBox(height: 16),
 
-              // Grid sản phẩm
+              // Grid of Products
               Expanded(
                 child: Consumer<CartModel>(
-                  builder: (context, value, child) {
+                  builder: (context, cartModel, child) {
+                    // Filter items based on selectedCategory
+                    List<Item> displayedItems = selectedCategory == 'All'
+                        ? cartModel.shopItems
+                        : cartModel.shopItems
+                            .where((item) => item.category == selectedCategory)
+                            .toList();
+
                     return GridView.builder(
                       padding: const EdgeInsets.all(12),
-                      itemCount: value.shopItems.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // 2 cột
+                      itemCount: displayedItems.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // 2 columns
                         mainAxisSpacing: 12,
                         crossAxisSpacing: 12,
-                        childAspectRatio: 1 / 1.4,
+                        childAspectRatio: 1 / 1.6,
                       ),
                       itemBuilder: (context, index) {
-                        var item = value.shopItems[index];
+                        var item = displayedItems[index];
                         return GroceryItemTile(
-                          itemName: item[0],
-                          itemPrice: item[1],
-                          imagePath: item[4],
-                          itemWeight: item[2],
-                          itemCount: item[3],
-                          description: item[5],
-                          generalInfo: item[6],
+                          item: item,
                           onPressed: () {
                             Provider.of<CartModel>(context, listen: false)
-                                .addItemToCart(index);
+                                .addItemToCart(
+                                    cartModel.shopItems.indexOf(item));
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('${item[0]} added to cart'),
+                                content: Text('${item.name} added to cart'),
                                 duration: const Duration(seconds: 2),
                               ),
                             );
                           },
-                          rating: 4.5,
-                          sold: 100,
                         );
                       },
                     );
@@ -130,13 +136,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              // Quảng cáo hoặc voucher (Moved to after the GridView)
+              // Additional space for AdvertisementBanner
               const SizedBox(height: 16),
             ],
           ),
-          // Positioned AdvertisementBanner after the GridView
+          // Positioned AdvertisementBanner at the bottom
           Consumer<CartModel>(
-            builder: (context, value, child) {
+            builder: (context, cartModel, child) {
               return Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
@@ -190,21 +196,29 @@ class _HomePageState extends State<HomePage> {
 class CategoryTile extends StatelessWidget {
   final String title;
 
-  const CategoryTile({required this.title});
+  const CategoryTile({required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.green[200],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    bool isSelected = false; // You can add logic to handle selection
+
+    return GestureDetector(
+      onTap: () {
+        // Update selected category
+        // Implement state management to handle category selection
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.green[200],
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
@@ -212,6 +226,8 @@ class CategoryTile extends StatelessWidget {
 }
 
 class AdvertisementBanner extends StatelessWidget {
+  const AdvertisementBanner({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
