@@ -1,198 +1,30 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:provider/provider.dart';
-// import '../model/cart_model.dart';
-
-// class ProductDetailPage extends StatefulWidget {
-//   final String itemName;
-//   final String itemPrice;
-//   final List<String> imagePaths;
-//   final String description;
-//   final List<String> suggestions; // Similar product suggestions
-
-//   const ProductDetailPage({
-//     super.key,
-//     required this.itemName,
-//     required this.itemPrice,
-//     required this.imagePaths,
-//     required this.description,
-//     required this.suggestions,
-//   });
-
-//   @override
-//   State<ProductDetailPage> createState() => _ProductDetailPageState();
-// }
-
-// class _ProductDetailPageState extends State<ProductDetailPage> {
-//   bool isFavorite = false; // Heart icon toggle state
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           widget.itemName,
-//           style: GoogleFonts.notoSerif(fontSize: 20, color: Colors.black),
-//         ),
-//         backgroundColor: Colors.white,
-//         foregroundColor: Colors.black,
-//         elevation: 1,
-//         actions: [
-//           IconButton(
-//             icon: Icon(
-//               isFavorite ? Icons.favorite : Icons.favorite_border,
-//               color: isFavorite ? Colors.red : Colors.black,
-//             ),
-//             onPressed: () {
-//               setState(() {
-//                 isFavorite = !isFavorite;
-//               });
-//             },
-//           ),
-//         ],
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             // Horizontal image scroll
-//             SizedBox(
-//               height: 250,
-//               child: ListView.builder(
-//                 scrollDirection: Axis.horizontal,
-//                 itemCount: widget.imagePaths.length,
-//                 itemBuilder: (context, index) {
-//                   return Padding(
-//                     padding: const EdgeInsets.all(8.0),
-//                     child: Image.asset(widget.imagePaths[index]),
-//                   );
-//                 },
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-//               child: Text(
-//                 widget.description,
-//                 style: GoogleFonts.notoSerif(fontSize: 16, color: Colors.black87),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//               child: Row(
-//                 children: [
-//                   Text(
-//                     'Price: ',
-//                     style: GoogleFonts.notoSerif(fontSize: 16, fontWeight: FontWeight.bold),
-//                   ),
-//                   Text(
-//                     '\$${widget.itemPrice}',
-//                     style: GoogleFonts.notoSerif(fontSize: 16, color: Colors.red),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: ElevatedButton(
-//                 onPressed: () {
-//                   Provider.of<CartModel>(context, listen: false)
-//                       .addItemToCartByName(widget.itemName);
-//                   ScaffoldMessenger.of(context).showSnackBar(
-//                     SnackBar(
-//                       content: Text('${widget.itemName} added to cart'),
-//                       duration: const Duration(seconds: 2),
-//                     ),
-//                   );
-//                 },
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Colors.green,
-//                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-//                 ),
-//                 child: const Text(
-//                   'Add to Cart',
-//                   style: TextStyle(color: Colors.white, fontSize: 16),
-//                 ),
-//               ),
-//             ),
-//             // Similar Products Section
-//             if (widget.suggestions.isNotEmpty) ...[
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-//                 child: Text(
-//                   'You may also like:',
-//                   style: GoogleFonts.notoSerif(
-//                     fontSize: 18,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(
-//                 height: 150,
-//                 child: ListView.builder(
-//                   scrollDirection: Axis.horizontal,
-//                   itemCount: widget.suggestions.length,
-//                   itemBuilder: (context, index) {
-//                     return Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           // Navigate to another ProductDetailPage if needed
-//                         },
-//                         child: Container(
-//                           width: 100,
-//                           decoration: BoxDecoration(
-//                             color: Colors.grey[200],
-//                             borderRadius: BorderRadius.circular(12),
-//                           ),
-//                           child: Center(
-//                             child: Text(
-//                               widget.suggestions[index],
-//                               textAlign: TextAlign.center,
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                 ),
-//               ),
-//             ],
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
+// item_details.dart
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../model/cart_model.dart';
+import '../model/item.dart'; // Import the Item class
 
 class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({super.key});
+  final Item item;
+
+  const ProductDetailPage({
+    required this.item,
+    super.key,
+  });
 
   @override
-  _ProductDetailPageState createState() =>
-      _ProductDetailPageState();
+  _ProductDetailPageState createState() => _ProductDetailPageState();
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
   bool isLiked = false;
-  int likeCount = 100; // Lượt thích mặc định
+  int likeCount = 0;
 
   @override
   Widget build(BuildContext context) {
-    // Sử dụng các giá trị placeholder tượng trưng cho sản phẩm
-    final String productName = "Product Name";
-    final String productPrice = "19.99";
-    final String productImage =
-        "https://via.placeholder.com/150"; // Link ảnh placeholder
-    final String productDescription = "This is a description of the product.";
-    final String productCategory = "Category Name";
-    final String productSeller = "Seller Name";
-    final String productOrigin = "Made in Vietnam";
-    final String productSold = "1.2k sold";
-    final String productStock = "50 in stock";
-    final String productDiscount = "20"; // Discount giả định là 20%
-    final String productRating = "4.8"; // Giả định đánh giá 4.8 sao
+    // Assuming you have a list of suggestions, you can generate them based on category or other logic
+    List<String> suggestions = []; // Populate as needed
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -233,7 +65,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               height: 300,
               width: double.infinity,
               child: Image.network(
-                productImage,
+                widget.item.img,
                 fit: BoxFit.cover,
               ),
             ),
@@ -247,7 +79,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 children: [
                   // Tên sản phẩm
                   Text(
-                    productName,
+                    widget.item.name,
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -260,18 +92,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   Row(
                     children: [
                       Text(
-                        '\$$productPrice',
+                        '\$${widget.item.price}',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
                         ),
                       ),
-                      if (productDiscount.isNotEmpty)
+                      if (widget.item.discount.isNotEmpty)
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                            '$productDiscount% OFF',
+                            '${widget.item.discount}% OFF',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.green,
@@ -291,7 +123,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           const Icon(Icons.star, color: Colors.orange, size: 16),
                           const SizedBox(width: 4),
                           Text(
-                            productRating,
+                            widget.item.rating,
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -301,7 +133,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        productSold,
+                        widget.item.sold,
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
@@ -313,7 +145,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
                   // Mô tả sản phẩm
                   Text(
-                    productDescription,
+                    widget.item.description,
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
@@ -324,10 +156,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   // Thông tin thêm (Category, Seller, Origin)
                   const Divider(color: Colors.grey),
                   const SizedBox(height: 8),
-                  _buildProductInfoRow('Category', productCategory),
-                  _buildProductInfoRow('Seller', productSeller),
-                  _buildProductInfoRow('Origin', productOrigin),
-                  _buildProductInfoRow('Stock', productStock),
+                  _buildProductInfoRow('Category', widget.item.category),
+                  _buildProductInfoRow('Seller', widget.item.seller),
+                  _buildProductInfoRow('Origin', widget.item.origin),
+                  _buildProductInfoRow('Stock', widget.item.stock),
                   const SizedBox(height: 16),
 
                   // Like Section
@@ -452,7 +284,3 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 }
-
-
-
-
