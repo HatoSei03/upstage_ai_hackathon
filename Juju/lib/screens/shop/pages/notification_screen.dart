@@ -5,11 +5,11 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications'),
+        title: const Text('Notifications'),
         backgroundColor: Colors.green,
       ),
       body: ListView(
-        children: [
+        children: const [
           NotificationTile(
             title: "Order Shipped",
             subtitle: "Your order #1234 has been shipped!",
@@ -55,9 +55,9 @@ class NotificationTile extends StatelessWidget {
         backgroundColor: color,
         child: Icon(icon, color: Colors.white),
       ),
-      title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(subtitle),
-      trailing: Icon(Icons.arrow_forward_ios),
+      trailing: const Icon(Icons.arrow_forward_ios),
       onTap: () {
         // Handle notification tap if needed
       },

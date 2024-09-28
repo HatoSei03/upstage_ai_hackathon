@@ -111,22 +111,6 @@ List<Item> itemList = [
     rating: "4",
   ),
   Item(
-    id: "item005",
-    name: "Jeju Tangerine Pencil",
-    category: "souvenir",
-    seller: "RAINBOWJEJU 1st Branch",
-    origin:
-        "The Tangerine Pencil is a delightful writing tool inspired by Jeju Island’s famous tangerines. Crafted from eco-friendly materials, the pencil is often scented with the subtle, refreshing fragrance of Jeju tangerines, adding a unique sensory experience to your writing. The body of the pencil may feature bright orange hues, resembling the vibrant citrus fruit, while its smooth lead offers effortless writing or sketching. Whether used for journaling or drawing, the Tangerine Pencil brings a touch of Jeju’s playful and fresh spirit, making it both a practical and whimsical addition to your stationery collection.",
-    description:
-        "You can feel the creators’ care in trying to preserve the beautiful nature of Jeju with these pencils, for they are upcycled from materials generated during tangerine farming. To create this tangerine peel-based pencil, many years of research in the service of sustainability were needed.",
-    sold: "50",
-    stock: "26",
-    price: "7.52",
-    img: "https://i.ibb.co/jZz43QK/pencil.jpg",
-    discount: "5",
-    rating: "4",
-  ),
-  Item(
     id: "item006",
     name: "Jeju Shirts, Trousers, and Dresses",
     category: "souvenir",

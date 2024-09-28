@@ -6,7 +6,8 @@ import '../components/grocery_item_tile.dart';
 import '../model/cart_model.dart';
 import 'cart_page.dart';
 import 'notification_screen.dart';
-import '../model/item.dart'; // Import the Item class
+import '../model/item.dart';
+import 'package:juju/util/const.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,10 +18,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String selectedCategory = 'All';
+  Color selectedColor = Color(0xffEF7168);
+  Color textColor = Color(0xff6A778B);
+
+  // Determine the selected tag and filter the source list
+
+  void selectCategory() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constants.background,
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -43,7 +53,6 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                 icon: const Icon(Icons.notifications),
                 onPressed: () {
-                  // Navigate to the NotificationScreen
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -64,41 +73,42 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-
-              // Categories Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Text(
-                  "Categories",
-                  style: GoogleFonts.notoSerif(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Text(
+                      "Categories",
+                      style: GoogleFonts.notoSerif(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: SizedBox(
+                      height: 50,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          _buildCategoryTile(
+                            'All',
+                          ),
+                          _buildCategoryTile('Food'),
+                          _buildCategoryTile('Souvenir'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-
-              // Horizontal List of Categories
-              SizedBox(
-                height: 60,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                    CategoryTile(title: 'All'),
-                    CategoryTile(title: 'Food'),
-                    CategoryTile(title: 'Souvenir'),
-                    // Add more categories as needed
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Grid of Products
               Expanded(
                 child: Consumer<CartModel>(
                   builder: (context, cartModel, child) {
-                    // Filter items based on selectedCategory
-                    List<Item> displayedItems = selectedCategory == 'All'
+                    List<Item> displayedItems = selectedCategory == 'all'
                         ? cartModel.shopItems
                         : cartModel.shopItems
                             .where((item) => item.category == selectedCategory)
@@ -109,9 +119,9 @@ class _HomePageState extends State<HomePage> {
                       itemCount: displayedItems.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // 2 columns
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 2,
+                        crossAxisSpacing: 0,
                         childAspectRatio: 1 / 1.6,
                       ),
                       itemBuilder: (context, index) {
@@ -135,23 +145,20 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-
-              // Additional space for AdvertisementBanner
               const SizedBox(height: 16),
             ],
           ),
-          // Positioned AdvertisementBanner at the bottom
-          Consumer<CartModel>(
-            builder: (context, cartModel, child) {
-              return Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: AdvertisementBanner(),
-                ),
-              );
-            },
-          ),
+          // Consumer<CartModel>(
+          //   builder: (context, cartModel, child) {
+          //     return Align(
+          //       alignment: Alignment.bottomCenter,
+          //       child: Padding(
+          //         padding: const EdgeInsets.all(24.0),
+          //         child: AdvertisementBanner(),
+          //       ),
+          //     );
+          //   },
+          // ),
         ],
       ),
       // Floating Cart Button
@@ -191,61 +198,71 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
 
-class CategoryTile extends StatelessWidget {
-  final String title;
-
-  const CategoryTile({required this.title, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    bool isSelected = false; // You can add logic to handle selection
-
+  Widget _buildCategoryTile(String title) {
+    bool isSelected = selectedCategory.toLowerCase() == title.toLowerCase();
     return GestureDetector(
       onTap: () {
-        // Update selected category
-        // Implement state management to handle category selection
+        setState(() {});
       },
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: Colors.green[200],
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10.0),
+        child: ChoiceChip(
+          showCheckmark: false,
+          label: Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.montserrat(
+                  color: isSelected ? Colors.white : textColor,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
           ),
+          selected: isSelected,
+          onSelected: (selected) {
+            setState(() {
+              selectedCategory = title.toLowerCase();
+            });
+          },
+          selectedColor: selectedColor,
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+            side: BorderSide(
+              color: isSelected ? selectedColor : const Color(0xffD6D6D6),
+              width: 1,
+            ),
+          ),
+          elevation: isSelected ? 3 : 0,
         ),
       ),
     );
   }
 }
 
-class AdvertisementBanner extends StatelessWidget {
-  const AdvertisementBanner({super.key});
+// class AdvertisementBanner extends StatelessWidget {
+//   const AdvertisementBanner({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 150,
-      decoration: BoxDecoration(
-        color: Colors.orange[100],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Text(
-          'Special Offer: 20% Off All Local Souvenirs!',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.orange[900],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 150,
+//       decoration: BoxDecoration(
+//         color: Colors.orange[100],
+//         borderRadius: BorderRadius.circular(12),
+//       ),
+//       child: Center(
+//         child: Text(
+//           'Special Offer: 20% Off All Local Souvenirs!',
+//           style: TextStyle(
+//             fontSize: 18,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.orange[900],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
