@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
+  const NotificationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +34,6 @@ class NotificationScreen extends StatelessWidget {
             icon: Icons.new_releases,
             color: Color.fromARGB(255, 203, 94, 222),
           ),
-          // Các thông báo khác
         ],
       ),
     );
@@ -45,7 +46,7 @@ class NotificationTile extends StatelessWidget {
   final IconData icon;
   final Color color;
 
-  const NotificationTile({
+  const NotificationTile({super.key, 
     required this.title,
     required this.subtitle,
     required this.icon,
