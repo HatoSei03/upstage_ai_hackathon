@@ -45,7 +45,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           IconButton(
             icon: Icon(
               isLiked ? Icons.favorite : Icons.favorite_border,
-              color: isLiked ? Colors.red : Colors.black,
+              color: isLiked ? Color(0xffEF7168) : Colors.black,
             ),
             onPressed: () {
               setState(() {
@@ -60,7 +60,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Colors.grey[200],
+              color: Color(0xffFFF9F3),
               height: 300,
               width: double.infinity,
               child: Image.network(
@@ -161,19 +161,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   _buildProductInfoRow('Seller', widget.item.seller),
                   _buildProductInfoRow('Origin', widget.item.origin),
                   _buildProductInfoRow('Stock', widget.item.stock),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Text(
-                        '$likeCount Likes',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 16)
                 ],
               ),
             ),
@@ -191,7 +179,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Colors.orange,
+                  backgroundColor: Color(0xff18AFBA),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -214,7 +202,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Colors.red,
+                  backgroundColor: Color(0xffEF7168),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
