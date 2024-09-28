@@ -36,7 +36,7 @@ class _ScheduleLoadingScreenState extends State<ScheduleLoadingScreen> {
           widget.schedule.dates[0],
           widget.schedule.dates[1],
           widget.schedule.travelerNum,
-          widget.schedule.budget[1].toDouble());
+          widget.schedule.budget.toDouble());
       response = await getUpstageAIResponse(prompt[0], prompt[1]);
       print(response);
 
@@ -73,7 +73,7 @@ class _ScheduleLoadingScreenState extends State<ScheduleLoadingScreen> {
       widget.schedule.places = placeList;
       widget.schedule.activities = placeActivities;
 
-      Get.offAll(() => TimelineScreen(widget.schedule));
+      Get.offAll(() => TimelineScreen(widget.schedule, response));
     } catch (e) {
       Get.snackbar(
         'Error',

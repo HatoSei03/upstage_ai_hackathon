@@ -1,14 +1,11 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'dart:async';
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:flutter/material.dart';
-import 'package:juju/screens/ocr/ocr.dart';
+import 'package:juju/screens/translation/ocr/ocr.dart';
 import 'package:get/get.dart';
-
-void main() {
-  runApp(const CameraAwesomeApp());
-}
+import 'package:juju/util/const.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 
 class CameraAwesomeApp extends StatelessWidget {
   const CameraAwesomeApp({super.key});
@@ -45,9 +42,31 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+
     return Scaffold(
+      backgroundColor: Constants.background,
+      appBar: AppBar(
+        backgroundColor: Constants.background,
+        elevation: 0.0,
+        title: Text(
+          'Camera',
+          style: GoogleFonts.rubik(
+            color: Constants.lightText,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Constants.backArrow,
+          ),
+          onPressed: () => Get.back(),
+        ),
+      ),
       body: Container(
-        color: Colors.white,
+        color: Colors.black,
         child: CameraAwesomeBuilder.awesome(
           saveConfig: SaveConfig.photo(),
           onMediaTap: (mediaCapture) {},

@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:juju/util/const.dart';
 import 'package:get/get.dart';
 import 'package:juju/widgets/chatbot_float_button.dart';
+import 'package:flutter/cupertino.dart';
 
 class SavedTour extends StatefulWidget {
   const SavedTour({super.key});
@@ -50,7 +51,7 @@ class _SavedTourState extends State<SavedTour> {
               onPressed: () {
                 setState(
                   () {
-                    savedTour[index].name = _tourNameController.text;
+                    savedTour[index][0].name = _tourNameController.text;
                     _tourNameController.clear();
                   },
                 );
@@ -106,23 +107,34 @@ class _SavedTourState extends State<SavedTour> {
   Widget build(context) {
     if (savedTour.isEmpty) {
       return Scaffold(
+        backgroundColor: Constants.background,
         appBar: AppBar(
-          title: Text(
-            'Saved Tours',
-            style: TextStyle(
-              color: Constants.lightText,
-              fontWeight: FontWeight.bold,
+          backgroundColor: Constants.background,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Saved tours',
+                  style: GoogleFonts.rubik(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 32.0,
+                  ),
+                ),
+              ],
             ),
           ),
-          backgroundColor: Constants.header,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Constants.lightText,
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+            child: IconButton(
+              icon: Icon(
+                CupertinoIcons.arrow_left,
+                color: Constants.backArrow,
+                size: 26,
+              ),
+              onPressed: () => Get.back(),
             ),
-            onPressed: () {
-              Get.back();
-            },
           ),
         ),
         body: Center(
@@ -183,7 +195,7 @@ class _SavedTourState extends State<SavedTour> {
       body: ListView.builder(
         itemCount: savedTour.length,
         itemBuilder: (BuildContext context, int index) {
-          Schedule tour = savedTour[index];
+          Schedule tour = savedTour[index][0];
           return ListTile(
             title: Text(tour.name,
                 style: const TextStyle(fontWeight: FontWeight.w500)),
@@ -191,7 +203,7 @@ class _SavedTourState extends State<SavedTour> {
                 'Created in: ${DateFormat.yMd().format(tour.createdDate)}'),
             onTap: () {
               Get.to(
-                () => ViewSavedTour(savedTour[index]),
+                () => ViewSavedTour(savedTour[index][0]),
                 transition: Transition.zoom,
               );
             },

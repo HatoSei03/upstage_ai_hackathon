@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:juju/util/const.dart';
 import 'package:juju/model/upstage.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:juju/screens/translation/ocr/ocr.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class OCRScreen extends StatefulWidget {
@@ -59,24 +62,37 @@ class _OCRScreenState extends State<OCRScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+
     return Scaffold(
+      backgroundColor: Constants.background,
       appBar: AppBar(
-        title: Text(
-          'PhotoTranslator',
-          style: TextStyle(
-            color: Constants.lightText,
-            fontWeight: FontWeight.bold,
+        backgroundColor: Constants.background,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'PhotoTranslator',
+                style: GoogleFonts.rubik(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 28.0,
+                ),
+              ),
+            ],
           ),
         ),
-        backgroundColor: Constants.header,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Constants.lightText,
+        leading: Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+          child: IconButton(
+            icon: Icon(
+              CupertinoIcons.arrow_left,
+              color: Constants.backArrow,
+              size: 26,
+            ),
+            onPressed: () => Get.back(),
           ),
-          onPressed: () {
-            Get.back();
-          },
         ),
       ),
       body: Column(
@@ -89,48 +105,28 @@ class _OCRScreenState extends State<OCRScreen> {
             flex: 1,
             child: Column(
               children: [
-                ElevatedButton(
+                ElevatedButton.icon(
                   onPressed: translate,
+                  icon: Icon(
+                    Icons.translate,
+                    color: Constants.lightText,
+                  ),
+                  label: Text(
+                    'Translate to English',
+                    style: GoogleFonts.rubik(
+                      color: Constants.lightText,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Constants.header,
                     elevation: 1,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.translate,
-                        color: Constants.lightText,
-                      ),
-                      Text(
-                        'Translate to English',
-                      ),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: _currContent));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Copied to clipboard')),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Constants.header,
-                    elevation: 1,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.copy,
-                        color: Constants.lightText,
-                      ),
-                      Text(
-                        'Copy to Clipboard',
-                        style: TextStyle(color: Constants.lightText),
-                      ),
-                    ],
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -149,20 +145,18 @@ class _OCRScreenState extends State<OCRScreen> {
 }
 
 Widget displayImage(String imagePath) {
-  return SizedBox(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.withOpacity(1)),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Image.file(
-            File(imagePath),
-            fit: BoxFit.contain,
-          ),
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.withOpacity(1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Image.file(
+          File(imagePath),
+          fit: BoxFit.contain,
         ),
       ),
     ),
@@ -171,7 +165,7 @@ Widget displayImage(String imagePath) {
 
 Widget displayText(String text) {
   return Padding(
-    padding: const EdgeInsets.all(16.0),
+    padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
     child: Container(
       height: 200,
       width: double.infinity,
@@ -184,7 +178,10 @@ Widget displayText(String text) {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             _isLoading ? 'Gathering Information...' : text,
-            style: const TextStyle(fontSize: 14),
+            style: GoogleFonts.rubik(
+              fontSize: 16,
+              color: Colors.black.withOpacity(0.8),
+            ),
           ),
         ),
       ),

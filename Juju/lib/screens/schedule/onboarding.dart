@@ -81,7 +81,7 @@ class _OnboardingScheduleState extends State<OnboardingSchedule> {
                         Schedule(
                           "Jeju Trip",
                           "Budget friendly",
-                          [0, 0],
+                          0,
                           1,
                           [DateTime.now(), DateTime.now()],
                           [

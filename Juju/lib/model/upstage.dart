@@ -19,14 +19,14 @@ List<String> getSchedulePrompt(
     Your mission is to construct wise itinerary to Jeju Island based on customer needs such as the number of days, desired destinations, budget, and number of people. These information will be placed in JSON format as following
   
     \'\'\'
-    {"days": number_of_days(int), "places": [list of string of places' name to be included], "people_num": number_of_people(int), "budget": users'budget(int, using USD unit)}
+    {"days": number_of_days(int), "places": [list of string of places' name to be included], "people_num": number_of_people(int), "budget": users' budget(int, using USD unit)}
     \'\'\'
   
     Please perform the following tasks:
     Build an itinerary: Create an engaging, lively, and appealing itinerary for a tour to Jeju Island based on the user's provided needs.
     Summarize information: Summarize the information for each day of the itinerary and provide a summary of the total cost (breakdown the cost into categories such as accommodation, food, etc.). Make sure that the total cost, sum of the element costs, and sum of the breakdown costs are equal and do not exceed the budget
   
-    Output format: alwaysutput the information in JSON format.
+    Output format: always output the information in JSON format.
   
     Example JSON format
     [
@@ -93,6 +93,35 @@ Example JSON
     """;
 }
 
+String getScheduleAdviceContent(String schedule) {
+  return """
+You are a friendly and knowledgable AI local tour guide based in JeJu Island, South Korea
+The current date is {curr_date}
+Your mission is to friendly and concisely answer user's questions about an itinerary provided in the json delimited by triple backticks
+
+```
+$schedule
+```
+
+You can use your knowledge base to answer the question, highly focus on give advice about the common weather features at the current time. 
+Please provide the most up-to-date information, no more than 3 months old from the current time
+Always respond in the language spoken in English
+
+Please perform the following tasks:
+        * Infer the type of the question: "general" (the truth like sun rise in the East) or "details" (the question to ask details)
+        * Infer the place of the question: "identify the place/nation/district/etc that user likely want to visit"
+        * Answer the questions: do not answer any question that the place is not in JeJu Island (except "general" question). If you do not have answer for the question, be honor inform to user that "I do not have enough authentic information to answer your question. Please contact Support Center"
+        * Output your answer in JSON format
+        
+Example JSON 
+{
+        "type": "the type of question",
+        "place": "the place of the question",
+        "answer": "your answer to the question"
+}
+""";
+}
+
 String getReconstructContent() {
   return """
 this is the OCR result of a document. reconstruct the document and correct any mistakes in case there are problems during the OCR process.
@@ -107,6 +136,19 @@ I psum}
 Lorem
 Ipsum
   """;
+}
+
+String getSensitivityCheckContext() {
+  return """
+Your mission is to help me identify whether the input text is sensitive or not
+Some of the example sensitive case you can consider such as: violence, Sexual Harassment or Misconduct, descrimination, etc
+Please output in JSON format:
+{
+    "is_sensitive": True/False stand for text's sensitivity,
+    "answer": "If the text is not sensitive: please return exactly the input text. If the text is sensitive: please answer that 'Sorry, we can not translate this sentence for you because + `the reason`'"
+}
+Just output the answer as the format above and set your temperature to 0
+""";
 }
 
 const String apiKey = 'up_34nJBBm1jGJWcYhjX2H5X3tLKUfRx';
@@ -229,6 +271,15 @@ Future<String> getMiniModelResponse(String content, String prompt) async {
   }
 }
 
+Future<String> checkSensitivity(String content) async {
+  final response =
+      await getUpstageAIResponse(getSensitivityCheckContext(), content);
+  if (response.contains('"is_sensitive": True')) {
+    return 'Sorry, we can not translate this sentence for you because it is flagged as sensitive or contains inappropriate content';
+  }
+  return response;
+}
+
 Future<String> performOCR(String imagePath) async {
   const String url = 'https://api.upstage.ai/v1/document-ai/ocr';
 
@@ -254,8 +305,11 @@ Future<String> performOCR(String imagePath) async {
   return reconstructed.toString();
 }
 
-Future<String> getTranslation(String input) async {
+Future<String> getTranslation(String input, {bool fromEnglish = false}) async {
   const String url = 'https://api.upstage.ai/v1/solar/chat/completions';
+
+  const String koreanContent = "아버지가방에들어가셨다";
+  const String englishContent = "Father went into his room";
 
   final Map<String, String> headers = {
     'Authorization': 'Bearer $apiKey',
@@ -263,8 +317,11 @@ Future<String> getTranslation(String input) async {
   };
 
   final message = [
-    {"role": "user", "content": "아버지가방에들어가셨다"},
-    {"role": "assistant", "content": "Father went into his room"},
+    {"role": "user", "content": fromEnglish ? englishContent : koreanContent},
+    {
+      "role": "assistant",
+      "content": fromEnglish ? koreanContent : englishContent
+    },
     {"role": "user", "content": input}
   ];
 

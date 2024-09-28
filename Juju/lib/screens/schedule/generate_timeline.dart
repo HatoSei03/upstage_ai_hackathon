@@ -4,6 +4,7 @@ import 'package:juju/model/places.dart';
 import 'package:juju/model/schedule.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:juju/screens/chatbot.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:juju/util/const.dart';
 import 'package:flutter/services.dart';
@@ -13,14 +14,13 @@ import 'package:juju/screens/home.dart';
 import 'package:juju/screens/main_screen.dart';
 import 'package:juju/screens/schedule/view_saved_tour.dart';
 import 'package:juju/screens/details/details.dart';
-
-
-List<Schedule> savedTour = [];
+import 'package:juju/font/solar_l_l_m_icons.dart';
 
 class TimelineScreen extends StatefulWidget {
   final Schedule schedule;
+  final String response;
 
-  const TimelineScreen(this.schedule, {super.key});
+  const TimelineScreen(this.schedule, this.response, {super.key});
 
   @override
   _TimelineScreenState createState() => _TimelineScreenState();
@@ -240,6 +240,28 @@ class _TimelineScreenState extends State<TimelineScreen>
               ),
             ),
           ),
+          IconButton(
+            style: ButtonStyle(
+              padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+                const EdgeInsets.all(8.0),
+              ),
+              backgroundColor: WidgetStateProperty.all<Color>(
+                Colors.white,
+              ),
+              shadowColor: WidgetStateProperty.all<Color>(
+                Colors.black.withOpacity(0.5),
+              ),
+              elevation: WidgetStateProperty.all<double>(4.0),
+            ),
+            onPressed: () {
+              Get.to(() => ChatbotSupportScreen(context: widget.response));
+            },
+            icon: Icon(
+              SolarLLM.solarllm_symbol_color,
+              color: Color(0xff8796ff),
+              size: 38.0,
+            ),
+          ),
         ],
       ),
     );
@@ -340,13 +362,10 @@ class _TimelineScreenState extends State<TimelineScreen>
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {
-            // Update the createdDate to the current date and time
             widget.schedule.createdDate = DateTime.now();
 
-            // Add the current schedule to the savedTour list
-            savedTour.add(widget.schedule);
+            savedTour.add([widget.schedule, widget.response]);
 
-            // Display a snackbar confirming the save
             Get.snackbar(
               'Success',
               'I have successfully saved to tour to my profile.',
@@ -356,7 +375,6 @@ class _TimelineScreenState extends State<TimelineScreen>
               duration: const Duration(seconds: 3),
             );
 
-            // Pop all screens and navigate back to the HomeScreen
             Get.offAll(() => MainScreen());
           },
           style: ElevatedButton.styleFrom(

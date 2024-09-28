@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:juju/util/const.dart';
 import 'package:juju/screens/chatbot.dart';
+import 'package:juju/font/solar_l_l_m_icons.dart';
 
 class ChatbotFloatButton extends StatelessWidget {
   const ChatbotFloatButton({super.key});
@@ -11,7 +12,7 @@ class ChatbotFloatButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () {
         Get.to(
-          const ChatbotSupportScreen(),
+          () => ChatbotSupportScreen(),
           transition: Transition.zoom,
         );
       },
@@ -22,8 +23,9 @@ class ChatbotFloatButton extends StatelessWidget {
       ),
       elevation: 2.0,
       child: Icon(
-        Icons.question_answer,
+        SolarLLM.solarllm_symbol_color,
         color: Constants.lightText2,
+        size: 38.0,
       ),
     );
   }

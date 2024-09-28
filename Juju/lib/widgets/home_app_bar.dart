@@ -4,7 +4,7 @@ import "package:juju/util/const.dart";
 import "package:juju/util/location.dart";
 import 'package:icons_plus/icons_plus.dart';
 import 'package:get/get.dart';
-import 'package:juju/screens/community/authenticate/screens/login.dart';
+import 'package:juju/screens/community/widget/profile.dart ';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -24,7 +24,7 @@ class HomeAppBar extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Get.to(
-                    () => const LogInScreen(),
+                    () => const Profile(),
                     transition: Transition.rightToLeftWithFade,
                   );
                 },

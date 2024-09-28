@@ -162,8 +162,7 @@ class _ReviewTripScreenState extends State<ReviewTripScreen> {
                     _buildReviewItem(
                       icon: BoxIcons.bx_wallet,
                       label: 'Budget',
-                      value:
-                          '\$${widget.schedule.budget[0]} - \$${widget.schedule.budget[1]}',
+                      value: '\$${widget.schedule.budget}',
                       onEdit: () {
                         Get.to(() => BudgetScreen(widget.schedule))?.then((_) {
                           setState(() {});

@@ -3,18 +3,19 @@ import 'package:juju/model/schedule.dart';
 import 'package:juju/screens/home.dart';
 import 'package:juju/util/const.dart';
 import 'package:juju/screens/community/widget/profile.dart';
-import 'package:juju/screens/ocr/camera_screen.dart';
+import 'package:juju/screens/translation/ocr/camera_screen.dart';
 import 'package:juju/screens/schedule/onboarding.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:juju/screens/community/onboarding/onboarding.dart';
 import 'package:juju/screens/shop/model/cart_model.dart';
-import 'package:juju/screens/shop/pages/intro_screen.dart';
+import 'package:juju/screens/shop/pages/onboarding.dart';
 import 'package:provider/provider.dart';
 import 'package:juju/screens/community/social_media.dart';
+import 'package:juju/screens/translation/home.dart';
 
 List<IconData> icons = [
-  Icons.document_scanner_outlined,
+  Icons.translate_rounded,
   Icons.timeline_outlined,
   Icons.home_outlined,
   BoxIcons.bx_store_alt,
@@ -22,7 +23,7 @@ List<IconData> icons = [
 ];
 
 List<Widget> pages = [
-  const CameraAwesomeApp(),
+  const TranslationHomePage(),
   const OnboardingSchedule(),
   const Home(),
   ChangeNotifierProvider(
@@ -150,7 +151,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         child: SafeArea(
           child: Row(
             children: [
-              _buildBarItem(0, 'OCR'),
+              _buildBarItem(0, 'Translation'),
               _buildBarItem(1, 'Timeline'),
               _buildBarItem(2, 'Home'),
               _buildBarItem(3, 'Shop'),

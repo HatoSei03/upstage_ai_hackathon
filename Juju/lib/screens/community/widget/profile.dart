@@ -6,6 +6,8 @@ import 'package:juju/screens/community/widget/profile_post.dart';
 import 'package:juju/screens/saved_tour.dart';
 import 'package:get/get.dart';
 import 'package:juju/widgets/chatbot_float_button.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/cupertino.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -23,6 +25,36 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Constants.background,
+      appBar: AppBar(
+        backgroundColor: Constants.background,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Profile',
+                style: GoogleFonts.rubik(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 32.0,
+                ),
+              ),
+            ],
+          ),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+          child: IconButton(
+            icon: Icon(
+              CupertinoIcons.arrow_left,
+              color: Constants.backArrow,
+              size: 26,
+            ),
+            onPressed: () => Get.back(),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 9.0),
         child: SafeArea(

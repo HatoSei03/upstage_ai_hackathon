@@ -11,10 +11,11 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:juju/util/const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:juju/screens/details/review_screen.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart'; // Added for Google Maps
-import 'package:http/http.dart' as http; // Added for HTTP requests
-import 'dart:convert'; // Added for JSON decoding
-import 'package:intl/intl.dart'; // Added for date formatting
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:intl/intl.dart';
+import 'package:juju/widgets/chatbot_float_button.dart';
 
 class DetailsScreen extends StatefulWidget {
   final Place place;
@@ -27,8 +28,10 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   bool isContactInfoExpanded = false;
 
-  Map<String, dynamic>? hourlyForecast;
+  List<dynamic>? hourlyForecast;
   Map<String, dynamic>? dailyForecast;
+
+  bool isLoadingWeather = true; // Added flag to check loading state
 
   @override
   void initState() {
@@ -115,9 +118,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
       setState(() {
         hourlyForecast = data['list'].take(8).toList();
         dailyForecast = _processDailyForecast(data);
+        isLoadingWeather = false;
       });
     } else {
       print("error while loading weather data");
+      setState(() {
+        isLoadingWeather = false;
+      });
     }
   }
 
@@ -201,29 +208,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   style: GoogleFonts.montserrat(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none,
                                   ),
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              hourlyForecast != null
-                                  ? SizedBox(
-                                      height: 100,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: 8,
-                                        itemBuilder: (context, index) {
-                                          var item =
-                                              hourlyForecast!['list'][index];
-                                          return _buildWeatherItem(item);
-                                        },
-                                      ),
-                                    )
-                                  : const Center(
-                                      child: CircularProgressIndicator()),
+                              isLoadingWeather
+                                  ? const Center(
+                                      child: CircularProgressIndicator())
+                                  : hourlyForecast != null
+                                      ? SizedBox(
+                                          height: 120,
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: hourlyForecast!.length,
+                                            itemBuilder: (context, index) {
+                                              var item = hourlyForecast![index];
+                                              return _buildWeatherItem(item);
+                                            },
+                                          ),
+                                        )
+                                      : const Center(
+                                          child: Text('No data available'),
+                                        ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10),
                         Expanded(
                           flex: 1,
                           child: Column(
@@ -234,24 +245,34 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   '7-Day Forecast',
                                   style: GoogleFonts.montserrat(
                                     fontSize: 18,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.none,
                                   ),
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              SizedBox(
-                                height: 100,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: dailyForecast!.keys.length,
-                                  itemBuilder: (context, index) {
-                                    var key =
-                                        dailyForecast!.keys.elementAt(index);
-                                    var item = dailyForecast![key];
-                                    return _buildWeatherItem(item);
-                                  },
-                                ),
-                              )
+                              isLoadingWeather
+                                  ? const Center(
+                                      child: CircularProgressIndicator())
+                                  : dailyForecast != null
+                                      ? SizedBox(
+                                          height: 120,
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount:
+                                                dailyForecast!.keys.length,
+                                            itemBuilder: (context, index) {
+                                              var key = dailyForecast!.keys
+                                                  .elementAt(index);
+                                              var item = dailyForecast![key];
+                                              return _buildWeatherItem(item);
+                                            },
+                                          ),
+                                        )
+                                      : const Center(
+                                          child: Text('No data available'),
+                                        ),
                             ],
                           ),
                         ),
@@ -282,7 +303,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     String iconUrl = 'https://openweathermap.org/img/w/$iconCode.png';
 
     return Card(
-      color: const Color(0xffe0f7fa),
+      color: const Color(0xff8bd4d6),
       margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Container(
         width: 80,
@@ -522,6 +543,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ],
         ),
       ),
+      floatingActionButton: const ChatbotFloatButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

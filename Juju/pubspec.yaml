@@ -69,6 +69,7 @@ dependencies:
   table_calendar: ^3.1.2
   video_player: ^2.9.1
   provider: ^6.1.2
+  speech_to_text: ^7.0.0
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +91,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+  - family:  SolarLLM
+    fonts:
+    - asset: fonts/SolarLLM.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -103,6 +108,7 @@ flutter:
     - assets\Lottie\splash_screen.json
     - assets\img\onboarding_schedule.jpg
     - assets\vid.gif
+    - assets\img\4550025.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

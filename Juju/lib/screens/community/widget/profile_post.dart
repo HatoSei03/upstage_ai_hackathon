@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:juju/util/const.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:juju/screens/schedule/generate_timeline.dart';
+import 'package:juju/model/schedule.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});
@@ -190,7 +195,10 @@ Stepping into Manjanggul is like time traveling millions of years back. This mas
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() =>
+                          TimelineScreen(exampleSchedule, exampleResponse));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xff18AFBA),
                       shape: RoundedRectangleBorder(

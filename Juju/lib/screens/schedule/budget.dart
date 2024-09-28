@@ -17,8 +17,7 @@ class BudgetScreen extends StatefulWidget {
 class _BudgetScreenState extends State<BudgetScreen>
     with SingleTickerProviderStateMixin {
   bool travelingAlone = false;
-  TextEditingController minPriceController = TextEditingController();
-  TextEditingController maxPriceController = TextEditingController();
+  TextEditingController budgetController = TextEditingController();
   TextEditingController travelersController = TextEditingController();
 
   late AnimationController _animationController;
@@ -27,8 +26,7 @@ class _BudgetScreenState extends State<BudgetScreen>
   @override
   void initState() {
     super.initState();
-    minPriceController.text = widget.schedule.budget[0].toString();
-    maxPriceController.text = widget.schedule.budget[1].toString();
+    budgetController.text = widget.schedule.budget.toString();
     travelersController.text = widget.schedule.travelerNum.toString();
     travelingAlone = widget.schedule.travelerNum == 1;
     _animationController = AnimationController(
@@ -53,8 +51,7 @@ class _BudgetScreenState extends State<BudgetScreen>
 
   @override
   void dispose() {
-    minPriceController.dispose();
-    maxPriceController.dispose();
+    budgetController.dispose();
     travelersController.dispose();
     _animationController.dispose();
     super.dispose();
@@ -120,7 +117,7 @@ class _BudgetScreenState extends State<BudgetScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Price range',
+                'Budget',
                 style: GoogleFonts.rubik(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -129,76 +126,6 @@ class _BudgetScreenState extends State<BudgetScreen>
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Minimum',
-                          style: GoogleFonts.rubik(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Stack(
-                          children: [
-                            Positioned(
-                              left: 12,
-                              top: 16,
-                              child: Text(
-                                'USD \$',
-                                style: GoogleFonts.rubik(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black.withOpacity(0.7),
-                                ),
-                              ),
-                            ),
-                            TextField(
-                              controller: minPriceController,
-                              decoration: InputDecoration(
-                                prefixText: 'USD \$',
-                                prefixStyle: GoogleFonts.rubik(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.transparent,
-                                ),
-                                hintText: '__',
-                                filled: true,
-                                fillColor:
-                                    const Color(0xff18AFBA).withOpacity(0.5),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  borderSide: BorderSide.none,
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 16.0,
-                                  horizontal: 12.0,
-                                ),
-                              ),
-                              keyboardType: TextInputType.number,
-                              style: GoogleFonts.rubik(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black.withOpacity(0.4),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 24),
-                    child: Icon(
-                      CupertinoIcons.arrow_right,
-                      color: Color(0xff18AFBA),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,7 +154,7 @@ class _BudgetScreenState extends State<BudgetScreen>
                               ),
                             ),
                             TextField(
-                              controller: maxPriceController,
+                              controller: budgetController,
                               decoration: InputDecoration(
                                 prefixText: 'USD \$',
                                 prefixStyle: GoogleFonts.rubik(
@@ -348,24 +275,13 @@ class _BudgetScreenState extends State<BudgetScreen>
                   child: ElevatedButton(
                     onPressed: () {
                       int minBudget =
-                          int.tryParse(minPriceController.text) ?? 0;
-                      int maxBudget =
-                          int.tryParse(maxPriceController.text) ?? 0;
+                          int.tryParse(budgetController.text) ?? 0;
                       int travelers =
                           int.tryParse(travelersController.text) ?? 1;
 
-                      if (minBudget > maxBudget) {
-                        Get.snackbar(
-                          'Invalid Budget',
-                          'Minimum budget cannot be greater than maximum budget.',
-                          backgroundColor: Colors.redAccent,
-                          colorText: Colors.white,
-                        );
-                        return;
-                      }
+                      
 
-                      widget.schedule.budget[0] = minBudget;
-                      widget.schedule.budget[1] = maxBudget;
+                      widget.schedule.budget = minBudget;
                       widget.schedule.travelerNum =
                           travelingAlone ? 1 : travelers;
 

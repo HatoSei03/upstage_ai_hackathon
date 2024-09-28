@@ -56,4 +56,4 @@ class Place {
 
 List<Place> places = [];
 List<Place> food = [];
-List<Schedule> savedTour = [];
+List<List<dynamic>> savedTour = [];

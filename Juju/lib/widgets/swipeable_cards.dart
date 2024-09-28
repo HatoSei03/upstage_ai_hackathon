@@ -232,7 +232,7 @@ class _SwipeableCardsState extends State<SwipeableCards> {
                   child: Stack(
                     children: [
                       FadeInImage.assetNetwork(
-                        placeholder: 'assets/localImage/placeholder.png',
+                        placeholder: 'assets/localImg/placeholder.jpg',
                         image: card.imageUrl,
                         fit: BoxFit.cover,
                         width: double.infinity,
