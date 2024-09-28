@@ -1,7 +1,8 @@
-import 'dart:ui'; // Added for ImageFilter
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class SwipableCard {
   final String imageUrl;
@@ -62,6 +63,7 @@ class _SwipeableCardsState extends State<SwipeableCards> {
                   onTap: () {},
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.6,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -87,52 +89,69 @@ class _SwipeableCardsState extends State<SwipeableCards> {
                               color: Colors.black,
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
                             ),
                           ),
                           const SizedBox(height: 10),
+                          Row(children: [
+                            const Icon(
+                              Icons.location_on,
+                              size: 16,
+                              color: Color(0xffFF9680),
+                            ),
+                            const SizedBox(width: 4),
+                            SizedBox(
+                              width: 240,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Text(
+                                  card.location,
+                                  style: GoogleFonts.montserrat(
+                                    color: Color(0xff39414B),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]),
+                          const SizedBox(height: 10),
                           Text(
-                            card.location,
+                            card.briefDescription,
                             style: GoogleFonts.montserrat(
-                              fontSize: 18,
-                              color: Colors.grey[700],
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              decoration: TextDecoration.none, // Added
+                              color: Colors.black,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 5),
                           Text(
-                            'Dates',
+                            'Event Time',
                             style: GoogleFonts.montserrat(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                              color: Colors.black,
                             ),
                           ),
                           const SizedBox(height: 5),
                           Text(
                             card.dates,
                             style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.w400,
                               fontSize: 16,
+                              decoration: TextDecoration.none,
+                              color: Colors.black,
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            'Description',
+                            'Useful Tips',
                             style: GoogleFonts.montserrat(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            card.briefDescription,
-                            style: GoogleFonts.montserrat(
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Tips',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              decoration: TextDecoration.none,
                             ),
                           ),
                           const SizedBox(height: 5),
@@ -140,14 +159,18 @@ class _SwipeableCardsState extends State<SwipeableCards> {
                             card.tips,
                             style: GoogleFonts.montserrat(
                               fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                              decoration: TextDecoration.none,
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
                             'Keywords',
                             style: GoogleFonts.montserrat(
+                              color: Colors.black,
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
                             ),
                           ),
                           const SizedBox(height: 5),
@@ -155,6 +178,9 @@ class _SwipeableCardsState extends State<SwipeableCards> {
                             card.keywords,
                             style: GoogleFonts.montserrat(
                               fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              decoration: TextDecoration.none,
+                              color: Colors.black,
                             ),
                           ),
                         ],
