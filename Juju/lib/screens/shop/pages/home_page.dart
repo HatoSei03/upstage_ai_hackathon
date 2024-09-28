@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: Text(
                       "Categories",
-                      style: GoogleFonts.notoSerif(
+                      style: GoogleFonts.rubik(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Text(
                 title,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.rubik(
                   color: isSelected ? Colors.white : textColor,
                   fontSize: 16.0,
                 ),

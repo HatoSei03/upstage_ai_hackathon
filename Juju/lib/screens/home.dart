@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
                     "fire festival, Jeju, South Korea, traditional, livestock, fireworks, bonfires",
                   ),
                   SwipableCard(
-                      "https://api.cdn.visitjeju.net/photomng/imgpath/20180",
+                      "https://api.cdn.visitjeju.net/photomng/imgpath/201804/30/c5f31522-cc19-4c05-a46e-51570d5ab957.jpg",
                       "Jeju Cherry Blossom Festival",
                       "Seogwipo and surrounding areas, Jeju Island, South Korea",
                       "Usually held in late March or early April",

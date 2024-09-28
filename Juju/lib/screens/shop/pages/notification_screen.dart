@@ -4,9 +4,13 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffFFF9F3),
       appBar: AppBar(
-        title: const Text('Notifications'),
-        backgroundColor: Colors.green,
+        title: const Text(
+          'Notifications',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Color(0xffF8D8B8),
       ),
       body: ListView(
         children: const [
@@ -14,19 +18,19 @@ class NotificationScreen extends StatelessWidget {
             title: "Order Shipped",
             subtitle: "Your order #1234 has been shipped!",
             icon: Icons.local_shipping,
-            color: Colors.blue,
+            color: Color(0xff18AFBA),
           ),
           NotificationTile(
             title: "Voucher Available",
             subtitle: "You've received a new voucher for 10% off!",
             icon: Icons.card_giftcard,
-            color: Colors.red,
+            color: Color(0xffEF7168),
           ),
           NotificationTile(
             title: "New Arrival",
             subtitle: "Check out the latest products in our store.",
             icon: Icons.new_releases,
-            color: Colors.purple,
+            color: Color.fromARGB(255, 203, 94, 222),
           ),
           // Các thông báo khác
         ],

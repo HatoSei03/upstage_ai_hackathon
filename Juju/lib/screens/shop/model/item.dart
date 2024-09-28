@@ -80,7 +80,7 @@ List<Item> itemList = [
   ),
   Item(
     id: "item003",
-    name: "Mongdol Natural Soap",
+    name: "Mongdol Soap",
     category: "souvenir",
     seller: "Sagye Saenghwal",
     origin:
@@ -112,7 +112,7 @@ List<Item> itemList = [
   ),
   Item(
     id: "item006",
-    name: "Jeju Shirts, Trousers, and Dresses",
+    name: "Jeju Clothes",
     category: "souvenir",
     seller: "Scene of Jeju",
     origin:
@@ -160,7 +160,7 @@ List<Item> itemList = [
   ),
   Item(
     id: "item009",
-    name: "Jeju Pendant, Bracelet, and Brooch",
+    name: "Jeju Pendant, Bracelet",
     category: "souvenir",
     seller: "Sumbi Island",
     origin:
