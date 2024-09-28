@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../model/cart_model.dart';
-import '../model/item.dart'; // Import the Item class
+import '../model/item.dart';
+import 'package:juju/util/const.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Item item;
@@ -23,13 +24,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Assuming you have a list of suggestions, you can generate them based on category or other logic
-    List<String> suggestions = []; // Populate as needed
+    // List<String> suggestions = [];
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Constants.background,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Constants.background,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
@@ -59,7 +59,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Hình ảnh sản phẩm
             Container(
               color: Colors.grey[200],
               height: 300,
@@ -70,14 +69,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             ),
             const SizedBox(height: 10),
-
-            // Thông tin sản phẩm
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Tên sản phẩm
                   Text(
                     widget.item.name,
                     style: const TextStyle(
@@ -87,8 +83,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-
-                  // Giá và giảm giá
                   Row(
                     children: [
                       Text(
@@ -114,26 +108,36 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ],
                   ),
                   const SizedBox(height: 8),
-
-                  // Đánh giá và số lượng đã bán
                   Row(
                     children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.star, color: Colors.orange, size: 16),
-                          const SizedBox(width: 4),
-                          Text(
-                            widget.item.rating,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.shade100,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 14,
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 2),
+                            Text(
+                              widget.item.rating.toString(),
+                              style: GoogleFonts.roboto(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        widget.item.sold,
+                        "Sold: ${widget.item.sold}",
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
@@ -142,18 +146,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ],
                   ),
                   const SizedBox(height: 16),
-
-                  // Mô tả sản phẩm
                   Text(
                     widget.item.description,
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
                     ),
+                    textAlign: TextAlign.justify,
                   ),
                   const SizedBox(height: 16),
-
-                  // Thông tin thêm (Category, Seller, Origin)
                   const Divider(color: Colors.grey),
                   const SizedBox(height: 8),
                   _buildProductInfoRow('Category', widget.item.category),
@@ -161,8 +162,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   _buildProductInfoRow('Origin', widget.item.origin),
                   _buildProductInfoRow('Stock', widget.item.stock),
                   const SizedBox(height: 16),
-
-                  // Like Section
                   Row(
                     children: [
                       Text(
@@ -172,25 +171,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(
-                          isLiked ? Icons.favorite : Icons.favorite_border,
-                          color: isLiked ? Colors.red : Colors.grey,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            if (isLiked) {
-                              likeCount--;
-                            } else {
-                              likeCount++;
-                            }
-                            isLiked = !isLiked;
-                          });
-                        },
-                      ),
                     ],
                   ),
+                  const SizedBox(height: 25),
                 ],
               ),
             ),
@@ -208,7 +191,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Colors.orange, //  theme color
+                  backgroundColor: Colors.orange,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -231,7 +214,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Colors.red, // Buy Now button color
+                  backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -255,11 +238,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  // Helper widget for product information rows
   Widget _buildProductInfoRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '$label: ',
@@ -269,15 +252,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               color: Colors.black87,
             ),
           ),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
-              ),
-              overflow: TextOverflow.ellipsis,
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black54,
             ),
+            textAlign: TextAlign.justify,
           ),
         ],
       ),

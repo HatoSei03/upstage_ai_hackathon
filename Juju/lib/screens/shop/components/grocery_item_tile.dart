@@ -126,7 +126,6 @@ class GroceryItemTile extends StatelessWidget {
                   ],
                 ),
               ),
-              // Rating and Sold
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
