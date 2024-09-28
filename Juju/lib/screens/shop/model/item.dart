@@ -64,7 +64,7 @@ List<Item> itemList = [
   ),
   Item(
     id: "item002",
-    name: "Dol Hareubang Candle",
+    name: "Hareubang Candle",
     category: "souvenir",
     seller: "By Jeju",
     origin:
