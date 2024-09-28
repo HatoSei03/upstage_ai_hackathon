@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                 child: Expanded(
                   child: Text(
                     "Vouchers",
-                    style: GoogleFonts.notoSerif(
+                    style: GoogleFonts.rubik(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -121,12 +121,11 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Expanded(
                       child: Text(
-                      "Categories",
-                      style: GoogleFonts.rubik(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-
-                      ),
+                        "Categories",
+                        style: GoogleFonts.rubik(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     GestureDetector(

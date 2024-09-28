@@ -12,8 +12,9 @@ class MyPost1 extends StatelessWidget {
       numberOfLikes: '1.2M',
       numberOfComments: '1232',
       numberOfShares: '122',
-      userPost: Container(
-        color: Colors.deepPurple[300],
+      userPost: Image.asset(
+        "assets/vid.gif",
+        fit: BoxFit.contain, 
       ),
     );
   }

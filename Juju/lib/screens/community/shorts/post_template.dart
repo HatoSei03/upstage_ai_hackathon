@@ -7,9 +7,10 @@ class PostTemplate extends StatelessWidget {
   final String numberOfLikes;
   final String numberOfComments;
   final String numberOfShares;
-  final userPost;
+  final Widget userPost;
 
-  const PostTemplate({super.key, 
+  const PostTemplate({
+    super.key,
     required this.username,
     required this.videoDescription,
     required this.numberOfLikes,
@@ -21,66 +22,75 @@ class PostTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black, // Set background to black
       body: Stack(
         children: [
-          userPost,
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          Center(
             child: Container(
-              alignment: const Alignment(-1, 1),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text('@$username',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      )),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: videoDescription,
-                            style: const TextStyle(color: Colors.white)),
-                        const TextSpan(
-                            text: ' #fyp #flutter',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)),
-                      ],
-                    ),
-                  )
-                ],
+              color: Colors.black, // Ensure the background remains black
+              child: AspectRatio(
+                aspectRatio: 9 / 16, // Typical vertical video aspect ratio
+                child: userPost,
               ),
             ),
           ),
+          // Post Information
+          Positioned(
+            bottom: 80, // Adjusted to ensure space for buttons
+            left: 20,
+            right: 100, // Leave space for buttons on the right
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('@$username',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.white,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                          text: videoDescription,
+                          style: const TextStyle(color: Colors.white)),
+                      const TextSpan(
+                          text: ' #fyp #flutter',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
 
-          // buttons
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              alignment: const Alignment(1, 1),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  MyButton(
-                    icon: Icons.favorite,
-                    number: numberOfLikes,
-                  ),
-                  MyButton(
-                    icon: Icons.chat_bubble_outlined,
-                    number: numberOfComments,
-                  ),
-                  MyButton(
-                    icon: Icons.send,
-                    number: numberOfShares,
-                  ),
-                ],
-              ),
+          // Buttons
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                MyButton(
+                  icon: Icons.favorite,
+                  number: numberOfLikes,
+                ),
+                const SizedBox(height: 20),
+                MyButton(
+                  icon: Icons.chat_bubble_outlined,
+                  number: numberOfComments,
+                ),
+                const SizedBox(height: 20),
+                MyButton(
+                  icon: Icons.send,
+                  number: numberOfShares,
+                ),
+              ],
             ),
           )
         ],

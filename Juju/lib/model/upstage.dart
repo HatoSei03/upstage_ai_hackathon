@@ -170,6 +170,65 @@ Future<String> getUpstageAIResponse(String content, String prompt) async {
   }
 }
 
+Future<String> getMiniModelResponse(String content, String prompt) async {
+  const String url = 'https://api.upstage.ai/v1/solar/chat/completions';
+
+  final Map<String, String> headers = {
+    'Authorization': 'Bearer $apiKey',
+    'Content-Type': 'application/json',
+  };
+
+  final Map<String, dynamic> body = {
+    'model': 'solar-1-mini-chat',
+    'messages': [
+      {'role': 'system', 'content': content},
+      {
+        'role': 'user',
+        'content': prompt,
+      }
+    ],
+    'stream': true,
+  };
+
+  try {
+    final client = http.Client();
+    final request = http.Request('POST', Uri.parse(url));
+    request.headers.addAll(headers);
+    request.body = jsonEncode(body);
+
+    final streamedResponse = await client.send(request);
+
+    if (streamedResponse.statusCode == 200) {
+      String response = '';
+      await for (String chunk
+          in streamedResponse.stream.transform(utf8.decoder)) {
+        final parts = chunk.split('\n');
+        for (var part in parts) {
+          if (part.startsWith('data: ')) {
+            final data = part.substring(6);
+            if (data != '[DONE]') {
+              try {
+                final jsonData = jsonDecode(data);
+                final content = jsonData['choices'][0]['delta']['content'];
+                if (content != null) {
+                  response += content;
+                }
+              } catch (e) {
+                print('Error parsing JSON: $e');
+              }
+            }
+          }
+        }
+      }
+      return response;
+    } else {
+      return 'Error: ${streamedResponse.statusCode}';
+    }
+  } catch (e) {
+    return 'Error: $e';
+  }
+}
+
 Future<String> performOCR(String imagePath) async {
   const String url = 'https://api.upstage.ai/v1/document-ai/ocr';
 
@@ -191,8 +250,8 @@ Future<String> performOCR(String imagePath) async {
   final jsonData = jsonDecode(jsonString);
 
   final reconstructed =
-      await getUpstageAIResponse(getReconstructContent(), jsonData.toString());
-  return reconstructed;
+      await getMiniModelResponse(getReconstructContent(), jsonData.toString());
+  return reconstructed.toString();
 }
 
 Future<String> getTranslation(String input) async {

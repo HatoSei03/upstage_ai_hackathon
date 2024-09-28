@@ -15,11 +15,12 @@ class MyButton extends StatelessWidget {
           Icon(
             icon,
             size: 40,
+            color: Colors.white,
           ),
           const SizedBox(
             height: 10,
           ),
-          Text(number),
+          Text(number, style: const TextStyle(color: Colors.white)),
         ],
       ),
     );

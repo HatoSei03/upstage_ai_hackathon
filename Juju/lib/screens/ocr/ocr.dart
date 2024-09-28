@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:juju/util/const.dart';
 import 'package:juju/model/upstage.dart';
 import 'package:get/get.dart';
+import 'package:flutter/services.dart';
 
 class OCRScreen extends StatefulWidget {
   const OCRScreen({super.key, required this.imagePath});
@@ -32,6 +33,7 @@ class _OCRScreenState extends State<OCRScreen> {
       _isLoading = true;
     });
     String response = await performOCR(image);
+    print(response);
     setState(() {
       _response = response;
       _currContent = response;
@@ -102,6 +104,30 @@ class _OCRScreenState extends State<OCRScreen> {
                       ),
                       Text(
                         'Translate to English',
+                      ),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: _currContent));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Copied to clipboard')),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Constants.header,
+                    elevation: 1,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.copy,
+                        color: Constants.lightText,
+                      ),
+                      Text(
+                        'Copy to Clipboard',
                         style: TextStyle(color: Constants.lightText),
                       ),
                     ],

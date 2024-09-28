@@ -176,7 +176,6 @@ class _HomeState extends State<Home> {
     const Color selectedColor = Color(0xffEF7168);
     const Color textColor = Color(0xff6A778B);
 
-    // Determine the selected tag and filter the source list
     String selectedTag = isPlace
         ? placeTag[selectedFilterPlace].toLowerCase()
         : foodTag[selectedFilterFood].toLowerCase();
@@ -185,10 +184,8 @@ class _HomeState extends State<Home> {
 
     if (isPlace && selectedFilterPlace == 0 ||
         !isPlace && selectedFilterFood == 0) {
-      // If "Popular" is selected, display all places
       filteredSource = source;
     } else {
-      // Otherwise, filter based on the selected tag (case-insensitive)
       filteredSource = source.where((place) {
         return place.tag.any((tag) => tag.toLowerCase() == selectedTag);
       }).toList();
