@@ -79,19 +79,6 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-<<<<<<< HEAD
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Text(
-                      "Categories",
-                      style: GoogleFonts.rubik(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-=======
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Expanded(
@@ -100,7 +87,6 @@ class _HomePageState extends State<HomePage> {
                     style: GoogleFonts.notoSerif(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
->>>>>>> 9951e40aa2d08d0173b1699641fa6b10b7eed9e3
                     ),
                   ),
                 ),
@@ -135,11 +121,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Expanded(
                       child: Text(
-                        "Categories",
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      "Categories",
+                      style: GoogleFonts.rubik(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+
+                      ),
                       ),
                     ),
                     GestureDetector(
@@ -151,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                       child: Chip(
                         label: Text(
                           isAscending ? 'Price ↑' : 'Price ↓',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.rubik(
                             color: textColor,
                             fontSize: 16.0,
                           ),
@@ -310,7 +297,6 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.only(right: 10.0),
         child: ChoiceChip(
           showCheckmark: false,
-<<<<<<< HEAD
           label: Row(
             children: [
               Text(
@@ -321,14 +307,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ],
-=======
-          label: Text(
-            title,
-            style: GoogleFonts.montserrat(
-              color: isSelected ? Colors.white : textColor,
-              fontSize: 16.0,
-            ),
->>>>>>> 9951e40aa2d08d0173b1699641fa6b10b7eed9e3
           ),
           selected: isSelected,
           onSelected: (selected) {
