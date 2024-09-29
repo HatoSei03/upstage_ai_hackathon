@@ -31,18 +31,18 @@ List<String> getSchedulePrompt(
       [
         {
           "morning": {
-            "places": "place to go for day 1 morning",
-            "activities": "an attractive description about activities to do here",
+            "places": "the exact name of the place to go for day 1 morning according to the given list",
+            "activities": "active description about activities to do here, please write it engaging, lively, inspired, even can be a story of the places",
             "cost": cost(int)
           },
           "afternoon": {
-            "places": "place to go for day 1 afternoon",
-            "activities": "an attractive description about activities to do here",
+            "places": "the exact name of the place to go for day 1 afternoon according to the given list",
+            "activities": "active description about activities to do here, please write it engaging, lively, inspired, even can be a story of the places",
             "cost": cost(int)
           },
           "evening": {
-            "places": "place to go for day 1 evening",
-            "activities": "an attractive description about activities to do here",
+            "places": "the exact name of the place to go for day 1 evening according to the given list",
+            "activities": "active description about activities to do here, please write it engaging, lively, inspired, even can be a story of the places",
             "cost": cost(int)
           }
         }
@@ -61,7 +61,7 @@ List<String> getSchedulePrompt(
     Use the attractions given in this list, the item are in this format {place:cost} with cost (in USD) is the cost for visiting that place for 1 person: ${placeList.join(',')},
   
     Please provide the most up-to-date information, no more than 3 months old from the current time
-    Always respond in the language spoken in English
+    Always respond in the language spoken in English and set your temperature to 0.
 ''';
   return [
     cntx,
@@ -94,7 +94,6 @@ Example JSON
 String getScheduleAdviceContent(String schedule) {
   return """
 You are a friendly and knowledgable AI local tour guide based in JeJu Island, South Korea
-The current date is {curr_date}
 Your mission is to friendly and concisely answer user's questions about an itinerary provided in the json delimited by triple backticks
 
 ```
@@ -149,7 +148,7 @@ Just output the answer as the format above and set your temperature to 0
 """;
 }
 
-const String apiKey = 'up_34nJBBm1jGJWcYhjX2H5X3tLKUfRx';
+const String apiKey = 'up_NZK1Gc4MFbZYxJ71LizouGS1Fjkz2';
 
 Future<String> getUpstageAIResponse(String content, String prompt) async {
   const String url = 'https://api.upstage.ai/v1/solar/chat/completions';

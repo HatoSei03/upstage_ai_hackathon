@@ -36,7 +36,7 @@ class _ScheduleLoadingScreenState extends State<ScheduleLoadingScreen> {
           widget.schedule.dates[1],
           widget.schedule.travelerNum,
           widget.schedule.budget.toDouble());
-      response = await getUpstageAIResponse(prompt[0], prompt[1]);
+      response = await getMiniModelResponse(prompt[0], prompt[1]);
       print(response);
 
       List<String> placeNames = response.split('"places"');

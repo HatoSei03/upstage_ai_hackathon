@@ -244,7 +244,7 @@ class _TimelineScreenState extends State<TimelineScreen>
                 const EdgeInsets.all(8.0),
               ),
               backgroundColor: WidgetStateProperty.all<Color>(
-                Colors.white,
+                Constants.header,
               ),
               shadowColor: WidgetStateProperty.all<Color>(
                 Colors.black.withOpacity(0.5),
@@ -254,9 +254,9 @@ class _TimelineScreenState extends State<TimelineScreen>
             onPressed: () {
               Get.to(() => ChatbotSupportScreen(context: widget.response));
             },
-            icon: const Icon(
+            icon: Icon(
               SolarLLM.solarllm_symbol_color,
-              color: Color(0xff8796ff),
+              color: Constants.lightText2,
               size: 38.0,
             ),
           ),
