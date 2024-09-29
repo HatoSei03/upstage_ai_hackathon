@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:juju/model/schedule.dart';
 import 'package:juju/screens/home.dart';
-import 'package:juju/util/const.dart';
-import 'package:juju/screens/community/widget/profile.dart';
-import 'package:juju/screens/translation/ocr/camera_screen.dart';
 import 'package:juju/screens/schedule/onboarding.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:juju/screens/community/onboarding/onboarding.dart';
 import 'package:juju/screens/shop/model/cart_model.dart';
 import 'package:juju/screens/shop/pages/onboarding.dart';
 import 'package:provider/provider.dart';
@@ -110,7 +105,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               ),
             ),
             const SizedBox(height: 8),
-            // Animated Icon and Label
             Column(
               children: [
                 Icon(

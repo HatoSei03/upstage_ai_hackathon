@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:juju/screens/community/widget/profile_post.dart';
-import 'package:juju/util/const.dart';
 import 'package:juju/widgets/search_bar.dart';
 import 'package:juju/screens/community/feeds/create_post.dart';
 
@@ -28,8 +27,8 @@ class _FeedScreenState extends State<FeedScreen> {
         SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
+              const Padding(
+                padding: EdgeInsets.all(12.0),
                 child: SearchBarWidget(),
               ),
 
@@ -79,7 +78,6 @@ class _FeedScreenState extends State<FeedScreen> {
 
               const SizedBox(height: 10),
 
-              // Feeds
               const PostScreen(),
             ],
           ),

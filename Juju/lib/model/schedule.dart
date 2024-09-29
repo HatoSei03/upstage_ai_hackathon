@@ -40,7 +40,7 @@ Schedule exampleSchedule = Schedule(
   "budget friendly",
   100,
   2,
-  [DateTime.now(), DateTime.now().add(Duration(days: 1))],
+  [DateTime.now(), DateTime.now().add(const Duration(days: 1))],
   [TimeOfDay.now(), TimeOfDay.now()],
   [
     [places[0], places[1], places[2]],

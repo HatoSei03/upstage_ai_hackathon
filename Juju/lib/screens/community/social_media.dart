@@ -32,7 +32,7 @@ class _SocialMediaScreenState extends State<SocialMediaScreen> {
                 ),
               ),
               Expanded(
-                child: focusedButtonIndex == 0 ? Reel() : FeedScreen(),
+                child: focusedButtonIndex == 0 ? Reel() : const FeedScreen(),
               ),
             ],
           ),
@@ -61,11 +61,11 @@ class _SocialMediaScreenState extends State<SocialMediaScreen> {
               style: GoogleFonts.rubik(
                 fontSize: 19,
                 fontWeight: FontWeight.w600,
-                color: isSelected ? selectedColor : Color(0xff111111),
+                color: isSelected ? selectedColor : const Color(0xff111111),
               ),
             ),
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Container(
             height: 2,
             width: double.infinity,

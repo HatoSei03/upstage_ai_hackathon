@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:get/get.dart';
 import 'package:juju/util/const.dart';
 import 'ocr/camera_screen.dart';
@@ -20,7 +19,6 @@ class _TranslationHomePageState extends State<TranslationHomePage> {
   String _toLanguage = 'Korean';
   bool _isLoading = false;
   String? _translatedText;
-  String? _originalText;
   late stt.SpeechToText _speech;
   bool _isListening = false;
 
@@ -40,8 +38,7 @@ class _TranslationHomePageState extends State<TranslationHomePage> {
           children: [
             Expanded(
               child: Container(
-                // margin: const EdgeInsets.all(16.0),
-                // padding: const EdgeInsets.all(16.0),
+
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20.0),
@@ -276,7 +273,6 @@ class _TranslationHomePageState extends State<TranslationHomePage> {
 
     setState(() {
       _isLoading = true;
-      _originalText = inputText;
     });
 
     String response = await checkSensitivity(inputText);
@@ -285,7 +281,7 @@ class _TranslationHomePageState extends State<TranslationHomePage> {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('The text contains inappropriate content.')),
+        const SnackBar(content: Text('The text contains inappropriate content.')),
       );
       return;
     }
@@ -301,6 +297,6 @@ class _TranslationHomePageState extends State<TranslationHomePage> {
   }
 
   void _onCameraPressed() {
-    Get.to(() => CameraAwesomeApp());
+    Get.to(() => const CameraAwesomeApp());
   }
 }

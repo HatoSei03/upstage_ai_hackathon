@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:juju/model/places.dart';
 import 'package:juju/model/schedule.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -10,7 +9,6 @@ import 'package:juju/util/const.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:juju/screens/home.dart';
 import 'package:juju/screens/main_screen.dart';
 import 'package:juju/screens/schedule/view_saved_tour.dart';
 import 'package:juju/screens/details/details.dart';
@@ -256,7 +254,7 @@ class _TimelineScreenState extends State<TimelineScreen>
             onPressed: () {
               Get.to(() => ChatbotSupportScreen(context: widget.response));
             },
-            icon: Icon(
+            icon: const Icon(
               SolarLLM.solarllm_symbol_color,
               color: Color(0xff8796ff),
               size: 38.0,
@@ -375,7 +373,7 @@ class _TimelineScreenState extends State<TimelineScreen>
               duration: const Duration(seconds: 3),
             );
 
-            Get.offAll(() => MainScreen());
+            Get.offAll(() => const MainScreen());
           },
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
@@ -417,7 +415,7 @@ class _TimelineScreenState extends State<TimelineScreen>
       itemCount: placesForDay.length,
       itemBuilder: (context, index) {
         if (index >= placesForDay.length) {
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }
         return TimelineTile(
           isFirst: index == 0,
@@ -464,7 +462,7 @@ class _TimelineScreenState extends State<TimelineScreen>
 
   Widget _buildAnimatedCard(Place place, int index) {
     if (index >= isCardExpanded.length) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
     bool isExpanded = isCardExpanded[index];
     return Padding(

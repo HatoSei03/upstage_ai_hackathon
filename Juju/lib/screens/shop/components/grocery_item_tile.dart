@@ -1,7 +1,6 @@
-// item_tile.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../model/item.dart'; // Import the Item class
+import '../model/item.dart'; 
 import '../pages/item_details.dart';
 
 class GroceryItemTile extends StatelessWidget {
@@ -65,7 +64,6 @@ class GroceryItemTile extends StatelessWidget {
                   ),
                 ],
               ),
-              // Title
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),

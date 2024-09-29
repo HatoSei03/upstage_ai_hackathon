@@ -1,4 +1,3 @@
-import 'package:juju/model/schedule.dart';
 
 class Place {
   String id;

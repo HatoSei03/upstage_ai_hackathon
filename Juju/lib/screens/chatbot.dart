@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
 
+// ignore: must_be_immutable
 class ChatbotSupportScreen extends StatefulWidget {
   String context = '';
   ChatbotSupportScreen({this.context = '', super.key});
@@ -207,7 +208,6 @@ class _ChatbotSupportScreenState extends State<ChatbotSupportScreen> {
                             ),
                     );
                   } else {
-                    // Display "Thinking..." indicator
                     return Padding(
                       padding: const EdgeInsets.all(16),
                       child: BubbleSpecialThree(

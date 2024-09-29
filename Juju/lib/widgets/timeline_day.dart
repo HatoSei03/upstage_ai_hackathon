@@ -1,4 +1,3 @@
-// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:juju/model/places.dart';
@@ -24,7 +23,7 @@ class _TimelineDayState extends State<TimelineDay> {
     setState(() {
       widget.placesToGo = newList;
       widget.updateResultList(
-          newList, widget.dayNum - 1); // Ensure the parent is updated
+          newList, widget.dayNum - 1); 
     });
   }
 
@@ -65,10 +64,9 @@ class _TimelineDayState extends State<TimelineDay> {
               Text(
                 'Day ${widget.dayNum} - ${totalCost.toStringAsFixed(0)}\$',
                 style: GoogleFonts.rubik(
-                  // Changed from default TextStyle to Rubik
                   fontSize: 20.0,
                   fontWeight: FontWeight.w800,
-                  color: Colors.black, // Updated text color to match app style
+                  color: Colors.black, 
                 ),
               ),
               TextButton(

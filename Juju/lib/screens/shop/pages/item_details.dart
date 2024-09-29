@@ -1,8 +1,5 @@
-// item_details.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import '../model/cart_model.dart';
 import '../model/item.dart';
 import 'package:juju/util/const.dart';
 
@@ -24,7 +21,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // List<String> suggestions = [];
 
     return Scaffold(
       backgroundColor: Constants.background,
@@ -45,7 +41,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           IconButton(
             icon: Icon(
               isLiked ? Icons.favorite : Icons.favorite_border,
-              color: isLiked ? Color(0xffEF7168) : Colors.black,
+              color: isLiked ? const Color(0xffEF7168) : Colors.black,
             ),
             onPressed: () {
               setState(() {
@@ -60,7 +56,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Color(0xffFFF9F3),
+              color: const Color(0xffFFF9F3),
               height: 300,
               width: double.infinity,
               child: Image.network(
@@ -179,7 +175,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Color(0xff18AFBA),
+                  backgroundColor: const Color(0xff18AFBA),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -202,7 +198,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Color(0xffEF7168),
+                  backgroundColor: const Color(0xffEF7168),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),

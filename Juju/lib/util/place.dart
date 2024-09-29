@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_function_literals_in_foreach_calls
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:juju/model/places.dart';
@@ -11,7 +9,7 @@ void getAllPlaceFood(String collection) {
       FirebaseFirestore.instance.collection(collection);
 
   placeCollection.get().then((QuerySnapshot snapshot) {
-    snapshot.docs.forEach((DocumentSnapshot documentSnapshot) {
+    for (var documentSnapshot in snapshot.docs) {
       if (documentSnapshot.exists) {
         Map<String, dynamic> data =
             documentSnapshot.data() as Map<String, dynamic>;
@@ -63,7 +61,7 @@ void getAllPlaceFood(String collection) {
           }
         }
       }
-    });
+    }
     print("Data retrieval from '$collection' completed successfully.");
   }).catchError((error) {
     print("Failed to retrieve data from '$collection': $error");

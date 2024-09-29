@@ -6,13 +6,13 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFF9F3),
+      backgroundColor: const Color(0xffFFF9F3),
       appBar: AppBar(
         title: const Text(
           'Notifications',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Color(0xffF8D8B8),
+        backgroundColor: const Color(0xffF8D8B8),
       ),
       body: ListView(
         children: const [
@@ -64,7 +64,6 @@ class NotificationTile extends StatelessWidget {
       subtitle: Text(subtitle),
       trailing: const Icon(Icons.arrow_forward_ios),
       onTap: () {
-        // Handle notification tap if needed
       },
     );
   }

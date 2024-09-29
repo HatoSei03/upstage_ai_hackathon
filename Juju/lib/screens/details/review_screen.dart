@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,9 +46,9 @@ class ReviewsScreen extends StatelessWidget {
           future: _fetchReviews(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error fetching reviews'));
+              return const Center(child: Text('Error fetching reviews'));
             } else {
               List<DocumentSnapshot> reviews = snapshot.data!;
               return Column(
@@ -63,7 +62,7 @@ class ReviewsScreen extends StatelessWidget {
                       IconButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              WidgetStateProperty.all<Color>(Color(0xffEF7168)),
+                              WidgetStateProperty.all<Color>(const Color(0xffEF7168)),
                           shape: WidgetStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
@@ -123,7 +122,7 @@ class ReviewsScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               );
             }
@@ -402,7 +401,7 @@ class ReviewsScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RatingBar(
+                const RatingBar(
                   rating: 5,
                   reviewCount: 3000,
                   displayText: false,

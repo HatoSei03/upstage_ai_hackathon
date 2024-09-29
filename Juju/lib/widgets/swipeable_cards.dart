@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 class SwipableCard {
   final String imageUrl;
@@ -107,7 +106,7 @@ class _SwipeableCardsState extends State<SwipeableCards> {
                                 child: Text(
                                   card.location,
                                   style: GoogleFonts.montserrat(
-                                    color: Color(0xff39414B),
+                                    color: const Color(0xff39414B),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300,
                                     decoration: TextDecoration.none,
@@ -122,7 +121,7 @@ class _SwipeableCardsState extends State<SwipeableCards> {
                             style: GoogleFonts.montserrat(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              decoration: TextDecoration.none, // Added
+                              decoration: TextDecoration.none, 
                               color: Colors.black,
                             ),
                           ),

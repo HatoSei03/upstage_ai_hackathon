@@ -1,9 +1,8 @@
-// search.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/cart_model.dart';
-import 'item_details.dart'; // Import the ProductDetailPage
-import '../model/item.dart'; // Import the Item class
+import 'item_details.dart'; 
+import '../model/item.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -24,7 +23,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Search...',
             border: InputBorder.none,
           ),
@@ -53,10 +52,9 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: Column(
         children: [
-          // Search History Section
           if (searchHistory.isNotEmpty) ...[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Search History',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -69,7 +67,7 @@ class _SearchPageState extends State<SearchPage> {
                   var history = searchHistory[index];
                   return ListTile(
                     title: Text(history),
-                    leading: Icon(Icons.history),
+                    leading: const Icon(Icons.history),
                     onTap: () {
                       setState(() {
                         searchQuery = history;
@@ -81,7 +79,7 @@ class _SearchPageState extends State<SearchPage> {
                       });
                     },
                     trailing: IconButton(
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                       onPressed: () {
                         setState(() {
                           searchHistory.removeAt(index);
@@ -93,10 +91,9 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ],
-          // Search Results Section
           if (searchQuery.isNotEmpty) ...[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Search Results',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -104,7 +101,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
             Expanded(
               child: filteredItems.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Text(
                         'No results found.',
                         style:

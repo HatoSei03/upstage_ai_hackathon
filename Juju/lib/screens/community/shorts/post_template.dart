@@ -22,23 +22,22 @@ class PostTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Set background to black
+      backgroundColor: Colors.black, 
       body: Stack(
         children: [
           Center(
             child: Container(
-              color: Colors.black, // Ensure the background remains black
+              color: Colors.black, 
               child: AspectRatio(
-                aspectRatio: 9 / 16, // Typical vertical video aspect ratio
+                aspectRatio: 9 / 16,
                 child: userPost,
               ),
             ),
           ),
-          // Post Information
           Positioned(
-            bottom: 80, // Adjusted to ensure space for buttons
+            bottom: 80, 
             left: 20,
-            right: 100, // Leave space for buttons on the right
+            right: 100, 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -69,7 +68,6 @@ class PostTemplate extends StatelessWidget {
             ),
           ),
 
-          // Buttons
           Positioned(
             bottom: 20,
             right: 20,

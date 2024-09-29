@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/services.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:juju/model/schedule.dart';
 
 class ScheduleScreen extends StatefulWidget {

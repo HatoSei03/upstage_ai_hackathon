@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:juju/util/const.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,17 +55,17 @@ class _PostScreenState extends State<PostScreen> {
                               Text(
                                 "Hato",
                                 style: GoogleFonts.rubik(
-                                  color: Color(0xFF545454),
+                                  color: const Color(0xFF545454),
                                   fontSize: 14,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 16,
                               ),
                               Text(
                                 "2 months ago",
                                 style: GoogleFonts.rubik(
-                                  color: Color(0xff545454),
+                                  color: const Color(0xff545454),
                                 ),
                               ),
                             ],
@@ -200,7 +198,7 @@ Stepping into Manjanggul is like time traveling millions of years back. This mas
                           TimelineScreen(exampleSchedule, exampleResponse));
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff18AFBA),
+                      backgroundColor: const Color(0xff18AFBA),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

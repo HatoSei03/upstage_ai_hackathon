@@ -26,7 +26,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  //Body
   Widget body() {
     return Expanded(
       child: Center(
@@ -43,11 +42,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //Images
                     Image.asset(controller.items[currentIndex].image),
 
                     const SizedBox(height: 15),
-                    //Titles
                     Text(
                       controller.items[currentIndex].title,
                       style: const TextStyle(
@@ -57,7 +54,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       textAlign: TextAlign.center,
                     ),
 
-                    //Description
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Text(
@@ -75,7 +71,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  //Dots
   Widget buildDots() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +88,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  //Button
   Widget button() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),

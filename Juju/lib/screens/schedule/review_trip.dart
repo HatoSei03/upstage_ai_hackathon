@@ -6,7 +6,6 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:juju/util/const.dart';
 import 'package:juju/model/schedule.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:juju/util/location.dart';
 import 'package:intl/intl.dart';
 import 'package:juju/screens/schedule/schedule.dart';
 import 'package:juju/screens/schedule/budget.dart';

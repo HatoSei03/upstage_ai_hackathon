@@ -44,7 +44,7 @@ class _ViewSavedTourState extends State<ViewSavedTour> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),

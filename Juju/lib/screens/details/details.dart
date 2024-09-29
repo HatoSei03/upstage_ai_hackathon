@@ -1,4 +1,4 @@
-import 'dart:ui'; // Added for ImageFilter
+import 'dart:ui'; 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:juju/widgets/rating_bar.dart';
@@ -31,7 +31,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   List<dynamic>? hourlyForecast;
   Map<String, dynamic>? dailyForecast;
 
-  bool isLoadingWeather = true; // Added flag to check loading state
+  bool isLoadingWeather = true; 
 
   @override
   void initState() {

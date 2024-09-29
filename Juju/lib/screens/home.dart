@@ -116,15 +116,7 @@ class _HomeState extends State<Home> {
                       "A beautiful festival celebrating the blooming of cherry blossoms.",
                       "Plan your visit during peak cherry blossom season for the best experience. Rent a bicycle to explore the scenic cherry blossom trails.",
                       "cherry blossom festival, Jeju, South Korea, spring, flowers, romance"),
-                  // SwipableCard(
-                  //     "https://api.cdn.visitjeju.net/photomng/imgpath/202201/21/d7e94987-85dd-460f-8e4f-91fd5bb1fb6d.jpg",
-                  //     "Tamnaguk Ipchungut",
-                  //     "Gwandeok-ro, Jeju-si, Jeju Island, South Korea",
-                  //     "Feb. 3~4",
-                  //     "A exciting spring festival that prays for blessings t.",
-                  //     "Participate in the rituals like Sarisalseong and Inchunhwiho, watch the parade, and enjoy traditi",
-                  //     "Amnaguk Ipchungut, Jeju Island, Traditional festival, Cultural heritage, Rituals, Sarisalseong, Inchunhwiho, Segyeongje, Parade, Spring festival, Blessing"),
-                  SwipableCard(
+                   SwipableCard(
                       "https://goguides.azureedge.net/media/mgmg1ise/b1d9d5f4-ea88-4da0-b8b9-f5a59c0fbdf4.jpg?anchor=center&mode=crop&width=1600&height=1066&quality=50",
                       "Jeju Canola Flower Festival",
                       "Seogwipo-si, Jeju Island, South Korea",

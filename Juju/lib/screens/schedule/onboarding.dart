@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:juju/model/schedule.dart';
-import 'package:juju/screens/community/onboarding/onboarding_data.dart';
 import 'package:juju/util/const.dart';
 import 'package:get/get.dart';
 import 'package:juju/screens/schedule/schedule.dart';
@@ -31,11 +30,9 @@ class _OnboardingScheduleState extends State<OnboardingSchedule> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //Images
                       Image.asset("assets/img/onboarding_schedule.jpg"),
 
                       const SizedBox(height: 15),
-                      //Titles
                       Text(
                         "Effortless Trip Planning with Itinerary Generator",
                         style: GoogleFonts.rubik(
@@ -45,7 +42,6 @@ class _OnboardingScheduleState extends State<OnboardingSchedule> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 24),
-                      //Description
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Text(

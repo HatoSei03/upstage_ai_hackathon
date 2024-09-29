@@ -4,7 +4,6 @@ import 'package:juju/util/const.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
-// ignore: must_be_immutable
 class AddLocation extends StatefulWidget {
   List<Place> newList = [];
   final void Function(List<Place>) updateNewList;

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:juju/model/schedule.dart';
-import 'package:juju/screens/community/onboarding/onboarding_data.dart';
 import 'package:juju/util/const.dart';
-import 'package:get/get.dart';
-import 'package:juju/screens/schedule/schedule.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_page.dart';
 
@@ -47,7 +43,6 @@ class _IntroScreenState extends State<IntroScreen> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 24),
-                      //Description
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Text(
@@ -82,7 +77,7 @@ class _IntroScreenState extends State<IntroScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return HomePage();
+                          return const HomePage();
                         },
                       ),
                     );

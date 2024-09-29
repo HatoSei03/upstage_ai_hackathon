@@ -8,11 +8,9 @@ class CreatePostModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      // Ensures content is displayed within safe areas
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         child: SingleChildScrollView(
-          // Makes the modal scrollable to prevent overflow
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,7 +62,6 @@ class CreatePostModal extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Location Section
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -129,7 +126,6 @@ class CreatePostModal extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Feed Title Section
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -157,7 +153,6 @@ class CreatePostModal extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Description Section
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -4,7 +4,6 @@ import 'package:juju/util/const.dart';
 import 'package:juju/model/upstage.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:juju/screens/translation/ocr/ocr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 

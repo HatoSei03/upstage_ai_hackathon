@@ -1,4 +1,3 @@
-// @dart=2.17
 import 'package:flutter/material.dart';
 import 'package:juju/screens/details/details.dart';
 import 'package:juju/util/const.dart';

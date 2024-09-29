@@ -1,10 +1,9 @@
-// cart_page.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../model/cart_model.dart';
-import '../model/item.dart'; // Import the Item class
+import '../model/item.dart'; 
 import 'item_details.dart';
 
 class CartPage extends StatelessWidget {
@@ -32,12 +31,11 @@ class CartPage extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // List view of cart items
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: cartModel.cartItems.isEmpty
-                      ? Center(
+                      ? const Center(
                           child: Text(
                             'Your cart is empty.',
                             style: TextStyle(fontSize: 18, color: Colors.grey),
@@ -90,7 +88,6 @@ class CartPage extends StatelessWidget {
                                         cartModel.removeItemFromCart(index),
                                   ),
                                   onTap: () {
-                                    // Navigate to ProductDetailPage
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -108,7 +105,6 @@ class CartPage extends StatelessWidget {
                 ),
               ),
 
-              // Total amount + Pay now
               if (cartModel.cartItems.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -130,7 +126,6 @@ class CartPage extends StatelessWidget {
                             ),
 
                             const SizedBox(height: 8),
-                            // Total price
                             Text(
                               '\$${cartModel.calculateTotal()}',
                               style: const TextStyle(
@@ -142,12 +137,10 @@ class CartPage extends StatelessWidget {
                           ],
                         ),
 
-                        // Pay now button
                         ElevatedButton(
                           onPressed: () {
-                            // Implement payment functionality here
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text(
                                     'Payment functionality not implemented.'),
                                 duration: Duration(seconds: 2),
@@ -161,8 +154,8 @@ class CartPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(28),
                             ),
                           ),
-                          child: Row(
-                            children: const [
+                          child: const Row(
+                            children: [
                               Text(
                                 'Pay Now',
                                 style: TextStyle(color: Colors.green),

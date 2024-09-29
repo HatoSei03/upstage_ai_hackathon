@@ -1,4 +1,3 @@
-// cart_model.dart
 import 'package:flutter/material.dart';
 import 'item.dart'; 
 

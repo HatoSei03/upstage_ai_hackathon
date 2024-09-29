@@ -24,7 +24,6 @@ Stack profileImage(Size size) {
         ),
       ),
 
-      // * user profile image
       Positioned(
         top: 100,
         left: size.width / 2 - 50,

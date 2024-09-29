@@ -1,4 +1,3 @@
-// home_page.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -62,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NotificationScreen(),
+                      builder: (context) => const NotificationScreen(),
                     ),
                   );
                 },
@@ -145,8 +144,8 @@ class _HomePageState extends State<HomePage> {
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
-                          side: BorderSide(
-                            color: const Color(0xffD6D6D6),
+                          side: const BorderSide(
+                            color: Color(0xffD6D6D6),
                             width: 1,
                           ),
                         ),
@@ -172,7 +171,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 16),
-              // Items Grid
               Expanded(
                 child: Consumer<CartModel>(
                   builder: (context, cartModel, child) {
@@ -232,21 +230,9 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 16),
             ],
           ),
-          // Uncomment if AdvertisementBanner is needed elsewhere
-          // Consumer<CartModel>(
-          //   builder: (context, cartModel, child) {
-          //     return Align(
-          //       alignment: Alignment.bottomCenter,
-          //       child: Padding(
-          //         padding: const EdgeInsets.all(24.0),
-          //         child: AdvertisementBanner(),
-          //       ),
-          //     );
-          //   },
-          // ),
+
         ],
       ),
-      // Floating Cart Button
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
